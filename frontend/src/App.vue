@@ -1,34 +1,43 @@
-<script setup>
-import { RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue'
-</script>
-
 <template>
   <main>
     <header>
-      <NavBar/>
+      <Navbar />
     </header>
 
     <RouterView />
-
   </main>
 </template>
 
-<style scoped>
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import Navbar from './components/Navbar.vue'
 
-main{
+export default {
+  components: {
+    Navbar
+  },
+  setup() {
+    const store = useStore()
+    const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
+
+    return {
+      isLoggedIn
+    }
+  }
+}
+</script>
+
+<style scoped>
+main {
   display: flex;
   flex-direction: column;
 }
-header {
-  
-}
+
 
 .logo {
   display: block;
   margin: 0 auto 2rem;
 }
-
-
-
 </style>
+
