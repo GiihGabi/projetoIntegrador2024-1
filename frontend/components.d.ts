@@ -15,6 +15,7 @@ declare module 'vue' {
     InputText: typeof import('primevue/inputtext')['default']
     MultiSelect: typeof import('primevue/multiselect')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
+    Password: typeof import('primevue/password')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Slider: typeof import('primevue/slider')['default']
