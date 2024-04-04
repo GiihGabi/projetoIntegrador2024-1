@@ -6,7 +6,9 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/FeedAnimais.vue')
+      component: () => import('../views/FeedAnimais.vue'),
+      meta: { requiresAuth: true } // Indica que esta rota requer autenticação
+
     },
     {
       path: '/product',
@@ -47,4 +49,12 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !localStorage.getItem('token')) {
+    // Se a rota requer autenticação e não há token, redirecione para a página de login
+    next('/');
+  } else {
+    next(); // Continua para a próxima rota
+  }
+});
 export default router

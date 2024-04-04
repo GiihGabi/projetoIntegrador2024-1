@@ -16,19 +16,20 @@ export default {
                 throw new Error('Login failed');
             }
 
-
             const data = await response.json();
-            const token = data.token; // Supondo que o token seja retornado como parte da resposta
+            const token = data.token;
+
+            // Verifique se o token foi retornado
+            if (!token) {
+                throw new Error('Token not found');
+            }
 
             // Armazene o token JWT no armazenamento local
             localStorage.setItem('token', token);
-            console.log(data)
-
 
             return true;
         } catch (error) {
             console.error('Error logging in:', error);
-
             return false;
         }
     }
