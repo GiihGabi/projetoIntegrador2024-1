@@ -73,7 +73,7 @@
           </div>
           <div class="paragrafos-cardsAnimais">
             <p>Observações:</p>
-            <Textarea v-model="value" variant="filled" rows="3" cols="25" disabled autoResize />
+            <Textarea v-model="value" variant="filled" rows="4" cols="25" disabled autoResize />
           </div>
         </div>
       </div>
