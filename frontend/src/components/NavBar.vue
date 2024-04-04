@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
+// import { RouterLink } from 'vue-router'
 
 
 </script>
@@ -54,13 +54,13 @@ import { RouterLink } from 'vue-router'
 }
 
 .findPetBnt {
-    height: 3rem;
-    background-color: #FF5C00;
+    height: 2.5rem;
+    background: linear-gradient(90deg, #FF934B,#F27322, #D94509);
     border: none;
     border-radius: 1rem;
     font-family: "Roboto Flex", sans-serif;
     font-weight: bolder;
-
+    margin: auto;
 }
 
 .p-button-label {
@@ -70,6 +70,7 @@ import { RouterLink } from 'vue-router'
 a {
     text-decoration: none;
     color: #696969;
+    font-size: 20px;
     font-weight: 600;
     margin: auto;
 }
