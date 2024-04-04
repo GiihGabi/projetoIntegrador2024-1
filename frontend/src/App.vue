@@ -9,23 +9,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import Navbar from './components/Navbar.vue'
 
-export default {
-  components: {
-    Navbar
-  },
-  setup() {
-    const store = useStore()
-    const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
-
-    return {
-      isLoggedIn
-    }
-  }
-}
 </script>
 
 <style scoped>
