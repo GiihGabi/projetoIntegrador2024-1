@@ -26,9 +26,6 @@ class AuthController {
         $token = JWT::encode(array("user_id" => $user_id), $this->key, 'HS256');
         return json_encode(array("token" => $token));
     }
-    public function create($data) {
-        return $data;
-    }
+    
 
-    // Métodos para autenticação (login, logout, etc.)
 }

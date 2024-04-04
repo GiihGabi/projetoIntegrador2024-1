@@ -1,47 +1,51 @@
 <?php
+require_once ('config/config.php');
+require_once ('./vendor/autoload.php');
+require_once 'Router.php';
+
+// Inclua os controladores
 require_once ('./controllers/AuthController.php');
-require_once('./controllers/UserController.php');
-require_once('./vendor/autoload.php'); // Inclui o autoloader do Composer
-require_once('config/config.php');
-
-
-use \Firebase\JWT\JWT; // Importa a classe JWT
+require_once ('./controllers/UserController.php');
 
 $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+$router = new Router();
+
+//Rotas
+$router->post('/api/register', 'registerUser');
+$router->post('/api/login', 'loginUser');
 
 
-// Criar instâncias dos controladores
-$authController = new AuthController($db);
-$userController = new UserController($db);
-$array = array('HS256');
+//Funções das rotas
+function registerUser() {
+    global $db;
 
-// Rotas de autenticação
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($_SERVER['REQUEST_URI'] == '/api/login') {
-        // Rota para login
-        $data = json_decode(file_get_contents('php://input'), true);
-        echo $authController->login($data['username'], $data['password']);
-    } elseif ($_SERVER['REQUEST_URI'] == '/api/register') {
-        // Rota para registro
-        $data = json_decode(file_get_contents('php://input'), true);
-        echo $userController->register($data);
-    } elseif ($_SERVER['REQUEST_URI'] == '/api/teste') {
-        // Rota para teste        $data = json_decode(file_get_contents('php://input'), true);
-        echo $authController->create($data);
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!isset($data['username']) || !isset($data['password'])) {
+        return 'Erro: Dados incompletos';
     }
+    
+    $controller = new UserController($db);
+    return $controller->register($data);
 }
 
-// Outras rotas do usuário podem ser definidas aqui
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $headers = getallheaders();
-    $token = $headers['Authorization'];
+function loginUser() {
+    global $db;
 
-    try {
-        $decoded = JWT::decode($token, $key, $array);
-        // O token é válido, permitir acesso à rota
-    } catch (Exception $e) {
-        http_response_code(401); // Token inválido, retorne um status 401 Unauthorized
-        echo json_encode(array("message" => "Token inválido"));
-        exit();
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!isset($data['username']) || !isset($data['password'])) {
+        return 'Erro: Dados incompletos';
     }
+    
+    $controller = new AuthController($db);
+    return $controller->login($data['username'], $data['password']);
 }
+
+$router->get('/api/teste2', function () {
+    return 'Rota de teste GET';
+});
+
+$router->post('/api/teste', function () {
+    return 'Rota de teste POST';
+});
+
+$router->run();

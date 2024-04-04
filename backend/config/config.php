@@ -1,11 +1,4 @@
 <?php
-
-// coloque a barra / no final
-define('URL', 'http://localhost:8080/');
-// **** OBS:> alterar também a url do preloader no main.css
-
-define('LIBS', 'libs/');
-
 //conf. da conexao com o BD
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost:3306');
