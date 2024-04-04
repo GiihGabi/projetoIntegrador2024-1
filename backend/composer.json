@@ -1,0 +1,6 @@
+{
+    "name": "henry/backend",
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    }
+}

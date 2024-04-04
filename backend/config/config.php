@@ -1,7 +1,7 @@
 <?php
 
 // coloque a barra / no final
-define('URL', 'http://localhost:8080/app/');
+define('URL', 'http://localhost:8080/');
 // **** OBS:> alterar também a url do preloader no main.css
 
 define('LIBS', 'libs/');
@@ -9,7 +9,7 @@ define('LIBS', 'libs/');
 //conf. da conexao com o BD
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost:3306');
-define('DB_NAME', 'escola');
+define('DB_NAME', 'projetoIntegrador');
 define('DB_USER', 'root');
-define('DB_PASS', 'aula');
+define('DB_PASSWORD', '12345');
 

@@ -1,6 +1,6 @@
 <?php
 
-require 'config.php';
+require_once('routes/api.php');
 
 // funcao que carrega as classes automaticamente
 spl_autoload_register('myAutoloader');
