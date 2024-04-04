@@ -52,7 +52,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !localStorage.getItem('token')) {
     // Se a rota requer autenticação e não há token, redirecione para a página de login
-    next('/');
+    next('/login');
   } else {
     next(); // Continua para a próxima rota
   }

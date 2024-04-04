@@ -109,10 +109,10 @@ export default {
 }
 
 .screenLogin {
-  padding-top: 10rem;
+  padding-top: 8rem;
   margin: auto;
   width: 100vw;
-  height: 90vh;
+  height: 10%;
 }
 
 .esqueceu {
