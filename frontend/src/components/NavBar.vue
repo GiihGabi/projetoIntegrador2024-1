@@ -37,7 +37,8 @@
     height: 5rem;
     display: flex;
     justify-content: space-around;
-    padding: 1rem;
+    /* padding: 1rem; */
+    margin: 0;
 }
 
 .containerPages {
