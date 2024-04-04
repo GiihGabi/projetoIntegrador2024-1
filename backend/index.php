@@ -1,6 +1,8 @@
 <?php
 
 require_once('routes/api.php');
+header("Access-Control-Allow-Origin: http://localhost:5173");
+
 
 // funcao que carrega as classes automaticamente
 // spl_autoload_register('myAutoloader');
