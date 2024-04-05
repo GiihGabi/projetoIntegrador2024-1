@@ -6,6 +6,8 @@ require_once 'Router.php';
 // Inclua os controladores
 require_once ('./controllers/AuthController.php');
 require_once ('./controllers/UserController.php');
+require_once ('./controllers/AnimalController.php');
+
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
@@ -18,6 +20,12 @@ $router = new Router();
 //Rotas
 $router->post('/api/register', 'registerUser');
 $router->post('/api/login', 'loginUser');
+$router->get('/api/animals', 'getAllAnimals');
+$router->get('/api/animals/{id}', 'getAnimalById');
+$router->post('/api/animals', 'createAnimal');
+
+
+
 $router->get('/api/teste', function () {
     return 'Rota de teste GET';
 });
@@ -51,6 +59,35 @@ function loginUser()
 
     $controller = new AuthController($db);
     return $controller->login($data['email'], $data['password']);
+}
+
+function getAllAnimals()
+{
+    global $db;
+
+    $controller = new AnimalController($db);
+    return $controller->getAll();
+}
+
+function getAnimalById($id)
+{
+    global $db;
+
+    $controller = new AnimalController($db);
+    return $controller->getById($id);
+}
+
+function createAnimal()
+{
+    global $db;
+
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!isset($data['name']) || !isset($data['age']) || !isset($data['sex']) || !isset($data['description']) || !isset($data['size']) || !isset($data['weight']) || !isset($data['temperament']) || !isset($data['photo1']) || !isset($data['photo2']) || !isset($data['photo3']) || !isset($data['publication_date']) || !isset($data['status_id']) || !isset($data['owner_id']) || !isset($data['species_id'])) {
+        return 'Erro: Dados incompletos';
+    }
+
+    $controller = new AnimalController($db);
+    return $controller->create($data);
 }
 
 
