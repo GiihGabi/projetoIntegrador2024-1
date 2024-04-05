@@ -17,8 +17,7 @@ $sql_create_users_table = "
         username VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL,
         password VARCHAR(255) NOT NULL,
-        cpf_cnpj VARCHAR(15) NOT NULL,
-        zip_code VARCHAR(8) NOT NULL,
+        zip_code VARCHAR(20) NOT NULL,
         registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         user_level ENUM('Admin', 'Petshop', 'Client') NOT NULL,
         document VARCHAR(20) NOT NULL, -- CNPJ for Petshop, CPF for Client
