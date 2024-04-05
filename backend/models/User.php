@@ -6,10 +6,10 @@ class User {
         $this->conn = $db;
     }
 
-    public function findByUsername($username) {
-        $query = "SELECT * FROM users WHERE username = ?";
+    public function findByEmail($email) {
+        $query = "SELECT * FROM users WHERE email = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(1, $username, PDO::PARAM_STR);
+        $stmt->bindValue(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         

@@ -12,9 +12,9 @@ class AuthController {
         $this->userModel = new User($db);
     }
 
-    public function login($username, $password) {
+    public function login($email, $password) {
         // Verificar as credenciais no banco de dados
-        $user = $this->userModel->findByUsername($username); // Supondo que este método busca o usuário pelo nome de usuário
+        $user = $this->userModel->findByEmail($email); 
     
         // Verificar se o usuário existe e se a senha está correta
         if (!$user || !password_verify($password, $user['password'])) {

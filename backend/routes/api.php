@@ -25,7 +25,7 @@ function registerUser() {
     global $db;
 
     $data = json_decode(file_get_contents('php://input'), true);
-    if (!isset($data['username']) || !isset($data['password'])) {
+    if (!isset($data['username']) || !isset($data['password']) || !isset($data['email'])) {
         return 'Erro: Dados incompletos';
     }
     
@@ -37,12 +37,12 @@ function loginUser() {
     global $db;
 
     $data = json_decode(file_get_contents('php://input'), true);
-    if (!isset($data['username']) || !isset($data['password'])) {
+    if (!isset($data['email']) || !isset($data['password'])) {
         return 'Erro: Dados incompletos';
     }
     
     $controller = new AuthController($db);
-    return $controller->login($data['username'], $data['password']);
+    return $controller->login($data['email'], $data['password']);
 }
 
 $router->get('/api/teste2', function () {
