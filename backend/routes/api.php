@@ -18,39 +18,41 @@ $router = new Router();
 //Rotas
 $router->post('/api/register', 'registerUser');
 $router->post('/api/login', 'loginUser');
+$router->get('/api/teste', function () {
+    return 'Rota de teste GET';
+});
+$router->post('/api/teste', function () {
+    return 'Rota de teste POST';
+});
 
 
 //Funções das rotas
-function registerUser() {
+function registerUser()
+{
     global $db;
 
     $data = json_decode(file_get_contents('php://input'), true);
     if (!isset($data['username']) || !isset($data['password']) || !isset($data['email'])) {
         return 'Erro: Dados incompletos';
     }
-    
+
     $controller = new UserController($db);
     return $controller->register($data);
 }
 
-function loginUser() {
+function loginUser()
+{
     global $db;
 
     $data = json_decode(file_get_contents('php://input'), true);
     if (!isset($data['email']) || !isset($data['password'])) {
         return 'Erro: Dados incompletos';
     }
-    
+
     $controller = new AuthController($db);
     return $controller->login($data['email'], $data['password']);
 }
 
-$router->get('/api/teste2', function () {
-    return 'Rota de teste GET';
-});
 
-$router->post('/api/teste', function () {
-    return 'Rota de teste POST';
-});
 
 $router->run();

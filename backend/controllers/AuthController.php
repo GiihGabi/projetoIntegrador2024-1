@@ -13,15 +13,12 @@ class AuthController {
     }
 
     public function login($email, $password) {
-        // Verificar as credenciais no banco de dados
         $user = $this->userModel->findByEmail($email); 
     
-        // Verificar se o usuário existe e se a senha está correta
         if (!$user || !password_verify($password, $user['password'])) {
             return json_encode(array("message" => "Credenciais inválidas"));
         }
     
-        // Se as credenciais forem válidas, gerar um token JWT
         $user_id = $user['id']; 
         $token = JWT::encode(array("user_id" => $user_id), $this->key, 'HS256');
         return json_encode(array("token" => $token));
