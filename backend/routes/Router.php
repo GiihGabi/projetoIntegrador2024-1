@@ -49,15 +49,21 @@ class Router
         }
 
         // Verifica se existe uma rota com parâmetros dinâmicos
+        // Verifica se existe uma rota com parâmetros dinâmicos
         foreach ($this->routes[$method] as $route => $callback) {
             // Verifica se o caminho base da rota corresponde ao caminho da requisição
             if ($this->routeMatchesPath($route, $basePath)) {
                 // Extrai os parâmetros dinâmicos da URL
                 $params = $this->extractParams($route, $basePath);
+                if ($params === null) {
+                    // Se não houver parâmetros, continue para a próxima rota
+                    continue;
+                }
                 // Chama o callback passando os parâmetros
                 return call_user_func_array($callback, $params);
             }
         }
+
 
         return 'Erro: Rota não encontrada';
     }
@@ -75,14 +81,25 @@ class Router
     private function extractParams($route, $path)
     {
         $params = [];
-        preg_match_all('/\{.*?\}/', $route, $matches);
-        foreach ($matches[0] as $match) {
-            $paramName = trim($match, '{}');
-            $paramValue = explode('/', $path)[count(explode('/', $route)) - 1];
-            $params[] = $paramValue;
+        $routeParts = explode('/', $route);
+        $pathParts = explode('/', $path);
+
+        foreach ($routeParts as $key => $part) {
+            // Verifica se a parte da rota é um parâmetro dinâmico
+            if (strpos($part, '{') !== false && strpos($part, '}') !== false) {
+                // Parte da rota é um parâmetro dinâmico
+                $paramName = trim($part, '{}');
+                // Verifica se o parâmetro dinâmico existe no caminho da requisição
+                if (isset($pathParts[$key])) {
+                    // Obtém o valor do parâmetro do caminho da requisição
+                    $params[$paramName] = $pathParts[$key];
+                }
+            }
         }
+
         return $params;
     }
+
 
     public function run()
     {
