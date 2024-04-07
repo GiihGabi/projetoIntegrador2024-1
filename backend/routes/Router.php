@@ -50,6 +50,7 @@ class Router
         }
 
         // Verifica se existe uma rota com parâmetros dinâmicos
+        // Verifica se existe uma rota com parâmetros dinâmicos
         foreach ($this->routes[$method] as $route => $callback) {
             // Verifica se o caminho base da rota corresponde ao caminho da requisição
             if ($this->routeMatchesPath($route, $basePath)) {
@@ -63,6 +64,7 @@ class Router
                 return call_user_func_array($callback, $params);
             }
         }
+
 
         return 'Erro: Rota não encontrada';
     }
@@ -113,6 +115,7 @@ class Router
         // Retorna o valor do parâmetro da requisição
         return $pathParts[$paramIndex];
     }
+
 
     public function run()
     {
