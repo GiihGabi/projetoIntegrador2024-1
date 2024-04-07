@@ -1,4 +1,5 @@
 <?php
+
 class Router
 {
     private $routes = [];
@@ -72,32 +73,47 @@ class Router
     private function routeMatchesPath($route, $path)
     {
         $regex = str_replace('/', '\/', $route);
-        $regex = preg_replace('/\{.*?\}/', '.+', $regex);
+        $regex = preg_replace('/\{.*?\}/', '[^\/]+', $regex); // Corrigindo expressão regular
         $regex = '/^' . $regex . '$/';
         return preg_match($regex, $path);
     }
 
     // Função auxiliar para extrair os parâmetros dinâmicos da URL
     private function extractParams($route, $path)
+{
+    $params = [];
+    $routeParts = explode('/', $route);
+    $pathParts = explode('/', $path);
+
+    foreach ($routeParts as $key => $part) {
+        // Verifica se a parte da rota é um parâmetro dinâmico
+        if (strpos($part, '{') !== false && strpos($part, '}') !== false) {
+            // Parte da rota é um parâmetro dinâmico
+            $paramName = trim($part, '{}');
+            // Verifica se o parâmetro dinâmico existe no caminho da requisição
+            if (isset($pathParts[$key])) {
+                // Obtém o valor do parâmetro do caminho da requisição
+                $params[$paramName] = $pathParts[$key];
+            }
+        }
+    }
+
+    return $params;
+}
+
+
+    // Função auxiliar para obter o valor do parâmetro da rota dinâmica
+    private function getRouteParamValue($route, $path, $paramName)
     {
-        $params = [];
+        // Separa o caminho da rota e o caminho da requisição
         $routeParts = explode('/', $route);
         $pathParts = explode('/', $path);
 
-        foreach ($routeParts as $key => $part) {
-            // Verifica se a parte da rota é um parâmetro dinâmico
-            if (strpos($part, '{') !== false && strpos($part, '}') !== false) {
-                // Parte da rota é um parâmetro dinâmico
-                $paramName = trim($part, '{}');
-                // Verifica se o parâmetro dinâmico existe no caminho da requisição
-                if (isset($pathParts[$key])) {
-                    // Obtém o valor do parâmetro do caminho da requisição
-                    $params[$paramName] = $pathParts[$key];
-                }
-            }
-        }
+        // Encontra a posição do parâmetro na rota
+        $paramIndex = array_search('{' . $paramName . '}', $routeParts);
 
-        return $params;
+        // Retorna o valor do parâmetro da requisição
+        return $pathParts[$paramIndex];
     }
 
 
@@ -108,3 +124,4 @@ class Router
         echo $this->handleRequest($method, $path);
     }
 }
+
