@@ -30,6 +30,18 @@ class AnimalController
         }
     }
 
+    public function getByOwnerId($ownerId)
+    {    
+        $animais = $this->animalModel->findByField('owner_id', $ownerId);
+    
+        if ($animais) {
+            error_log("Animais encontrados: " . json_encode($animais));
+            return json_encode($animais);
+        } else {
+            return "Nenhum animal encontrado para este proprietário" + $ownerId;
+        }
+    }
+
     public function create($data)
     {
         $result = $this->animalModel->create(

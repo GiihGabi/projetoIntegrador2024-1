@@ -23,6 +23,9 @@ $router->post('/api/login', 'loginUser');
 $router->get('/api/animals', 'getAllAnimals');
 $router->get('/api/animals/{id}', 'getAnimalById');
 $router->post('/api/animals', 'createAnimal');
+$router->get('/api/animals/owner/{ownerId}', 'getAnimalsByOwnerId');
+
+
 
 
 
@@ -48,6 +51,11 @@ function registerUser()
     return $controller->register($data);
 }
 
+function teste()
+{
+    return "teste";
+}
+
 function loginUser()
 {
     global $db;
@@ -69,6 +77,12 @@ function getAllAnimals()
     return $controller->getAll();
 }
 
+function getAnimalsByOwnerId($ownerId)
+{
+    global $db;
+    $controller = new AnimalController($db);
+    return $controller->getByOwnerId($ownerId);
+}
 function getAnimalById($id)
 {
     global $db;
