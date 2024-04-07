@@ -7,11 +7,11 @@
       <RouterLink to="/" class="textoEntrar">Entrar</RouterLink>
       <div class="inputLogin">
         <label for="username">Email</label>
-        <InputText id="username" v-model="username" aria-describedby="username-help" />
+        <InputText id="email" v-model="email" aria-describedby="username-help" />
       </div>
       <div class="inputLogin">
         <label for="username">Senha</label>
-        <Password class="password" id="username" v-model="password" :feedback="false" />
+        <Password class="password" id="password" v-model="password" :feedback="false" />
       </div>
       <div>
         <label class="esqueceu">Esqueceu sua senha?</label>
@@ -33,12 +33,11 @@ import AuthService from '@/services/AuthService'
 export default {
   setup() {
     const router = useRouter(); 
-    const username = ref('');
+    const email = ref('');
     const password = ref('');
 
     const submitForm = async () => {
-      console.log(username.value, password.value)
-      const loggedIn = await AuthService.login(username.value, password.value);
+      const loggedIn = await AuthService.login(email.value, password.value);
       if (loggedIn) {
         // Login bem-sucedido, redirecione o usuário para outra página
         router.push('/');
@@ -49,7 +48,7 @@ export default {
     }
 
     return {
-      username,
+      email,
       password,
       submitForm
     };

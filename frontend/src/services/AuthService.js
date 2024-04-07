@@ -3,14 +3,15 @@
 var URL = "http://localhost:8000"
 
 export default {
-    async login(username, password) {
+    async login(email, password) {
+        console.log(email,password)
         try {
             const response = await fetch(URL + "/api/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ email, password })
             });
             if (!response.ok) {
                 throw new Error('Login failed');
