@@ -2,10 +2,10 @@
 
 <template>
     <div class="screenCad">
-      <section class="mainLogin">
+      <section class="mainCad">
         <div class="textEncontrePet">
             <div class="image">
-                <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
+                <img class="logoCad" src="../assets/images/logoLogin.svg" alt="" />
             </div>
             <div class="textImage">
                 <h3 class="h3_encontrePet">Encontre seu pet</h3>
@@ -13,24 +13,24 @@
             </div>
         </div>
         <form action="" class="form-cad">
-            <div class="inputLogin">
+            <div class="inputCad">
                 <label for="name">Nome</label>
                 <InputText id="name" v-model="name" aria-describedby="username-help" />
               </div>
-              <div class="inputLogin">
+              <div class="inputCad">
                 <label for="username">Email</label>
                 <InputText id="email" v-model="email" aria-describedby="username-help" />
               </div>
-              <div class="inputLogin">
+              <div class="inputCad">
                   <label for="username">Senha</label>
                   <InputText id="senha" v-model="senha" aria-describedby="username-help" />
               </div>
-              <div class="inputLogin">
+              <div class="inputCad">
                   <label for="username">Confirmar senha</label>
                   <InputText id="confirmarSenha" v-model="confirmarSenha" aria-describedby="username-help" />
               </div>
               <div class="textosCad">
-                <label class="conta">Já tem conta? <a class="a-entre" href="/login">Entre!</a></label>
+                <label class="contaCad">Já tem conta? <a class="a-entre" href="/login">Entre!</a></label>
               </div>
         </form>
       </section>
@@ -43,7 +43,7 @@
 
 
   <style>
-  .mainLogin {
+  .mainCad {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     margin: auto;
@@ -92,7 +92,7 @@
     height: 100%;
   }
   
-  .logologin {
+  .logoCad {
     width: 2rem;
     height: 2rem;
   }
@@ -104,25 +104,11 @@
     margin: 0;
   }
   
-  .inputLogin {
+  .inputCad {
     display: flex;
     flex-direction: column;
     color: gray;
     width: 20rem;
-  }
-  .p-password-input{
-      width: 100%;
-  }
-  
-  .loginBtn {
-    height: 2.5rem;
-    background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
-    border: none;
-    border-radius: 1rem;
-    font-family: 'Roboto Flex', sans-serif;
-    font-weight: bolder;
-    margin: auto;
-    width: 9rem;
   }
   
   .screenCad {
@@ -132,14 +118,7 @@
     height: 10%;
   }
   
-  .esqueceu {
-    padding-top: 0.5rem;
-    color: gray;
-    float: right;
-    padding-bottom: 1rem;
-  }
-  
-  .conta {
+  .contaCad {
     color: gray;
     font-size: 14px;
     font-weight: 400;
@@ -150,10 +129,6 @@
     font-weight: 400;
     color: #FF5C00;
     text-decoration: underline
-  }
-  
-  .cadastrese {
-    color: gray;
   }
   
   .textosCad {
