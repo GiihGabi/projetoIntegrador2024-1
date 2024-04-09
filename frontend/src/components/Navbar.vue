@@ -27,14 +27,14 @@
           </div>
           <div class="text-image-pata-cad">
             <h3 class="h3_cad_pet">Tem um animal perdido?</h3>
-            <h4 class="cadastro-pet">Cadastre ele na plataforma para encontra-lo!</h4>
+            <h4 class="cadastro-pet">Cadastre ele na plataforma para encontrá-lo!</h4>
           </div>
         </div>
       </template>
       <!-- Corpo do modal -->
       <div class="form-div">
         <span class="p-text-secondary block mb-5">Insira as imagens do seu animalzinho:</span>
-          <div class="image-animals">
+          <div class="image-animals" @click="openFileSelector">
             <input type="file" name="file" id="file" class="inputfile" />
           </div>
           <div class="form-div-2">
@@ -46,15 +46,23 @@
               <div class="tipo-raca">
                 <div class="input-cad-pet">
                   <label for="tipo">Tipo:</label>
-                  <InputText id="tipo" v-model="tipo" aria-describedby="username-help" />
+                  <Dropdown v-model="selectedTipo" :options="tipos" optionLabel="name" placeholder="Selecione o tipo" class="w-full dropdown-tipo">
+                    <template #selectedItem>
+                      <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
+                    </template>
+                  </Dropdown>
                 </div>
                 <div class="input-cad-pet">
                   <label for="raca">Raça:</label>
-                  <InputText id="raca" v-model="raca" aria-describedby="username-help" />
+                  <Dropdown v-model="selectedRaca" :options="racas" optionLabel="name" placeholder="Selecione a raça" class="w-full dropdown-raca">
+                    <template #selectedItem>
+                      <div v-if="selectedRaca">{{ selectedRaca.name }}</div>
+                    </template>
+                  </Dropdown>
                 </div>
               </div>
               <div class="input-cad-pet-local">
-                <label for="senha">Ultimo local visto:</label>
+                <label for="senha">Último local visto:</label>
                 <InputText id="senha" v-model="senha" aria-describedby="username-help" />
               </div>
             </form>
@@ -62,8 +70,8 @@
         </div>
       <!-- Rodapé do modal -->
       <template #footer>
-        <Button label="Cancelar" text severity="secondary" @click="showModal = false" autofocus />
-        <Button label="Salvar" outlined severity="secondary" @click="showModal = false" autofocus />
+        <Button class="button-cancel" label="Cancelar" text severity="secondary" @click="showModal = false" autofocus />
+        <Button class="button-save" label="Salvar" outlined severity="secondary" @click="showModal = false" autofocus />
       </template>
     </Dialog>
   </section>
@@ -75,19 +83,37 @@ import { useRouter } from 'vue-router';
 import Button from "primevue/button";
 import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
-import Avatar from 'primevue/avatar';
+import Dropdown from 'primevue/dropdown';
 
 export default {
   components: {
     Button,
     Dialog,
     InputText,
-    Avatar
+    Dropdown
   },
   setup() {
     const isLoggedIn = ref(false);
     const router = useRouter();
     const showModal = ref(false); // Variável para controlar a exibição do modal
+
+    // Tipos e raças para os dropdowns
+    const tipos = ref([
+      { name: 'Cachorro' },
+      { name: 'Gato' },
+      { name: 'Pássaro' },
+      { name: 'Outro' }
+    ]);
+    const racas = ref([
+      { name: 'Labrador' },
+      { name: 'Poodle' },
+      { name: 'Siamese' },
+      { name: 'Vira-lata' }
+    ]);
+
+    // Variáveis ref para armazenar os valores selecionados
+    const selectedTipo = ref(null);
+    const selectedRaca = ref(null);
 
     const checkAuthStatus = () => {
       const token = localStorage.getItem('token');
@@ -103,6 +129,11 @@ export default {
       showModal.value = true;
     };
 
+    const openFileSelector = () => {
+      const fileInput = document.getElementById('file');
+      fileInput.click();
+    };
+
     onMounted(() => {
       checkAuthStatus();
     });
@@ -111,7 +142,12 @@ export default {
       isLoggedIn,
       handleLogin,
       showModal,
-      openModal
+      openModal,
+      openFileSelector,
+      tipos,
+      racas,
+      selectedTipo,
+      selectedRaca
     };
   }
 }
@@ -225,7 +261,7 @@ a {
 }
 
 .image-animals:hover {
-  border-color: #999;
+  border-color: #FF5C00;
 }
 
 .images-pets{
@@ -242,24 +278,27 @@ a {
   display: flex;
   flex-direction: column;
   color: gray;
-  width: 11.8rem;
+  width: 11em;
   margin-right: 20px;
+  padding-top: 0.5rem;
 }
 
 .input-cad-pet-local {
   display: flex;
   flex-direction: column;
   color: gray;
-  width: 25rem;
+   width: 23.2rem;
   margin-right: 20px;
+  padding-top: 0.5rem;
 }
 
 .input-cad-pet-name {
   display: flex;
   flex-direction: column;
   color: gray;
-  width: 25rem;
+  width: 23.2rem;
   margin-right: 20px;
+  padding-top: 0.5rem;
 }
 
 .tipo-raca {
@@ -268,11 +307,20 @@ a {
 }
 
 .form-div{
-  padding: 0 0 1em 1em;
+  padding: 0 0 1em 2em;
 }
 
 .form-div-2{
   padding-top: 1em;
 }
+
+.button-save:hover{
+  color: #FF5C00;
+}
+
+.button-cancel:hover{
+  color: #FF5C00;
+}
+
 
 </style>
