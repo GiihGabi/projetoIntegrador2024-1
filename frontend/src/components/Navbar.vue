@@ -268,7 +268,7 @@ a {
 }
 
 .form-div{
-  padding: 1em;
+  padding: 0 0 1em 1em;
 }
 
 .form-div-2{
