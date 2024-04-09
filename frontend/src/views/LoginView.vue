@@ -6,13 +6,13 @@
               <img class="cachorros" src="../assets/images/fundocachorros.svg" alt="" />
           </div>
 
+          
+
           <div class="main-card-rgst">
                <div class="header-card-rgst">
-
-                <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
-                        <div class="textos-rgst">
-                            <RouterLink to="/" class="textoEntrar">Encontre seu pet!</RouterLink>
-                            <p class="cadastretxt">Cadastre-se agora</p>
+                        <div class="content-header-login">
+                          <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
+                            <h2 class="entrarLogin">Entrar</h2>
                         </div>
                 </div>
             
@@ -25,11 +25,19 @@
               <Password class="password" id="password" :feedback="false" />
               </div>
             
-              <div class="footer-card-rgst">
-                  <p class="conta">Ja tem uma conta? Entre!</p>
-                  <Button  class="rgstBtn" label=""></Button>
+              <div class="texto-esqueceu-login">
+                <label class="esqueceu">Esqueceu sua senha?</label>
+              </div>
+
+              <div class="footer-btn-login">
+                 <Button  class="loginBtn" label="">Entrar</Button>
+
               </div>
              
+              <div class="footer-texts-login">       
+                 <label>Ainda não tem conta?</label>
+                 <label>Cadastre-se e encontre seu pet!</label>
+              </div>
 
           </div>
     </section>
@@ -86,15 +94,20 @@ export default {
   border-radius: 1.5rem;
 }
 
-.screenlogin {
-  width: 100%;
-  height: 100%;
-}
 
 .logologin {
   width: 2rem;
   height: 2rem;
 }
+
+.texto-esqueceu-login{}
+
+.esqueceu {
+  padding-top: 0.5rem;
+    color: gray;
+    float: right;
+    padding-bottom: 1rem;
+  }
 
 .textoEntrar {
   font-weight: bolder;
@@ -103,7 +116,7 @@ export default {
 }
 
 .inputLogin {
-  padding-left: 2rem;
+  padding-left: 0;
   display: flex;
   flex-direction: column;
   color: gray;
@@ -112,15 +125,18 @@ export default {
     width: 100%;
 }
 
-.rgstBtn {
+.loginBtn {
+  display: flex;
+  justify-content: center;
   height: 2.5rem;
   background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
   border: none;
   border-radius: 1rem;
   font-family: 'Roboto Flex', sans-serif;
   font-weight: bolder;
-  margin: auto;
   width: 9rem;
+  margin: auto;
+  
 }
 
 .screenLogin {
@@ -187,16 +203,33 @@ export default {
 }
 
 
-.footer-card-rgst{
+.footer-btn-login{
+  height:fit-content;
   display: flex;
-  padding-top: 1rem;
-  padding-left: 2rem;
-  justify-content: end;
+  justify-content: center;
+  padding-top:1.5rem;
 }
 
 .conta{
   color:#646464;
 }
 
+.footer-texts-login{
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-header-login{
+  display: flex;
+  flex-direction: column;
+}
+
+.entrarLogin{
+  color:#646464;
+  font-size: 30px;
+  font-weight: bolder;
+}
 
 </style>

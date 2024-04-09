@@ -15,19 +15,19 @@
                         </div>
                 </div>
 
-                <div class="inputLogin">
+                <div class="inputRegst">
                 <label for="username">Nome</label>
                 <InputText id="email" aria-describedby="username-help" />
                 </div>
-                <div class="inputLogin">
+                <div class="inputRegst">
                 <label for="username">Email</label>
                 <InputText id="email" aria-describedby="username-help" />
                 </div>
-                <div class="inputLogin">
+                <div class="inputRegst">
                 <label for="username">Senha</label>
                 <Password class="password" id="password" :feedback="false" />
                 </div>
-                <div class="inputLogin">
+                <div class="inputRegst">
                 <label for="username">Repetir a Senha</label>
                 <Password class="password" id="password" :feedback="false" />
                 </div>
@@ -74,11 +74,11 @@
   
   .textoEntrar {
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 20px;
     margin: 0;
   }
   
-  .inputLogin {
+  .inputRegst {
     padding-left: 2rem;
     display: flex;
     flex-direction: column;
@@ -95,14 +95,13 @@
     border-radius: 1rem;
     font-family: 'Roboto Flex', sans-serif;
     font-weight: bolder;
-    margin: auto;
-    width: 9rem;
+    width: fit-content;
     background-image: url('../assets/images/seta.svg');
     background-size: cover;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    padding-left: 2rem;
+  
   }
   
   .screenLogin {
@@ -152,20 +151,21 @@
 
   .header-card-rgst{
     display: flex;
-    height: fit-content;
+    /* height: fit-content; */
     gap: 1rem;
     padding-top:1.0rem;
+    padding-bottom: 1rem;
   }
 
 
   .cadastretxt{
     color: #646464;
-    font-size: 10px;
+    font-size: 14px;
   }
 
 
   .textos-rgst{
-    line-height: 0.7rem;
+    line-height: 1rem;
   }
 
 
@@ -173,7 +173,8 @@
     display: flex;
     padding-top: 1rem;
     padding-left: 2rem;
-    justify-content: end;
+    justify-content: space-between;
+
   }
 
   .conta{
