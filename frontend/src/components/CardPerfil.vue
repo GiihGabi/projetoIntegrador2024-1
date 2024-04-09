@@ -1,7 +1,7 @@
 <template>
   <div class="center">
     <section>
-      
+
       <div v-if="!editando" class="ajustar">
         <div class="espacamento" style="line-height: 2.0;">
           <h2><strong></strong> {{ usuario.nome }}</h2>
@@ -27,7 +27,7 @@
         <div class="ajustar">
           <form @submit.prevent="salvarEdicao">
             <label for="telefone">Telefone:</label><br />
-            <input type="tel" id="telefone" v-model="usuarioEditado.telefone" /><br />
+            <input type="tel" id="telefone" v-model="usuarioEditado.telefone" style="border-radius: 5px;" /><br />
             <label for="email">Email:</label><br />
             <input type="email" id="email" v-model="usuarioEditado.email" /><br />
             <label for="cidade">Cidade:</label><br />
@@ -38,50 +38,43 @@
             <input type="cep" id="cep" v-model="usuarioEditado.cep" /><br /><br />
           </form>
 
-          <form @submit.prevent="salvarEdicao">
+          <form @submit.prevent="salvarEdicaoAnimais">
             <h2>Seus Animais:</h2>
             <div v-for="(animal, index) in usuarioEditado.animais" :key="index">
               <label for="nomeAnimal">Nome:</label><br />
-              <input
-                type="text"
-                id="nomeAnimal"
-                v-model="usuarioEditado.animais[index].nome"
-              /><br />
+              <input type="text" id="nomeAnimal" v-model="usuarioEditado.animais[index].nome" /><br />
               <label for="especieAnimal">Espécie:</label><br />
-              <input
-                type="text"
-                id="especieAnimal"
-                v-model="usuarioEditado.animais[index].especie"
-              /><br />
+              <input type="text" id="especieAnimal" v-model="usuarioEditado.animais[index].especie" /><br />
               <label for="situacaoAnimal">Situação:</label><br />
-              <input
-                type="text"
-                id="situacaoAnimal"
-                v-model="usuarioEditado.animais[index].situacao"
-              /><br />
+              <input type="text" id="situacaoAnimal" v-model="usuarioEditado.animais[index].situacao" /><br />
+
+
+              <label for="fotoAnimal">Foto:</label><br />
+              <input type="file" id="fotoAnimal" @change="handleFileUpload($event, index)" accept="image/*" /><br />
+
+
+              <img :src="animal.fotoUrl" v-if="animal.fotoUrl" style="max-width: 100px; max-height: 100px;" />
             </div>
 
-           
           </form>
         </div>
       </div>
       <div>
         <div class="center-button">
           <div class="flex justify-center">
-            <div v-if="!editando">
-              <Button label="Editar Dados" class="alterar" @click="editarDados" />
+            <div v-if="!editando" class="edit">
+              <label for="editarInformacoes" style="font-size: 20px;">Editar Informações</label>
+              <Button class="pencil" @click="toggleEdicao" label="" style="margin-left: 10px;"><img
+                  src="../assets/icons/pencil.svg" class="icon-pencil"></Button>
             </div>
+
             <div v-if="editando" class="center-button">
               <div class="flex justify-center mt-1">
                 <div class="flex gap-3">
-                  <Button
-                    label="Cancelar"
-                    severity="secondary"
-                    outlined
-                    class="w-full"
-                    @click="cancelarEdicao"
-                  />
-                  <Button type="submit" label="Salvar" class="alterar" @click="editarDados" />
+                  <Button label="Cancelar" severity="secondary" outlined class="w-full" @click="cancelarEdicao" />
+                  <Button type="submit" label="Salvar" @click="salvarEdicao" style=" background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
+                  background-clip: text;
+                  -webkit-text-fill-color: transparent; border-color: white;" />
                 </div>
               </div>
             </div>
@@ -119,7 +112,7 @@ const usuarioEditado = ref({
 
 const editando = ref(false)
 
-function editarDados() {
+function toggleEdicao() {
   editando.value = !editando.value
 }
 
@@ -152,9 +145,10 @@ function salvarEdicao() {
   align-items: center;
   height: 90vh;
 }
+
 .ajustar {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
 }
 
 section {
@@ -171,35 +165,48 @@ section {
 .horizontal {
   font-size: 15px;
 }
+
 .posicao {
   display: flex;
-  justify-content: space-between; 
-  
+  justify-content: space-between;
+
 }
 
 .center-button {
   display: flex;
   justify-content: center;
-  margin-top: 3rem; 
-}
-h2{
-    background: linear-gradient(90deg, #FF934B,#F27322, #D94509);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
-    font-weight: bolder;
+  margin-top: 3rem;
 }
 
-.alterar{
-    background: linear-gradient(90deg, #FF934B,#F27322, #D94509);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 20px;
-    font-weight: bolder;
-    border-color: #D94509;
+h2 {
+  background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
-@media screen and (max-width: 768px) {
-     }
+.pencil {
+  background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
+  border: none;
+  border-radius: 0.7rem;
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: bolder;
+  width: 2.3rem;
+  display: flex;
+  justify-content: center;
+}
 
-</style>
+.icon-pencil {
+  margin: auto;
+}
+
+.edit {
+  margin-bottom: 10px;
+  display: flex;
+  background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 768px) {}</style>
