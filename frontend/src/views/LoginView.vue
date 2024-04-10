@@ -51,7 +51,7 @@
 
 <script>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'; // Importe o useRouter corretamente
+import { RouterLink, useRouter } from 'vue-router'; // Importe o useRouter corretamente
 import AuthService from '@/services/AuthService'
 
 export default {
@@ -93,6 +93,8 @@ export default {
   justify-content: center;
   border-radius: 1.5rem;
 }
+
+.link-registro { font-size: 15px; text-decoration: underline; color: #FF5C00; }
 
 
 .logologin {
@@ -232,4 +234,10 @@ export default {
   font-weight: bolder;
 }
 
+
+.link-registro {
+  font-size: 15px;
+  text-decoration: underline;
+  color: #FF5C00;
+}
 </style>
