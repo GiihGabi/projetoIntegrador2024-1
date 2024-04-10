@@ -35,7 +35,7 @@
 
 
                 <div class="footer-card-rgst">
-                    <p class="conta">Ja tem uma conta? Entre!</p>
+                    <label class="conta">Ja tem uma conta? <RouterLink to="/login" class="link-login">Entre!</RouterLink></label>
                     <Button  class="rgstBtn" label=""></Button>
                 </div>
                
@@ -45,7 +45,14 @@
     </div>
   </template>
   
+<script>
+  import { RouterLink, useRouter } from 'vue-router'; // Importe o useRouter corretamente
 
+
+
+
+
+</script>
 
 
 
@@ -150,6 +157,7 @@
 
 
   .header-card-rgst{
+    margin-top: 1rem;
     display: flex;
     /* height: fit-content; */
     gap: 1rem;
@@ -181,6 +189,11 @@
     color:#646464;
   }
 
+  .link-login {
+  font-size: 15px;
+  text-decoration: underline;
+  color: #FF5C00;
+}
 
   </style>
   

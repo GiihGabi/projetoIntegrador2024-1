@@ -36,7 +36,7 @@
              
               <div class="footer-texts-login">       
                  <label>Ainda não tem conta?</label>
-                 <label>Cadastre-se e encontre seu pet!</label>
+                 <label><RouterLink to="/singUp" class="link-registro">Cadastre-se</RouterLink> e encontre seu pet!</label>
               </div>
 
           </div>
