@@ -1,29 +1,53 @@
 <!-- Login.vue -->
-
 <template>
   <div class="screenLogin">
     <section class="mainLogin">
-      <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
-      <label  class="textoEntrar">Entrar</label>
-      <div class="inputLogin">
-        <label for="username">Email</label>
-        <InputText id="email" v-model="email" aria-describedby="username-help" />
-      </div>
-      <div class="inputLogin">
-        <label for="username">Senha</label>
-        <Password class="password" id="password" v-model="password" :feedback="false" />
-      </div>
-      <div>
-        <label class="esqueceu">Esqueceu sua senha?</label>
-      </div>
-      <Button @click="submitForm" class="loginBtn" label="Entrar"></Button>
-      <div class="textoslogin">
-        <label class="conta">Ainda não tem uma conta?</label>
-        <label class="cadastrese"><RouterLink class="link-registro" to="/singUp">Cadastre-se</RouterLink> e <span class="link-registro">encontre seu pet</span></label>
-      </div>
+          <div class="imgfundo">
+              <img class="cachorros" src="../assets/images/fundocachorros.svg" alt="" />
+          </div>
+
+          
+
+          <div class="main-card-rgst">
+               <div class="header-card-rgst">
+                        <div class="content-header-login">
+                          <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
+                            <h2 class="entrarLogin">Entrar</h2>
+                        </div>
+                </div>
+            
+              <div class="inputLogin">
+              <label for="username">Email</label>
+              <InputText id="email" aria-describedby="username-help" />
+              </div>
+              <div class="inputLogin">
+              <label for="username">Senha</label>
+              <Password class="password" id="password" :feedback="false" />
+              </div>
+            
+              <div class="texto-esqueceu-login">
+                <label class="esqueceu">Esqueceu sua senha?</label>
+              </div>
+
+              <div class="footer-btn-login">
+                 <Button  class="loginBtn" label="">Entrar</Button>
+
+              </div>
+             
+              <div class="footer-texts-login">       
+                 <label>Ainda não tem conta?</label>
+                 <label><RouterLink to="/singUp" class="link-registro">Cadastre-se</RouterLink> e encontre seu pet!</label>
+              </div>
+
+          </div>
     </section>
   </div>
 </template>
+
+
+
+
+
 
 <script>
 import { ref } from 'vue';
@@ -55,41 +79,46 @@ export default {
   }
 }
 </script>
+
+
 <style>
 .mainLogin {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
   margin: auto;
   border: 8px red;
   background-color: white;
-  width: 20rem;
+  width: fit-content;
   height: 27rem;
   display: flex;
-  justify-content: start;
-  flex-direction: column;
-  border-radius: 1rem;
+  justify-content: center;
+  border-radius: 1.5rem;
 }
 
 .link-registro { font-size: 15px; text-decoration: underline; color: #FF5C00; }
 
-.screenlogin {
-  width: 100%;
-  height: 100%;
-}
 
 .logologin {
   width: 2rem;
   height: 2rem;
 }
 
+.texto-esqueceu-login{}
+
+.esqueceu {
+  padding-top: 0.5rem;
+    color: gray;
+    float: right;
+    padding-bottom: 1rem;
+  }
+
 .textoEntrar {
-  padding: 1rem 0;
   font-weight: bolder;
-  font-size: 25px;
+  font-size: 15px;
   margin: 0;
 }
 
 .inputLogin {
+  padding-left: 0;
   display: flex;
   flex-direction: column;
   color: gray;
@@ -99,14 +128,17 @@ export default {
 }
 
 .loginBtn {
+  display: flex;
+  justify-content: center;
   height: 2.5rem;
   background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
   border: none;
   border-radius: 1rem;
   font-family: 'Roboto Flex', sans-serif;
   font-weight: bolder;
-  margin: auto;
   width: 9rem;
+  margin: auto;
+  
 }
 
 .screenLogin {
@@ -139,6 +171,69 @@ export default {
   margin: auto;
   text-align: center;
 }
+
+
+
+.main-card-rgst{
+  display: flex;
+  flex-direction: column;
+  padding-inline: 3rem;
+}
+
+.cachorros{
+  height: 100%;
+  width: 100%;
+}
+
+
+.header-card-rgst{
+  display: flex;
+  height: fit-content;
+  gap: 1rem;
+  padding-top:1.0rem;
+}
+
+
+.cadastretxt{
+  color: #646464;
+  font-size: 10px;
+}
+
+
+.textos-rgst{
+  line-height: 0.7rem;
+}
+
+
+.footer-btn-login{
+  height:fit-content;
+  display: flex;
+  justify-content: center;
+  padding-top:1.5rem;
+}
+
+.conta{
+  color:#646464;
+}
+
+.footer-texts-login{
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-header-login{
+  display: flex;
+  flex-direction: column;
+}
+
+.entrarLogin{
+  color:#646464;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
 
 .link-registro {
   font-size: 15px;
