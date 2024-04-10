@@ -5,13 +5,21 @@
       <div v-if="!editando" class="ajustar">
         <div class="espacamento" style="line-height: 2.0;">
           <h2><strong></strong> {{ usuario.nome }}</h2>
-          <h3 class="gap-"><strong>Informações:</strong></h3>
+          <h3 class="m-0 "><strong>Informações:</strong></h3>
           <p class="m-0"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
           <p class="m-0"><strong>Email:</strong> {{ usuario.email }}</p>
           <p class="m-0"><strong>Cidade:</strong> {{ usuario.cidade }}</p>
           <p class="m-0"><strong>Endereço:</strong> {{ usuario.endereco }}</p>
           <p class="m-0"><strong>CEP:</strong> {{ usuario.cep }}</p>
         </div>
+        <div style="margin-top: 2cm; margin-left: 5cm;">
+          <div class="image">
+            <div style="margin-top: 2rem; margin-left: 1.70rem; ">
+              <img src="../assets/icons/camera.svg" class="cam-icon">
+            </div>
+          </div>
+        </div>
+
         <div class="posicao">
           <div class="animal-info" style="line-height: 2.0;">
             <h2 class="right-align">Seus Animais:</h2>
@@ -26,34 +34,29 @@
       <div v-else>
         <div class="ajustar">
           <form @submit.prevent="salvarEdicao">
-            <label for="telefone">Telefone:</label><br />
-            <input type="tel" id="telefone" v-model="usuarioEditado.telefone" style="border-radius: 5px;" /><br />
-            <label for="email">Email:</label><br />
-            <input type="email" id="email" v-model="usuarioEditado.email" /><br />
-            <label for="cidade">Cidade:</label><br />
-            <textarea id="cidade" v-model="usuarioEditado.cidade"></textarea><br /><br />
-            <label for="endereco">Endereço:</label><br />
-            <textarea id="endereco" v-model="usuarioEditado.endereco"></textarea><br />
-            <label for="cep">CEP:</label><br />
-            <input type="cep" id="cep" v-model="usuarioEditado.cep" /><br /><br />
+            <label for="telefone" class="bord">Telefone:</label><br />
+            <input type="tel" id="telefone" v-model="usuarioEditado.telefone" class="bord" /><br />
+            <label for="email" class="bord">Email:</label><br />
+            <input type="email" id="email" v-model="usuarioEditado.email" class="bord" /><br />
+            <label for="cidade" class="bord">Cidade:</label><br />
+            <textarea id="cidade" v-model="usuarioEditado.cidade" class="bord"></textarea><br /><br />
+            <label for="endereco" class="bord">Endereço:</label><br />
+            <textarea id="endereco" v-model="usuarioEditado.endereco" class="bord"></textarea><br />
+            <label for="cep" class="bord">CEP:</label><br />
+            <input type="cep" id="cep" v-model="usuarioEditado.cep" class="bord" /><br /><br />
           </form>
 
           <form @submit.prevent="salvarEdicaoAnimais">
             <h2>Seus Animais:</h2>
             <div v-for="(animal, index) in usuarioEditado.animais" :key="index">
-              <label for="nomeAnimal">Nome:</label><br />
-              <input type="text" id="nomeAnimal" v-model="usuarioEditado.animais[index].nome" /><br />
-              <label for="especieAnimal">Espécie:</label><br />
-              <input type="text" id="especieAnimal" v-model="usuarioEditado.animais[index].especie" /><br />
-              <label for="situacaoAnimal">Situação:</label><br />
-              <input type="text" id="situacaoAnimal" v-model="usuarioEditado.animais[index].situacao" /><br />
-
-
-              <label for="fotoAnimal">Foto:</label><br />
-              <input type="file" id="fotoAnimal" @change="handleFileUpload($event, index)" accept="image/*" /><br />
-
-
-              <img :src="animal.fotoUrl" v-if="animal.fotoUrl" style="max-width: 100px; max-height: 100px;" />
+              <label for="nomeAnimal" class="bord">Nome:</label><br />
+              <input type="text" id="nomeAnimal" v-model="usuarioEditado.animais[index].nome" class="bord" /><br />
+              <label for="especieAnimal" class="bord">Espécie:</label><br />
+              <input type="text" id="especieAnimal" v-model="usuarioEditado.animais[index].especie"
+                class="bord" /><br />
+              <label for="situacaoAnimal" class="bord">Situação:</label><br />
+              <input type="text" id="situacaoAnimal" v-model="usuarioEditado.animais[index].situacao"
+                class="bord" /><br />
             </div>
 
           </form>
@@ -71,7 +74,8 @@
             <div v-if="editando" class="center-button">
               <div class="flex justify-center mt-1">
                 <div class="flex gap-3">
-                  <Button label="Cancelar" severity="secondary" outlined class="w-full" @click="cancelarEdicao" />
+                  <Button label="Cancelar" severity="secondary" outlined class="w-full" @click="cancelarEdicao"
+                    style=" background: linear-gradient(90deg, #FF934B, #F27322, #D94509); background-clip: text; -webkit-text-fill-color: transparent; border-color: white;" />
                   <Button type="submit" label="Salvar" @click="salvarEdicao" style=" background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
                   background-clip: text;
                   -webkit-text-fill-color: transparent; border-color: white;" />
@@ -151,6 +155,10 @@ function salvarEdicao() {
   justify-content: space-around;
 }
 
+.bord {
+  border-radius: 2px;
+}
+
 section {
   background-color: white;
   border: 1px solid white;
@@ -160,6 +168,16 @@ section {
   width: 75rem;
   height: 40rem;
   overflow: hidden;
+}
+
+.cam-icon {}
+
+.image {
+  display: flexbox;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+
 }
 
 .horizontal {
@@ -207,6 +225,9 @@ h2 {
   background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-top: 10rem;
+
 }
 
-@media screen and (max-width: 768px) {}</style>
+@media screen and (max-width: 768px) {}
+</style>
