@@ -4,7 +4,7 @@
   <div class="screenLogin">
     <section class="mainLogin">
       <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
-      <RouterLink to="/" class="textoEntrar">Entrar</RouterLink>
+      <label  class="textoEntrar">Entrar</label>
       <div class="inputLogin">
         <label for="username">Email</label>
         <InputText id="email" v-model="email" aria-describedby="username-help" />
@@ -19,7 +19,7 @@
       <Button @click="submitForm" class="loginBtn" label="Entrar"></Button>
       <div class="textoslogin">
         <label class="conta">Ainda não tem uma conta?</label>
-        <label class="cadastrese">Cadastre-se e encontre seu pet</label>
+        <label class="cadastrese"><RouterLink class="link-registro" to="/singUp">Cadastre-se</RouterLink> e <span class="link-registro">encontre seu pet</span></label>
       </div>
     </section>
   </div>
@@ -27,7 +27,7 @@
 
 <script>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'; // Importe o useRouter corretamente
+import { RouterLink, useRouter } from 'vue-router'; // Importe o useRouter corretamente
 import AuthService from '@/services/AuthService'
 
 export default {
@@ -69,6 +69,8 @@ export default {
   flex-direction: column;
   border-radius: 1rem;
 }
+
+.link-registro { font-size: 15px; text-decoration: underline; color: #FF5C00; }
 
 .screenlogin {
   width: 100%;
@@ -136,5 +138,11 @@ export default {
   flex-direction: column;
   margin: auto;
   text-align: center;
+}
+
+.link-registro {
+  font-size: 15px;
+  text-decoration: underline;
+  color: #FF5C00;
 }
 </style>
