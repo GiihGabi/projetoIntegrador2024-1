@@ -1,12 +1,12 @@
 <template>
   <section class="filtro-feedAnimais">
     <div id="titulos-feedAnimais">
-        <h1 class="h1-feedAnimais">Pets perdidos e  encontrados</h1>
+        <h1  class="h1-feedAnimais">Pets perdidos e  encontrados</h1>
         <h2 class="sub-titulo-feedAnimais">Perto de: Rua de exemplo n°000</h2>
     </div>
     <form class="form-feedAnimais">
       <p class="titulo-filtros-feedAnimais">Filtros</p>
-      <section>
+      <section style="padding: 0 0 0 1em;">
         <div class="form-label-input-feedAnimais">
           <label class="paragrafo-filtro-feedAnimais" for="inputcep">Endereço, Cidade ou CEP</label>
           <InputText id="inputcep" type="text" v-model="valueInputTextCEP" />
@@ -62,10 +62,10 @@
   margin-bottom: 27px;
 }
 .h1-feedAnimais {
-  background: #646464;
+  background: linear-gradient(to right, #ff934b, #f27322, #d94509);
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 900;
 }
 .sub-titulo-feedAnimais{
@@ -83,8 +83,8 @@
 /* FORM */
 .titulo-filtros-feedAnimais {
   font-size: 24px;
-  color: #373737;
-  font-weight: 700;
+  color: #6B6B6B;
+  font-weight: 900;
 }
 
 /* LABEL */
@@ -95,7 +95,7 @@
 .paragrafo-filtro-feedAnimais {
   font-weight: 600;
   font-size: 18px;
-  color: #838383;
+  color: #373737;
 }
 
 /* DIVS */

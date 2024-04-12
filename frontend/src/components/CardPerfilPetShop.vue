@@ -28,6 +28,7 @@
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 .cardPerfilPetShop {
     width: 25%;
     margin: 33px ;
@@ -37,7 +38,7 @@
 }
 .p-perfil-feedAnimais {
     color: #696969;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600
 }
 .perfis-petshop{
@@ -55,11 +56,11 @@
     color: #696969;
 }
 .strong-cardPerfil{
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 }
 .text-perfilA{
-    font-size: 12px;
+    font-size: 16px;
 }
 </style>
 
