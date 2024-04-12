@@ -18,6 +18,9 @@ main {
   flex-direction: column;
 }
 
+header{
+  z-index: 10;
+}
 
 .logo {
   display: block;
