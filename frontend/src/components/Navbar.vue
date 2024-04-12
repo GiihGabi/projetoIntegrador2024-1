@@ -87,7 +87,9 @@ import Dropdown from 'primevue/dropdown';
 
 export default {
   components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
     Button,
+    // eslint-disable-next-line vue/no-reserved-component-names
     Dialog,
     InputText,
     Dropdown
@@ -169,7 +171,7 @@ export default {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100vw;
-  height: 5rem;
+  height: 4rem;
   display: flex;
   justify-content: space-around;
   /* padding: 1rem; */
