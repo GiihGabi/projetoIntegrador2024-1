@@ -1,5 +1,9 @@
 <template>
   <section class="filtro-feedAnimais">
+    <div id="titulos-feedAnimais">
+        <h1 class="h1-feedAnimais">Pets perdidos e  encontrados</h1>
+        <h2 class="sub-titulo-feedAnimais">Perto de: Rua de exemplo n°000</h2>
+    </div>
     <form class="form-feedAnimais">
       <p class="titulo-filtros-feedAnimais">Filtros</p>
       <section>
@@ -23,11 +27,22 @@
         </div>
         <div class="div-filtro-feedAnimais">
           <MultiSelect
-            v-model="selectedCities"
-            :options="cities"
+            v-model="especieAnimal"
+            :options="especies"
             filter
             optionLabel="name"
-            placeholder="Raça do animal"
+            placeholder="Espécie"
+            :maxSelectedLabels="3"
+            class="paragrafo-filtro-feedAnimais"
+          />
+        </div>
+        <div class="div-filtro-feedAnimais">
+          <MultiSelect
+            v-model="racaAnimal"
+            :options="raca"
+            filter
+            optionLabel="name"
+            placeholder="Raça"
             :maxSelectedLabels="3"
             class="paragrafo-filtro-feedAnimais"
           />
@@ -43,12 +58,26 @@
 
 <style>
 /* SECTION */
-.filtro-feedAnimais {
-  /* margin: 0 5em 0 0; */
-  width: fit-content;
+#titulos-feedAnimais{
+  margin-bottom: 27px;
 }
-section{
-    margin-left: 1rem;
+.h1-feedAnimais {
+  background: #646464;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
+  font-weight: 900;
+}
+.sub-titulo-feedAnimais{
+  color: #696969;
+  font-weight: 600;
+  font-size: 18px;
+}
+.filtro-feedAnimais {
+  padding: 33px 38px;
+  background-color: white;
+  width: 25%;
+  border-right: 3px solid #e3e3e3;
 }
 
 /* FORM */
@@ -99,6 +128,7 @@ section{
   box-shadow: none;
   padding: 0.5rem 0;
   color: orange;
+  background: transparent;
   font-weight: 800;
 }
 .slider-feedAnimais {
@@ -174,12 +204,19 @@ const valueWithUnit = computed({
   }
 })
 
-const selectedCities = ref()
-const cities = ref([
-  { name: 'New York', code: 'NY' },
-  { name: 'Rome', code: 'RM' },
-  { name: 'London', code: 'LDN' },
-  { name: 'Istanbul', code: 'IST' },
-  { name: 'Paris', code: 'PRS' }
+const especieAnimal = ref()
+const especies = ref([
+  { name: 'Gato', code: 'Cat' },
+  { name: 'Cachorro', code: 'Dog' },
+  { name: 'Aves', code: 'Av' },
+  { name: 'Réptil', code: 'Re' }
 ])
+
+const racaAnimal = ref()
+const raca = ref([
+  { name: 'Bodercolie', code: 'NY' },
+  { name: 'Chiuaua', code: 'RM' },
+  { name: 'Pastor Alemão', code: 'LDN' }
+])
+
 </script>

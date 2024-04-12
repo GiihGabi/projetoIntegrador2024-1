@@ -15,6 +15,31 @@
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.js"></script>
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel__slide');
+    const totalSlides = slides.length;
+  
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('current-slide');
+      currentSlide = (n + totalSlides) % totalSlides;
+      slides[currentSlide].classList.add('current-slide');
+    }
+  
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+  
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+  
+    const nextButton = document.querySelector('.carousel__button--right');
+    const prevButton = document.querySelector('.carousel__button--left');
+  
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+  </script>
 </body>
 
 </html>
