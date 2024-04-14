@@ -5,19 +5,32 @@
       <div v-if="!editando" class="ajustar">
         <div class="espacamento" style="line-height: 2.0;">
           <h2><strong></strong> {{ usuario.nome }}</h2>
-          <h3 class="m-0 "><strong>Informações:</strong></h3>
-          <p class="m-0"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
-          <p class="m-0"><strong>Email:</strong> {{ usuario.email }}</p>
-          <p class="m-0"><strong>Cidade:</strong> {{ usuario.cidade }}</p>
-          <p class="m-0"><strong>Endereço:</strong> {{ usuario.endereco }}</p>
-          <p class="m-0"><strong>CEP:</strong> {{ usuario.cep }}</p>
+          <h3 class="m-0 " style="margin-bottom: 10px;"><strong>Informações:</strong></h3>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Email:</strong> {{ usuario.email }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Cidade:</strong> {{ usuario.cidade }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Endereço:</strong> {{ usuario.endereco }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>CEP:</strong> {{ usuario.cep }}</p>
         </div>
-        <div style="margin-top: 2cm; margin-left: 5cm;">
+        <div style="margin-top: 2cm; margin-left: 6cm;">
           <div class="image">
             <div style="margin-top: 2rem; margin-left: 1.70rem; ">
+              <label for="fileInput" class = "file-uplod">
               <img src="../assets/icons/camera.svg" class="cam-icon">
+              </label>
+              <input type="file" id="fileInput" style="display: none;" @change="handleImageUpload">
             </div>
           </div>
+          <div>
+          <div class="image-2">
+            <div style="margin-top: 2rem; margin-left: 1.70rem; ">
+              <label for="fileInput" class = "file-uplod">
+              <img src="../assets/icons/camera.svg" class="cam-icon-2">
+              </label>
+              <input type="file" id="fileInput" style="display: none;" @change="handleImageUpload">
+            </div>
+          </div>
+        </div>
         </div>
 
         <div class="posicao">
@@ -155,9 +168,6 @@ function salvarEdicao() {
   justify-content: space-around;
 }
 
-.bord {
-  border-radius: 2px;
-}
 
 section {
   background-color: white;
@@ -170,9 +180,9 @@ section {
   overflow: hidden;
 }
 
-.cam-icon {}
 
 .image {
+  margin-right: 4%;
   display: flexbox;
   border: 1px solid black;
   width: 100px;
@@ -180,7 +190,16 @@ section {
 
 }
 
+
+.image-2 {
+  margin-top: 3rem;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+
+}
 .horizontal {
+  margin-bottom: 20px;
   font-size: 15px;
 }
 
@@ -193,7 +212,7 @@ section {
 .center-button {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+ 
 }
 
 h2 {
@@ -228,6 +247,8 @@ h2 {
   margin-top: 10rem;
 
 }
-
+.file-upload {
+    cursor: pointer;
+  }
 @media screen and (max-width: 768px) {}
 </style>
