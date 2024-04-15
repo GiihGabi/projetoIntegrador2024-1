@@ -68,7 +68,16 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../components/ModalCadPet.vue')
+      component: () => import('../components/CardsAnimais.vue')
+    },
+
+    {
+      path: '/registroPet',
+      name: 'registroPet',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/RegistroAnimal.vue')
     }
   ]
 })

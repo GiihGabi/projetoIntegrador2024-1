@@ -18,11 +18,11 @@
     </div>
 
     <!-- Modal -->
-    <Dialog v-model:visible="showModal" modal header="Edit Profile" :style="{ width: '30rem' }">
+   <Dialog v-model:visible="showModal" modal header="Edit Profile" :style="{ width: '30rem' }">
       <!-- Cabeçalho do modal -->
       <template #header>
         <div class="inline-flex align-items-center justify-content-center gap-2 div-infos">
-          <div>
+          <div> 
             <img class="pata_cad" src="../assets/icons/pata_cad_pet.png" alt="" />
           </div>
           <div class="text-image-pata-cad">
