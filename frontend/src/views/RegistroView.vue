@@ -138,7 +138,7 @@
   
 <script>
   import { ref } from 'vue';
-  import { RouterLink, useRouter } from 'vue-router'; // Importe o useRouter corretamente
+  import { RouterLink } from 'vue-router';
 
   export default {
     setup(){
@@ -146,7 +146,8 @@
       const registerStage = ref(true)
 
       return{
-        registerStage
+        registerStage,
+        RouterLink
       }
     }
   }
