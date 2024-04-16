@@ -217,7 +217,7 @@ export default {
 }
 
 .footer-texts-login{
-  padding-top: 2rem;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
