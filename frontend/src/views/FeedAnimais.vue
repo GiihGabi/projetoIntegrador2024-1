@@ -9,7 +9,9 @@
   </template>
   
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 #feedAnimais{
+    font-family: "Roboto Flex", sans-serif;
 }
 
 .sub-titulo-feedAnimais{
@@ -22,6 +24,6 @@
     display: flex;
     justify-content: space-between;
     gap:2rem;
-    /* height: 80%; */
+    height: 100vh;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <secao class="cardAnimaisGeral">
+  <section class="cardAnimaisGeral">
     <div class="cards-geral">
       <div id="filtro-cardAnimais">
         <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Mais recentes:"
@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-  </secao>
+  </section>
 </template>
 
 <script>
@@ -89,6 +89,10 @@ export default {
 #bloco-info{
   padding: 0px 10px;
 }
+.p-button{
+  border-radius:10px;
+  border:0;
+}
 .cards-geral{
   background-color: white;
   margin-bottom: 15px;
@@ -102,7 +106,9 @@ export default {
 
 .lost-text {
   color: black;
-  font-weight: 700
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .p-carousel-content {
@@ -116,6 +122,7 @@ export default {
 }
 .text-nome {
   color: #9E9E9E;
+  font-size: 15px;
 }
 
 .talk {
@@ -130,6 +137,7 @@ export default {
   color: #696969;
   font-weight: 700;
   margin-left: 6px;
+  font-size: 20px;
 }
 
 .info-baixo {
@@ -174,8 +182,10 @@ export default {
 
 .p-inputtext {
   padding: 0.5rem 0;
+  width: 284px;
+  font-size: 20px;
+  font-weight: bold;
 }
-
 #icone-lupaDog {
   margin: 0 0 0 10px;
 }

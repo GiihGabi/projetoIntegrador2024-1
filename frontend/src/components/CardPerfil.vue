@@ -5,24 +5,37 @@
       <div v-if="!editando" class="ajustar">
         <div class="espacamento" style="line-height: 2.0;">
           <h2><strong></strong> {{ usuario.nome }}</h2>
-          <h3 class="m-0 "><strong>Informações:</strong></h3>
-          <p class="m-0"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
-          <p class="m-0"><strong>Email:</strong> {{ usuario.email }}</p>
-          <p class="m-0"><strong>Cidade:</strong> {{ usuario.cidade }}</p>
-          <p class="m-0"><strong>Endereço:</strong> {{ usuario.endereco }}</p>
-          <p class="m-0"><strong>CEP:</strong> {{ usuario.cep }}</p>
+          <h3 class="m-0 " style="margin-bottom: 10px;"><strong>Informações:</strong></h3>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Email:</strong> {{ usuario.email }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Cidade:</strong> {{ usuario.cidade }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>Endereço:</strong> {{ usuario.endereco }}</p>
+          <p class="m-0" style="margin-bottom: 10px;"><strong>CEP:</strong> {{ usuario.cep }}</p>
         </div>
-        <div style="margin-top: 2cm; margin-left: 5cm;">
+        <div style="margin-top: 2cm; margin-left: 6cm;gap:2rem;display: flex;flex-direction: column;">
           <div class="image">
-            <div style="margin-top: 2rem; margin-left: 1.70rem; ">
+            <div style="margin-top: 2rem; margin-left: 2rem; ">
+              <label for="fileInput" class = "file-uplod">
               <img src="../assets/icons/camera.svg" class="cam-icon">
+              </label>
+              <input type="file" id="fileInput" style="display: none;" @change="handleImageUpload">
             </div>
           </div>
+          <div>
+          <div class="image">
+            <div style="margin-top: 2rem; margin-left: 2rem; ">
+              <label for="fileInput" class = "file-uplod">
+              <img src="../assets/icons/camera.svg" class="cam-icon-2">
+              </label>
+              <input type="file" id="fileInput" style="display: none;" @change="handleImageUpload">
+            </div>
+          </div>
+        </div>
         </div>
 
         <div class="posicao">
           <div class="animal-info" style="line-height: 2.0;">
-            <h2 class="right-align">Seus Animais:</h2>
+            <h2 class="right-align">Seus Animais</h2>
             <div v-for="(animal, index) in usuario.animais" :key="index">
               <p class="horizontal"><strong>Nome:</strong> {{ animal.nome }}</p>
               <p class="horizontal"><strong>Espécie:</strong> {{ animal.especie }}</p>
@@ -47,7 +60,6 @@
           </form>
 
           <form @submit.prevent="salvarEdicaoAnimais">
-            <h2>Seus Animais:</h2>
             <div v-for="(animal, index) in usuarioEditado.animais" :key="index">
               <label for="nomeAnimal" class="bord">Nome:</label><br />
               <input type="text" id="nomeAnimal" v-model="usuarioEditado.animais[index].nome" class="bord" /><br />
@@ -155,32 +167,39 @@ function salvarEdicao() {
   justify-content: space-around;
 }
 
-.bord {
-  border-radius: 2px;
-}
 
 section {
   background-color: white;
   border: 1px solid white;
   border-radius: 3rem;
-  margin: 0 auto;
-  padding: 40px;
+  margin: auto;
+  padding: 3rem;
   width: 75rem;
-  height: 40rem;
+  height: fit-content;
   overflow: hidden;
 }
 
-.cam-icon {}
 
 .image {
+  /* margin-right: 4%; */
   display: flexbox;
-  border: 1px solid black;
+  border: 1px solid rgb(156, 156, 156);
+  border-radius: 1rem;
   width: 100px;
   height: 100px;
 
 }
 
+
+.image-2 {
+  margin-top: 3rem;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+
+}
 .horizontal {
+  margin-bottom: 20px;
   font-size: 15px;
 }
 
@@ -193,7 +212,7 @@ section {
 .center-button {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+ 
 }
 
 h2 {
@@ -225,9 +244,10 @@ h2 {
   background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 10rem;
+  /* margin-top: 10rem; */
 
 }
-
-@media screen and (max-width: 768px) {}
+.file-upload {
+    cursor: pointer;
+  }
 </style>

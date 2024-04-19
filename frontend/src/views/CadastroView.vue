@@ -2,7 +2,7 @@
 
 <template>
   <div class="screenCad">
-    <section class="mainCad">
+    <section class="cadpetCard">
       <div class="textEncontrePet">
         <div class="image">
           <img class="logoCad" src="../assets/images/logoLogin.svg" alt="" />
