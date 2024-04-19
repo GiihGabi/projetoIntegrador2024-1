@@ -1,13 +1,19 @@
 <?php
 require_once ('./models/Animal.php');
+require_once ('./controllers/ImageController.php'); // Importe o controller de imagens
+
 
 class AnimalController
 {
     private $animalModel;
+    private $db;
+    private $s3;
 
-    public function __construct($db)
+    public function __construct($db, $s3)
     {
         $this->animalModel = new Animal($db);
+        $this->db = $db;
+        $this->s3 = $s3;
     }
 
     public function getAll()
@@ -31,9 +37,9 @@ class AnimalController
     }
 
     public function getByOwnerId($ownerId)
-    {    
+    {
         $animais = $this->animalModel->findByField('owner_id', $ownerId);
-    
+
         if ($animais) {
             error_log("Animais encontrados: " . json_encode($animais));
             return json_encode($animais);
@@ -44,21 +50,62 @@ class AnimalController
 
     public function create($data)
     {
+
+        $userId = 7;
+        $name = $data['name'];
+        $age = $data['age'];
+        $gender = $data['gender'];
+        $description = $data['description'];
+        $size = $data['size'];
+        $weight = $data['weight'];
+        $temperament = $data['temperament'];
+        $publication_date = $data['publication_date'];
+        $status_id = $data['status_id'];
+        $owner_id = $data['owner_id'];
+        $species_id = $data['species_id'];
+
+        $imageController = new ImageController($this->db, $this->s3);
+
+
+        // Chamar a função de upload de imagens
+        if (isset($_FILES['images']) && is_array($_FILES['images'])) {
+            // var_dump(isset($_FILES['images']));
+            // var_dump(is_array($_FILES['images']));
+
+            // A variável $_FILES['images'] está definida e é um array
+            $uploadResults = $imageController->uploadImages($_FILES['images'], $userId);
+        } else {
+            // $_FILES['images'] não está definido ou não é um array
+            // Trate este caso de acordo com a lógica do seu aplicativo
+            return "Erro";
+        }
+
+        $imageUrls = [];
+        foreach ($uploadResults as $result) {
+            // var_dump($result['success'] );
+            // var_dump(isset($result['image_url']));
+            if (isset($result['ObjectURL'])) {
+                $imageUrls[] = $result['ObjectURL'];
+            } else {
+                // Lidar com falha no upload da imagem, se necessário
+            }
+        }
+        // Verificar se o upload das imagens foi bem-sucedido
+
+        // Chame o método create do modelo, passando as informações do animal e os URLs das imagens
         $result = $this->animalModel->create(
-            $data['name'],
-            $data['age'],
-            $data['sex'],
-            $data['description'],
-            $data['size'],
-            $data['weight'],
-            $data['temperament'],
-            $data['photo1'],
-            $data['photo2'],
-            $data['photo3'],
-            $data['publication_date'],
-            $data['status_id'],
-            $data['owner_id'],
-            $data['species_id']
+            $name,
+            $age,
+            $gender,
+            $description,
+            $size,
+            $weight,
+            $temperament,
+            $publication_date,
+            $status_id,
+            $owner_id,
+            $species_id,
+            $imageUrls
         );
 
         if ($result === true) {
@@ -67,6 +114,8 @@ class AnimalController
             return $this->errorResponse("Erro ao criar animal", 500, "Detalhes adicionais sobre o erro");
         }
     }
+
+
 
     // Função para criar uma resposta de sucesso
     private function successResponse($message, $statusCode)

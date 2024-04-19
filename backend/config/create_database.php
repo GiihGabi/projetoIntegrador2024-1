@@ -84,6 +84,7 @@ if ($conn->query($sql_create_status_table) === TRUE) {
     echo "Error creating status table: " . $conn->error . "\n";
 }
 
+
 // Query para criar a tabela de animais
 $sql_create_animals_table = "
     CREATE TABLE IF NOT EXISTS animals (
@@ -95,9 +96,6 @@ $sql_create_animals_table = "
         size VARCHAR(20),
         weight FLOAT,
         temperament TEXT,
-        photo1 VARCHAR(255),
-        photo2 VARCHAR(255),
-        photo3 VARCHAR(255),
         publication_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         status_id INT(6) UNSIGNED,
         owner_id INT(6) UNSIGNED,
@@ -112,6 +110,20 @@ if ($conn->query($sql_create_animals_table) === TRUE) {
     echo "Animals table created successfully or already exists\n";
 } else {
     echo "Error creating animals table: " . $conn->error . "\n";
+}
+$sql_create_animal_images_table = "
+    CREATE TABLE IF NOT EXISTS animal_images (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        animal_id INT(6) UNSIGNED,
+        image_path VARCHAR(255) NOT NULL,
+        FOREIGN KEY (animal_id) REFERENCES animals(id_animal)
+    )
+";
+
+if ($conn->query($sql_create_animal_images_table) === TRUE) {
+    echo "Animal images table created successfully or already exists\n";
+} else {
+    echo "Error creating animal images table: " . $conn->error . "\n";
 }
 
 

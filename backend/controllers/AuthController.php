@@ -14,9 +14,8 @@ class AuthController {
 
     public function login($email, $password) {
         $user = $this->userModel->findByEmail($email); 
-    
         if (!$user || !password_verify($password, $user['password'])) {
-            return json_encode(array("message" => "Credenciais inválidas"));
+            return json_encode(array("message" => "Credenciais inválidas"),500);
         }
     
         $user_id = $user['id']; 
