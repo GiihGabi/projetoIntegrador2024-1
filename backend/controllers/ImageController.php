@@ -12,7 +12,12 @@ class ImageController
         $this->s3 = $s3;
     }
 
-    public function uploadImages($request, $userID)
+    public function getImagesUrlsForAnimal($animalId)
+    {
+        return $this->imageModel->getImagesUrlsForAnimal($animalId);
+    }
+    
+    public function uploadImages($request,$userId)
     {
         // Verifica se foram enviadas imagens
         if (!empty($request)) {
@@ -24,7 +29,7 @@ class ImageController
                 if ($images['error'][$key] === 0) {
                     $imageName = $images['name'][$key];
                     $bucketName = 'projetointegrador';
-                    $userImagePath = "users/{$userID}/{$imageName}";
+                    $userImagePath = "users/ID{$userId}/animalsImages/{$imageName}";
 
                     try {
                         $result = $this->s3->putObject([
@@ -35,7 +40,6 @@ class ImageController
 
                         // Adiciona o resultado do upload ao array de resultados
                         $uploadResults[] = $result;
-                        // var_dump($result['ObjectURL']);
 
                     } catch (Exception $e) {
                         // Se ocorrer um erro durante o upload, adiciona uma mensagem de erro ao array de resultados
