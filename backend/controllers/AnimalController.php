@@ -39,7 +39,6 @@ class AnimalController
             foreach ($animais as &$animal) {
                 $animal['images'] = $imageController->getImagesUrlsForAnimal($animal['id_animal']);
             }
-            var_dump($animais);
             return json_encode($animais);
         } else {
             return $this->errorResponse("Nenhum animal encontrado", 404);
