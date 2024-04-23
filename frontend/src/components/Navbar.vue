@@ -1,166 +1,135 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="containerItens">
-    <div class="containerPages">
-      <img class="logo" src="./../assets/images/Logo.svg" alt="" />
-      <RouterLink to="/">Encontre seu pet!</RouterLink>
-      <RouterLink to="/products" v-if="isLoggedIn">Produtos</RouterLink>
-      <RouterLink to="/adoption" v-if="isLoggedIn">Adoção</RouterLink>
+  <section class="body">
+    <RouterLink to="/" @click="visibleMenu = false">
+      <img class="logo" src="./../assets/images/Logo.svg" style="margin-top: 0.1rem" />
+    </RouterLink>
+    <div style="display: flex">
+      <div class="notLogged">
+        <RouterLink to="/chat" @click="visibleMenu = false"
+          ><i v-badge class="pi pi-comments" style="font-size: 1rem" />
+        </RouterLink>
+
+        <RouterLink to="/cart" @click="visibleMenu = false"
+          ><img src="../assets/icons/cartIcon.svg" alt=""
+        /></RouterLink>
+      </div>
+
+      <Button class="menuButton" @click="visibleMenu = !visibleMenu">
+        <img src="../assets/icons/menuIcon.svg" />
+      </Button>
+    </div>
+  </section>
+  <Sidebar v-model:visible="visibleMenu" position="right">
+    <div class="menuItens">
+      <RouterLink to="/" @click="visibleMenu = false">Encontre seu pet!</RouterLink>
+      <RouterLink to="/products" v-if="!isLoggedIn" @click="visibleMenu = false"
+        >Produtos</RouterLink
+      >
+      <RouterLink to="/adoption" v-if="!isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink>
       <RouterLink to="/about">Sobre nós</RouterLink>
     </div>
-    <div class="containerProfile">
-      <!-- Botão para abrir o modal -->
-      <Button class="findPetBnt" label="Procurar meu Pet" @click="openModal"></Button>
-      <RouterLink to="/profile" v-if="isLoggedIn">Perfil</RouterLink>
-      <div class="notLogged" v-if="!isLoggedIn">
-        <RouterLink to="/login">Entrar</RouterLink>
-        <RouterLink to="/singUp">Cadastre-se</RouterLink>
-      </div>
+    <div class="logoutButton">
+      <div style="float: inline-end"><a href="">Sair</a></div>
     </div>
-
-    <!-- Modal -->
-   <Dialog v-model:visible="showModal" modal header="Edit Profile" :style="{ width: '30rem' }">
-      <!-- Cabeçalho do modal -->
-      <template #header>
-        <div class="inline-flex align-items-center justify-content-center gap-2 div-infos">
-          <div> 
-            <img class="pata_cad" src="../assets/icons/pata_cad_pet.png" alt="" />
-          </div>
-          <div class="text-image-pata-cad">
-            <h3 class="h3_cad_pet">Tem um animal perdido?</h3>
-            <h4 class="cadastro-pet">Cadastre ele na plataforma para encontrá-lo!</h4>
-          </div>
-        </div>
-      </template>
-      <!-- Corpo do modal -->
-      <div class="form-div">
-        <span class="p-text-secondary block mb-5">Insira as imagens do seu animalzinho:</span>
-          <div class="image-animals" @click="openFileSelector">
-            <input type="file" name="file" id="file" class="inputfile" />
-          </div>
-          <div class="form-div-2">
-            <form action="" class="form-cad-pet">
-              <div class="input-cad-pet-name">
-                <label for="name">Nome do animalzinho:</label>
-                <InputText id="nameAnimal" v-model="nameAnimal" aria-describedby="username-help" />
-              </div>
-              <div class="tipo-raca">
-                <div class="input-cad-pet">
-                  <label for="tipo">Tipo:</label>
-                  <Dropdown v-model="selectedTipo" :options="tipos" optionLabel="name" placeholder="Selecione o tipo" class="w-full dropdown-tipo">
-                    <template #selectedItem>
-                      <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
-                    </template>
-                  </Dropdown>
-                </div>
-                <div class="input-cad-pet">
-                  <label for="raca">Raça:</label>
-                  <Dropdown v-model="selectedRaca" :options="racas" optionLabel="name" placeholder="Selecione a raça" class="w-full dropdown-raca">
-                    <template #selectedItem>
-                      <div v-if="selectedRaca">{{ selectedRaca.name }}</div>
-                    </template>
-                  </Dropdown>
-                </div>
-              </div>
-              <div class="input-cad-pet-local">
-                <label for="senha">Último local visto:</label>
-                <InputText id="senha" v-model="senha" aria-describedby="username-help" />
-              </div>
-            </form>
-          </div>
-        </div>
-      <!-- Rodapé do modal -->
-      <template #footer>
-        <Button class="button-cancel" label="Cancelar" text severity="secondary" @click="showModal = false" autofocus />
-        <Button class="button-save" label="Salvar" outlined severity="secondary" @click="showModal = false" autofocus />
-      </template>
-    </Dialog>
-  </section>
+  </Sidebar>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import Button from "primevue/button";
-import Dialog from 'primevue/dialog';
-import InputText from 'primevue/inputtext';
-import Dropdown from 'primevue/dropdown';
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
-  components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Button,
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Dialog,
-    InputText,
-    Dropdown
-  },
+  components: {},
   setup() {
-    const isLoggedIn = ref(false);
-    const router = useRouter();
-    const showModal = ref(false); // Variável para controlar a exibição do modal
-
-    // Tipos e raças para os dropdowns
-    const tipos = ref([
-      { name: 'Cachorro' },
-      { name: 'Gato' },
-      { name: 'Pássaro' },
-      { name: 'Outro' }
-    ]);
-    const racas = ref([
-      { name: 'Labrador' },
-      { name: 'Poodle' },
-      { name: 'Siamese' },
-      { name: 'Vira-lata' }
-    ]);
-
-    // Variáveis ref para armazenar os valores selecionados
-    const selectedTipo = ref(null);
-    const selectedRaca = ref(null);
+    const isLoggedIn = ref(false)
+    const router = useRouter()
+    const visibleMenu = ref(false)
 
     const checkAuthStatus = () => {
-      const token = localStorage.getItem('token');
-      isLoggedIn.value = !!token;
-    };
+      const token = localStorage.getItem('token')
+      isLoggedIn.value = !!token
+    }
 
     const handleLogin = () => {
-      checkAuthStatus();
-      router.push('/'); // Redirecione para a página inicial após o login
-    };
-
-    const openModal = () => {
-      showModal.value = true;
-    };
-
-    const openFileSelector = () => {
-      const fileInput = document.getElementById('file');
-      fileInput.click();
-    };
+      checkAuthStatus()
+      router.push('/')
+    }
 
     onMounted(() => {
-      checkAuthStatus();
-    });
+      checkAuthStatus()
+    })
 
     return {
+      visibleMenu,
       isLoggedIn,
-      handleLogin,
-      showModal,
-      openModal,
-      openFileSelector,
-      tipos,
-      racas,
-      selectedTipo,
-      selectedRaca
-    };
+      handleLogin
+    }
   }
 }
 </script>
 
-
 <style>
-
 .logo {
+  padding: 0.5rem;
   width: 3rem;
 }
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  width: 100%;
+  height: 3rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  z-index: 10000;
+}
+.menuButton {
+  background: none;
+  border: none;
+}
+.menuItens {
+  display: flex;
+  text-align: end;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+.p-badge {
+  background: #f27322;
+  font-weight: 700;
+  min-width: 0.5rem;
+  height: 0.5rem;
+  line-height: 32rem !important;
+  /* position: absolute; */
+  /* margin-right: 30px; */
+}
+
+.p-sidebar-close {
+  display: none;
+}
+.p-sidebar-mask {
+  z-index: 1 !important;
+}
+.p-sidebar {
+  top: 3rem;
+  width: 15rem !important;
+}
+.p-sidebar-header {
+  display: none;
+}
+.p-sidebar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logoutButton {
+  padding-bottom: 3rem;
+}
+
 .notLogged {
   display: flex;
   margin: auto;
@@ -169,7 +138,6 @@ export default {
 
 .containerItens {
   background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100vw;
   height: 4rem;
   display: flex;
@@ -207,39 +175,39 @@ export default {
 a {
   text-decoration: none;
   color: #696969;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin: auto;
+  line-height: 2rem;
 }
 
-/******  MODAL STYLES ******/
+/* *****  MODAL STYLES *****
 
-.pata_cad{
+.pata_cad {
   width: 30px;
 }
 
-.div-text-pata-cad{
+.div-text-pata-cad {
   display: block;
 }
 
-.div-infos{
+.div-infos {
   display: flex;
   align-items: center;
 }
 
-.text-image-pata-cad{
+.text-image-pata-cad {
   display: flex;
   flex-direction: column;
   padding-left: 0.5rem;
 }
 
-.h3_cad_pet{
+.h3_cad_pet {
   color: #646464;
   font-size: 24px;
   font-weight: 700;
 }
 
-.cadastro-pet{
+.cadastro-pet {
   font-size: 12px;
   color: #646464;
   font-weight: 400;
@@ -263,15 +231,15 @@ a {
 }
 
 .image-animals:hover {
-  border-color: #FF5C00;
+  border-color: #ff5c00;
 }
 
-.images-pets{
+.images-pets {
   display: flex;
   padding: 0.5em;
 }
 
-.form-cad-pet{
+.form-cad-pet {
   justify-content: center;
   display: contents;
 }
@@ -289,7 +257,7 @@ a {
   display: flex;
   flex-direction: column;
   color: gray;
-   width: 23.2rem;
+  width: 23.2rem;
   margin-right: 20px;
   padding-top: 0.5rem;
 }
@@ -308,21 +276,19 @@ a {
   margin-right: 20px;
 }
 
-.form-div{
+.form-div {
   padding: 0 0 1em 2em;
 }
 
-.form-div-2{
+.form-div-2 {
   padding-top: 1em;
 }
 
-.button-save:hover{
-  color: #FF5C00;
+.button-save:hover {
+  color: #ff5c00;
 }
 
-.button-cancel:hover{
-  color: #FF5C00;
-}
-
-
+.button-cancel:hover {
+  color: #ff5c00;
+} */
 </style>

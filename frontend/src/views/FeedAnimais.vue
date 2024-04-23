@@ -1,9 +1,9 @@
 <template>
     <section id="feedAnimais">
         <div id="main-feedAnimais">
-            <FiltrosAnimais />
+            <!-- <FiltrosAnimais />
             <CardsAnimais />
-            <CardPerfilPetShop />
+            <CardPerfilPetShop /> -->
         </div>
     </section>
   </template>
