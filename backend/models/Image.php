@@ -30,29 +30,10 @@ class Image
         }
     }
 
-    public function getImagesUrlsForAnimal($animalId)
-    {
-        try {
-            // Prepare a declaração SQL para obter os URLs das imagens associadas ao animal
-            $query = "SELECT image_path FROM animal_images WHERE animal_id = :animal_id";
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(':animal_id', $animalId);
-            
-            // Execute a consulta
-            if ($stmt->execute()) {
-                $imageUrls = [];
-                // Itera sobre os resultados para extrair os URLs das imagens
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $imageUrls[] = $row['image_path'];
-                }
-                return $imageUrls;
-            } else {
-                // Retornar null ou lançar uma exceção em caso de falha na execução da consulta
-                return null;
-            }
-        } catch (PDOException $e) {
-            // Lidar com erros de banco de dados, se necessário
-            return null;
-        }
-    }
+    // public function getImagesForAnimal($animalId)
+    // {
+    //     try {
+
+    //     }
+    // }
 }

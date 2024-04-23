@@ -16,10 +16,10 @@ $router->get('/api/animals', function () use ($db, $s3) {
 });
 
 //GetAllAnimalsWithImages
-$router->get('/api/animalsImages', function () use ($db, $s3) {
+$router->get('/api/animalsImages/{userId}', function ($userId) use ($db, $s3) {
     $controller = new AnimalController($db, $s3);
-    return $controller->getAllWithImages();
- });
+    return $controller->getAllWithImages($userId);
+});
 
 // GetAnimalsById
 $router->get('/api/animals/{id}', function ($id) use ($db, $s3) {
@@ -54,7 +54,7 @@ $router->post('/api/animals', function () use ($db, $s3) {
         'size' => $_POST['size'],
         'weight' => $_POST['weight'],
         'temperament' => $_POST['temperament'],
-        // 'publication_date' => $_POST['publication_date'],
+        'publication_date' => $_POST['publication_date'],
         'status_id' => $_POST['status_id'],
         'owner_id' => $_POST['owner_id'],
         'species_id' => $_POST['species_id'],

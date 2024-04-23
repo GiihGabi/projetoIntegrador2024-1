@@ -51,7 +51,7 @@ class Animal
     }
 
     // Método para criar um novo animal
-    public function create($name, $age, $gender, $description, $size, $weight, $temperament, $publication_date, $status_id, $owner_id, $species_id, $imagePaths)
+    public function create($name, $age, $gender, $description, $size, $weight, $temperament, $publication_date, $status_id, $owner_id, $species_id)
     {
         try {
             $query = "INSERT INTO animals (animal_name, age, gender, description, size, weight, temperament, publication_date, status_id, owner_id, species_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -68,16 +68,8 @@ class Animal
             $stmt->bindValue(10, $owner_id, PDO::PARAM_INT);
             $stmt->bindValue(11, $species_id, PDO::PARAM_INT);
 
-
-
-
             if ($stmt->execute()) {
-                $animal_id = $this->conn->lastInsertId();
-                var_dump($animal_id);
-                foreach ($imagePaths as $imagePath) {
-                    $this->insertImagePath($animal_id, $imagePath);
-                }
-                return true;
+                return $this->conn->lastInsertId();
             } else {
                 return $stmt->errorInfo()[2];
             }
@@ -89,12 +81,12 @@ class Animal
 
 
     }
-    private function insertImagePath($animal_id, $imagePath)
-    {
-        $query = "INSERT INTO animal_images (animal_id, image_path) VALUES (?, ?)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(1, $animal_id, PDO::PARAM_INT);
-        $stmt->bindValue(2, $imagePath, PDO::PARAM_STR);
-        $stmt->execute();
-    }
+    // private function insertImagePath($animal_id, $imagePath)
+    // {
+    //     $query = "INSERT INTO animal_images (animal_id, image_path) VALUES (?, ?)";
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindValue(1, $animal_id, PDO::PARAM_INT);
+    //     $stmt->bindValue(2, $imagePath, PDO::PARAM_STR);
+    //     $stmt->execute();
+    // }
 }

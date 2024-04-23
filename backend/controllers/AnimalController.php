@@ -1,8 +1,7 @@
 <?php
 require_once ('./models/Animal.php');
-require_once ('./controllers/ImageController.php'); // Importe o controller de imagens
-require_once ('./models/Image.php'); // Importe o controller de imagens
-
+require_once ('./controllers/ImageController.php');
+require_once ('./models/Image.php');
 
 class AnimalController
 {
@@ -29,17 +28,20 @@ class AnimalController
         }
     }
 
-    public function getAllWithImages()
+    public function getAllWithImages($userId)
     {
         $animais = $this->animalModel->getAll();
         $imageController = new ImageController($this->db, $this->s3);
+        $images = [];
 
         if ($animais) {
             // Itera sobre os animais para adicionar os URLs das imagens
-            foreach ($animais as &$animal) {
-                $animal['images'] = $imageController->getImagesUrlsForAnimal($animal['id_animal']);
+            foreach ($animais as $animal) {
+                $animalId = $animal['id_animal'];
+                $animalImages = $imageController->getImagesForAnimal($userId, $animalId);
+                $images[$animalId] = $animalImages;
             }
-            return json_encode($animais);
+            return json_encode(['animals' => $animais, 'images' => $images]);
         } else {
             return $this->errorResponse("Nenhum animal encontrado", 404);
         }
@@ -84,27 +86,6 @@ class AnimalController
         $owner_id = $data['owner_id'];
         $species_id = $data['species_id'];
 
-        $imageController = new ImageController($this->db, $this->s3);
-
-        // Chamar a função de upload de imagens
-        if (isset($_FILES['images']) && is_array($_FILES['images'])) {
-
-            $uploadResults = $imageController->uploadImages($_FILES['images'], $userId);
-        } else {
-            // Trate este caso de acordo com a lógica do seu aplicativo
-            return "Erro: _FILES['images'] não está definido ou não é um array";
-        }
-
-        $imageUrls = [];
-        foreach ($uploadResults as $result) {
-
-            if (isset($result['ObjectURL'])) {
-                $imageUrls[] = $result['ObjectURL'];
-            } else {
-                // Lidar com falha no upload da imagem, se necessário
-            }
-        }
-
         $result = $this->animalModel->create(
             $name,
             $age,
@@ -117,14 +98,27 @@ class AnimalController
             $status_id,
             $owner_id,
             $species_id,
-            $imageUrls
+            // $imageUrls
         );
 
-        if ($result === true) {
+        $imageController = new ImageController($this->db, $this->s3);
+
+        // Chamar a função de upload de imagens
+        if (isset($_FILES['images']) && is_array($_FILES['images'])) {
+            $animalImages = $imageController->uploadImages($_FILES['images'], $userId, $result);
+        } else {
+            // Trate este caso de acordo com a lógica do seu aplicativo
+            return "Erro: _FILES['images'] não está definido ou não é um array";
+        }
+
+
+        if ($result || $animalImages) {
             return $this->successResponse("Animal criado com sucesso", 201);
         } else {
             return $this->errorResponse("Erro ao criar animal", 500, "Detalhes adicionais sobre o erro");
         }
+
+
     }
 
 

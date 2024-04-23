@@ -12,12 +12,32 @@ class ImageController
         $this->s3 = $s3;
     }
 
-    public function getImagesUrlsForAnimal($animalId)
+    public function getImagesForAnimal($userId, $animalId)
     {
-        return $this->imageModel->getImagesUrlsForAnimal($animalId);
-    }
+        $bucketName = 'projetointegrador';
+        $images = [];
     
-    public function uploadImages($request,$userId)
+        try {
+            // Listar objetos no bucket do MinIO
+            $objects = $this->s3->listObjects([
+                'Bucket' => $bucketName,
+                'Prefix' => "users/{$userId}/animals/{$animalId}/",
+            ]);
+    
+            // Construir URLs para as imagens
+            foreach ($objects['Contents'] as $object) {
+                $imagePath = "https://localhost::2020/{$bucketName}/{$object['Key']}";
+                $images[] = $imagePath;
+            }
+    
+            return $images;
+        } catch (Exception $e) {
+            // Lidar com erros, como falha na conexão com o MinIO
+            return [];
+        }
+    }
+
+    public function uploadImages($request, $userId, $animalId)
     {
         // Verifica se foram enviadas imagens
         if (!empty($request)) {
@@ -29,7 +49,7 @@ class ImageController
                 if ($images['error'][$key] === 0) {
                     $imageName = $images['name'][$key];
                     $bucketName = 'projetointegrador';
-                    $userImagePath = "users/ID{$userId}/animalsImages/{$imageName}";
+                    $userImagePath = "users/{$userId}/animals/{$animalId}/{$imageName}";
 
                     try {
                         $result = $this->s3->putObject([

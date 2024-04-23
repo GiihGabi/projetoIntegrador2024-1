@@ -15,6 +15,12 @@ $router->get('/api/users/{id}', function ($id) use ($db) {
     // return $controller->getUserById($id);
 });
 
+// Buscar usuário por ID
+$router->get('/api/users/', function ($id) use ($db) {
+    // $controller = new UserController($db);
+    // return $controller->getUserById($id);
+});
+
 // Atualizar dados do usuário
 $router->put('/api/users/{id}', function ($id) use ($db) {
     // $data = json_decode(file_get_contents('php://input'), true);
