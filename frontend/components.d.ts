@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Badge: typeof import('primevue/badge')['default']
     Button: typeof import('primevue/button')['default']
     CardPerfil: typeof import('./src/components/CardPerfil.vue')['default']
     CardPerfilPetShop: typeof import('./src/components/CardPerfilPetShop.vue')['default']
@@ -24,6 +25,7 @@ declare module 'vue' {
     Password: typeof import('primevue/password')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('primevue/sidebar')['default']
     Slider: typeof import('primevue/slider')['default']
     Textarea: typeof import('primevue/textarea')['default']
   }
