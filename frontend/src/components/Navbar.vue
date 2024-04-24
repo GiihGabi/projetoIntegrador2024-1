@@ -85,6 +85,8 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   z-index: 10000;
+  overflow: hidden;
+
 }
 .menuButton {
   background: none;

@@ -181,7 +181,7 @@ export default {
 }
 
 .p-inputtext {
-  padding: 0.5rem 0;
+  /* padding: 0.5rem 0; */
   width: 284px;
   font-size: 20px;
   font-weight: bold;
