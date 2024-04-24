@@ -1,16 +1,14 @@
 <template>
   <main>
     <header>
-      <Navbar />
+      <Navbar class="nav" />
     </header>
 
     <RouterView />
   </main>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style scoped>
 main {
@@ -20,13 +18,16 @@ main {
   flex-direction: column;
 }
 
-header{
+header {
   z-index: 10;
+  margin-bottom: 3rem;
 }
 
+.nav {
+  position: sticky;
+}
 .logo {
   display: block;
   margin: 0 auto 2rem;
 }
 </style>
-
