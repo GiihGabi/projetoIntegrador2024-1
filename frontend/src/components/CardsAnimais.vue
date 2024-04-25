@@ -81,10 +81,6 @@ const responsiveOptions = ref([
 #bloco-info{
   padding: 20px 10px 0;
 }
-.p-button{
-  border-radius:10px;
-  border:0;
-}
 .cards-geral{
   background-color: white;
   margin-bottom: 15px;
@@ -159,13 +155,6 @@ const responsiveOptions = ref([
   margin: 10px 0px;
 }
 
-.p-dropdown {
-  box-shadow: none;
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
-}
-
 .bloco-topo {
   display: flex;
   flex-direction: column;
@@ -189,18 +178,20 @@ const responsiveOptions = ref([
 
 .buttonCardsAnimais {
   background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
+  border-radius:10px;
+  border:0;
 }
 
 .botaoPublicar {
   display: flex;
 }
 
-.p-inputtext {
-  /* padding: 0.5rem 0; */
+/*.p-inputtext {
+  /* padding: 0.5rem 0; 
   width: 284px;
   font-size: 20px;
   font-weight: bold;
-}
+}*/
 #icone-lupaDog {
   margin: 0 0 0 10px;
 }

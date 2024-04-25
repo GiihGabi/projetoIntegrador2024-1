@@ -1,16 +1,27 @@
+// SearchBar.vue
+
 <template>
   <div class="container">
     <!-- <InputIcon class="pi pi-search"> </InputIcon> -->
-    <InputText v-model="value1" placeholder="Pesquisar" />
+    <InputText class="input-pesquisar" v-model="value1" placeholder="Pesquisar" />
     <div class="buttons">
       <Button class="buttonSearchBar" icon="pi pi-filter-fill"></Button>
-      <Button class="buttonSearchBar"
-        ><img src="../assets/icons/publicationIcon.svg" alt=""
-      /></Button>
+      <ModalCadPet />
     </div>
   </div>
 </template>
-<script></script>
+
+<script setup>
+import { ref } from "vue";
+
+const value1 = ref('');
+const visible = ref(false);
+
+const showPetModal = () => {
+  visible.value = true;
+};
+</script>
+
 <style>
 .pi-filter-fill{
   color: #696969;
@@ -23,16 +34,19 @@
   height: fit-content;
   gap: 0.5rem;
 }
-.p-inputtext {
+
+.input-pesquisar{
   height: 2rem;
   width: 75%;
 }
-.p-inputtext:enabled:focus {
+.input-pesquisar:enabled:focus {
   outline: 1px solid #ff934b;
 }
 .buttons {
   display: flex;
   gap: 0.5rem;
+  border-radius:10px;
+  border:0;
 }
 .buttonSearchBar {
   background: none;
@@ -40,5 +54,7 @@
   width: 2rem;
   height: 2rem;
   padding: 0;
+  border-radius:10px;
+  border:0;
 }
 </style>
