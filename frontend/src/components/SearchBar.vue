@@ -23,6 +23,9 @@ const showPetModal = () => {
 </script>
 
 <style>
+.pi-filter-fill{
+  color: #696969;
+}
 .container {
   display: flex;
   justify-content: space-between;
