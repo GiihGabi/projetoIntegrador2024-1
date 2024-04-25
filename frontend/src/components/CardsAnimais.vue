@@ -2,8 +2,8 @@
   <section class="cardAnimaisGeral">
     <div class="cards-geral">
       <div id="filtro-cardAnimais">
-        <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Mais recentes:"
-          class="w-full md:w-14rem" />
+        <!-- <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" placeholder="Mais recentes:"
+          class="w-full md:w-14rem" /> -->
         <Button label="Submit" class="buttonCardsAnimais">
           <div class="botaoPublicar">
             <p>Publicar</p>
@@ -89,10 +89,6 @@ export default {
 #bloco-info{
   padding: 0px 10px;
 }
-.p-button{
-  border-radius:10px;
-  border:0;
-}
 .cards-geral{
   background-color: white;
   margin-bottom: 15px;
@@ -144,13 +140,6 @@ export default {
   margin: 10px 0 10px 52px;
 }
 
-.p-dropdown {
-  box-shadow: none;
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
-}
-
 .bloco-topo {
   display: flex;
   flex-direction: column;
@@ -174,18 +163,20 @@ export default {
 
 .buttonCardsAnimais {
   background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
+  border-radius:10px;
+  border:0;
 }
 
 .botaoPublicar {
   display: flex;
 }
 
-.p-inputtext {
-  /* padding: 0.5rem 0; */
+/*.p-inputtext {
+  /* padding: 0.5rem 0; 
   width: 284px;
   font-size: 20px;
   font-weight: bold;
-}
+}*/
 #icone-lupaDog {
   margin: 0 0 0 10px;
 }
