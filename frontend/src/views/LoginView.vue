@@ -2,17 +2,11 @@
 <template>
   <div class="screenLogin">
     <section class="mainLogin">
-          <div class="imgfundo">
-              <img class="cachorros" src="../assets/images/fundocachorros.svg" alt="" />
-          </div>
-
-          
-
           <div class="main-card-rgst">
                <div class="header-card-rgst">
                         <div class="content-header-login">
-                          <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
-                            <h2 class="entrarLogin">Entrar</h2>
+                              <img class="logologin" src="../assets/images/logo.svg" alt="" />
+                              <h2 class="entrarLogin">Entrar</h2>
                         </div>
                 </div>
             
@@ -26,7 +20,7 @@
               </div>
             
               <div class="texto-esqueceu-login">
-                <label class="esqueceu">Esqueceu sua senha?</label>
+                <label class="esqueceu">Esqueceu sua <RouterLink to="/singUp" class="link-registro">senha?</RouterLink> </label>
               </div>
 
               <div class="footer-btn-login">
@@ -82,11 +76,11 @@ export default {
 
 
 <style>
+
+
 .mainLogin {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: auto;
   border: 8px red;
-  background-color: white;
   width: fit-content;
   height: 27rem;
   display: flex;
@@ -102,7 +96,10 @@ export default {
   height: 2rem;
 }
 
-.texto-esqueceu-login{}
+.texto-esqueceu-login{
+  display: flex;
+  justify-content: center;;
+}
 
 .esqueceu {
   padding-top: 0.5rem;
@@ -142,10 +139,11 @@ export default {
 }
 
 .screenLogin {
-  padding-top: 8rem;
+  background-color: #f0f0f0e7;
+  padding-top: 3rem;
   margin: auto;
   width: 100vw;
-  height: 10%;
+  height: 100vh;
 }
 
 .esqueceu {
@@ -187,6 +185,7 @@ export default {
 
 
 .header-card-rgst{
+  justify-content: center;
   display: flex;
   height: fit-content;
   gap: 1rem;
@@ -226,6 +225,7 @@ export default {
 .content-header-login{
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .entrarLogin{
@@ -240,4 +240,12 @@ export default {
   text-decoration: underline;
   color: #FF5C00;
 }
+
+
+.logologin{
+  padding-left: 3px;
+  width: 6rem;
+  height: 4rem; 
+}
+
 </style>
