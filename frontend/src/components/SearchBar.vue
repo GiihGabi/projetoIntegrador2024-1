@@ -5,7 +5,7 @@
     <!-- <InputIcon class="pi pi-search"> </InputIcon> -->
     <InputText class="input-pesquisar" v-model="value1" placeholder="Pesquisar" />
     <div class="buttons">
-      <Button class="buttonSearchBar" icon="pi pi-filter-fill"></Button>
+      <FiltrosAnimais />
       <ModalCadPet />
     </div>
   </div>
