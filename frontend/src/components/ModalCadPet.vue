@@ -1,54 +1,249 @@
-<!-- <template>
-    <Dialog v-model:visible="visible" modal header="Edit Profile" :style="{ width: '25rem' }">
-      <template #header>
-        <div class="inline-flex align-items-center justify-content-center gap-2">
-          <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
-          <span class="font-bold white-space-nowrap">Amy Elsner</span>
+<template>
+  <div class="card flex justify-content-center">
+    <Button class="buttonSearchBar" @click="showModal">
+      <img src="../assets/icons/publicationIcon.svg" alt="" />
+    </Button>
+    <Dialog v-model:visible="visible" header="Cadastro de Animal" :style="{ width: '25rem' }">
+      <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span>
+      <div class="image-animals" @click="openFileSelector">
+        <input type="file" name="file" id="file" class="inputfile" />
+      </div>
+      <div class="form-div-2">
+        <div class="input-cad-pet-local">
+          <label for="nome">Nome do animal:</label>
+          <InputText class="input-pesquisar2" id="nome" v-model="nome" aria-describedby="username-help" />
         </div>
-      </template>
-      <span class="p-text-secondary block mb-5">Update your information.</span>
-      <div class="flex align-items-center gap-3 mb-3">
-        <label for="username" class="font-semibold w-6rem">Username</label>
-        <InputText id="username" class="flex-auto" autocomplete="off" />
+        <div class="input-cad-pet">
+          <label for="situacao">Situação do animal:</label>
+          <Dropdown
+            v-model="selectedSituacao"
+            :options="situacoes"
+            optionLabel="name"
+            placeholder="Selecione a situação"
+            class="w-full dropdown-situacao input-pesquisar2"
+          >
+            <template #selectedItem>
+              <div v-if="selectedSituacao">{{ selectedSituacao.name }}</div>
+            </template>
+          </Dropdown>
+        </div>
+        <div class="input-cad-pet">
+          <label for="tipo">Tipo:</label>
+          <Dropdown
+            v-model="selectedTipo"
+            :options="tipos"
+            optionLabel="name"
+            placeholder="Selecione o tipo"
+            class="w-full dropdown-tipo input-pesquisar2"
+          >
+            <template #selectedItem>
+              <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
+            </template>
+          </Dropdown>
+        </div>
+        <div class="input-cad-pet">
+          <label for="raca">Raça:</label>
+          <Dropdown
+            v-model="selectedRaca"
+            :options="racas"
+            optionLabel="name"
+            placeholder="Selecione a raça"
+            class="w-full dropdown-raca input-pesquisar2"
+          >
+            <template #selectedItem>
+              <div v-if="selectedRaca">{{ selectedRaca.name }}</div>
+            </template>
+          </Dropdown>
+        </div>
+        <div class="input-cad-pet-local">
+          <label for="local">Último local visto:</label>
+          <InputText class="input-pesquisar2" id="local" v-model="local" aria-describedby="username-help" />
+        </div>
       </div>
-      <div class="flex align-items-center gap-3 mb-2">
-        <label for="email" class="font-semibold w-6rem">Email</label>
-        <InputText id="email" class="flex-auto" autocomplete="off" />
+      <div class="flex justify-content-end button-publicar">
+        <Button class="button-publicar1" type="button" label="Publicar" @click="hideModal"></Button>
       </div>
-      <template #footer>
-        <Button label="Cancel" text severity="secondary" @click="visible = false" autofocus />
-        <Button label="Save" outlined severity="secondary" @click="visible = false" autofocus />
-      </template>
     </Dialog>
-  </template>
-  
-  <script>
-  import { ref } from 'vue';
-  import Dialog from 'primevue/dialog';
-  import InputText from 'primevue/inputtext';
-  import Avatar from 'primevue/avatar';
-  import Button from 'primevue/button';
-  
-  export default {
-    components: {
-      Dialog,
-      InputText,
-      Avatar,
-      Button
-    },
-    props: {
-      visible: {
-        type: Boolean,
-        default: false
-      }
-    },
-    setup(props) {
-      const visible = ref(props.visible);
-  
-      return {
-        visible
-      };
-    }
-  };
-  </script>
-   -->
+  </div>
+</template>
+
+<script setup>
+import { ref } from "vue";
+
+const visible = ref(false);
+
+const showModal = () => {
+  visible.value = true;
+};
+
+const hideModal = () => {
+  visible.value = false;
+};
+
+const openFileSelector = () => {
+  const fileInput = document.getElementById("file");
+  fileInput.click();
+};
+
+const nome = ref("");
+const selectedSituacao = ref(null);
+const raca = ref("");
+const selectedRaca = ref(null);
+const selectedTipo = ref(null);
+const local = ref("");
+
+const situacoes = [
+  { name: "Perdido" },
+  { name: "Abandonado" },
+  { name: "Resgatado" },
+  { name: "Adotado" },
+];
+
+const tipos = [
+  { name: "Cachorro" },
+  { name: "Gato" },
+  { name: "Pássaro" },
+  { name: "Outros" },
+];
+
+const racas = [
+  { name: "Labrador" },
+  { name: "Poodle" },
+  { name: "Siamês" },
+  { name: "Persa" },
+];
+</script>
+
+<style scoped>
+/* Estilos do modal */
+
+.input-pesquisar2:enabled:focus {
+  outline: 1px solid #ff934b;
+}
+
+.pata_cad {
+  width: 30px;
+}
+
+.div-text-pata-cad {
+  display: block;
+}
+
+.div-infos {
+  display: flex;
+  align-items: center;
+}
+
+.text-image-pata-cad {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+}
+
+.h3_cad_pet {
+  color: #646464;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.cadastro-pet {
+  font-size: 12px;
+  color: #646464;
+  font-weight: 400;
+  margin-top: -0.6em;
+}
+
+.inputfile {
+  display: none;
+}
+
+.image-animals {
+  width: 100px;
+  height: 100px;
+  background-image: url('../assets/icons/image-camera.png');
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.image-animals:hover {
+  border-color: #ff5c00;
+}
+
+.images-pets {
+  display: flex;
+  padding: 0.5em;
+}
+
+.form-cad-pet {
+  justify-content: center;
+  display: contents;
+}
+
+.input-cad-pet {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  width: 100%;
+  margin-right: 20px;
+  padding-top: 0.5rem;
+}
+
+.input-cad-pet-local {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  width: 100%;
+  margin-right: 20px;
+  padding-top: 0.5rem;
+}
+
+.input-cad-pet-name {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  width: 100%;
+  margin-right: 20px;
+  padding-top: 0.5rem;
+}
+
+.tipo-raca {
+  display: flex;
+  margin-right: 20px;
+}
+
+.input-raca {
+  width: 100%;
+}
+
+.form-div {
+  padding: 0 0 1em 2em;
+}
+
+.form-div-2 {
+  padding-top: 1em;
+}
+
+.button-save:hover {
+  color: #ff5c00;
+}
+
+.button-cancel:hover {
+  color: #ff5c00;
+}
+
+.button-publicar {
+  display: flex;
+  justify-content: end;
+  margin-top: 1em;
+}
+
+.button-publicar1 {
+  background-color: #ff5c00;
+  border: none;
+}
+
+</style>
