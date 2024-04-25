@@ -183,8 +183,8 @@ export default {
 .p-inputtext {
   /* padding: 0.5rem 0; */
   width: 284px;
-  font-size: 20px;
-  font-weight: bold;
+  /* font-size: 20px; */
+  /* font-weight: bold; */
 }
 #icone-lupaDog {
   margin: 0 0 0 10px;
