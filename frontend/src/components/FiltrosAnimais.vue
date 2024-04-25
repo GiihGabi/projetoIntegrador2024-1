@@ -1,60 +1,96 @@
 <template>
-  <section class="filtro-feedAnimais">
-    <div id="titulos-feedAnimais">
-        <h1  class="h1-feedAnimais">Pets perdidos e  encontrados</h1>
-        <h2 class="sub-titulo-feedAnimais">Perto de: Rua de exemplo n°000</h2>
-    </div>
-    <form class="form-feedAnimais">
-      <p class="titulo-filtros-feedAnimais">Filtros</p>
-      <section style="padding: 0 0 0 1em;">
-        <div class="form-label-input-feedAnimais">
-          <label class="paragrafo-filtro-feedAnimais" for="inputcep">Endereço, Cidade ou CEP</label>
-          <InputText id="inputcep" type="text" v-model="valueInputTextCEP" />
-        </div>
-        <div class="div-filtro-feedAnimais form-label-input-feedAnimais">
-          <label class="paragrafo-filtro-feedAnimais" for="inputname">Nome do Pet</label>
-          <InputText id="inputname" type="text" v-model="valueInputTextName" />
-        </div>
-        <div class="div-filtro-feedAnimais">
-          <div class="switch-filtro-feedAnimais div-filtro-feedAnimais">
-            <InputSwitch v-model="checked" class="input-switch-feedAnimais" />
-            <p class="paragrafo-filtro-feedAnimais">Perdido</p>
+  <Button class="buttonSearchBar" icon="pi pi-filter-fill" @click="showModal = true"></Button>
+  <Dialog v-model:visible="showModal"  :style="{ width: '50vw' }">
+    <section class="filtro-feedAnimais">
+      <form class="form-feedAnimais">
+        <p class="titulo-filtros-feedAnimais">Filtros</p>
+        <section style="padding: 0 0 0 1em;">
+          <div class="form-label-input-feedAnimais">
+            <label class="paragrafo-filtro-feedAnimais" for="inputcep">Endereço, Cidade ou CEP</label>
+            <InputText id="inputcep" type="text" v-model="valueInputTextCEP" />
           </div>
-          <div class="switch-filtro-feedAnimais div-filtro-feedAnimais">
-            <InputSwitch v-model="checked2" class="input-switch-feedAnimais" />
-            <p class="paragrafo-filtro-feedAnimais">Procurando Tutor</p>
+          <div class="div-filtro-feedAnimais form-label-input-feedAnimais">
+            <label class="paragrafo-filtro-feedAnimais" for="inputname">Nome do Pet</label>
+            <InputText id="inputname" type="text" v-model="valueInputTextName" />
           </div>
-        </div>
-        <div class="div-filtro-feedAnimais">
-          <MultiSelect
-            v-model="especieAnimal"
-            :options="especies"
-            filter
-            optionLabel="name"
-            placeholder="Espécie"
-            :maxSelectedLabels="3"
-            class="paragrafo-filtro-feedAnimais"
-          />
-        </div>
-        <div class="div-filtro-feedAnimais">
-          <MultiSelect
-            v-model="racaAnimal"
-            :options="raca"
-            filter
-            optionLabel="name"
-            placeholder="Raça"
-            :maxSelectedLabels="3"
-            class="paragrafo-filtro-feedAnimais"
-          />
-        </div>
-        <div class="div-filtro-feedAnimais">
-          <InputText v-model="valueWithUnit" class="input-slider-feedAnimais" />
-          <Slider v-model="value" class="slider-feedAnimais" />
-        </div>
-      </section>
-    </form>
-  </section>
+          <div class="div-filtro-feedAnimais">
+            <div class="switch-filtro-feedAnimais div-filtro-feedAnimais">
+              <InputSwitch v-model="checked" class="input-switch-feedAnimais" />
+              <p class="paragrafo-filtro-feedAnimais">Perdido</p>
+            </div>
+            <div class="switch-filtro-feedAnimais div-filtro-feedAnimais">
+              <InputSwitch v-model="checked2" class="input-switch-feedAnimais" />
+              <p class="paragrafo-filtro-feedAnimais">Procurando Tutor</p>
+            </div>
+          </div>
+          <div class="div-filtro-feedAnimais">
+            <MultiSelect
+              v-model="especieAnimal"
+              :options="especies"
+              filter
+              optionLabel="name"
+              placeholder="Espécie"
+              :maxSelectedLabels="3"
+              class="paragrafo-filtro-feedAnimais"
+            />
+          </div>
+          <div class="div-filtro-feedAnimais">
+            <MultiSelect
+              v-model="racaAnimal"
+              :options="raca"
+              filter
+              optionLabel="name"
+              placeholder="Raça"
+              :maxSelectedLabels="3"
+              class="paragrafo-filtro-feedAnimais"
+            />
+          </div>
+          <div class="div-filtro-feedAnimais">
+            <InputText v-model="valueWithUnit" class="input-slider-feedAnimais" />
+            <Slider v-model="value" class="slider-feedAnimais" />
+          </div>
+        </section>
+      </form>
+    </section>
+  </Dialog>
 </template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const valueInputTextCEP = ref(null)
+const valueInputTextName = ref(null)
+const checked = ref(false)
+const checked2 = ref(false)
+const showModal = ref(false) // Nova propriedade
+
+const value = ref(0)
+
+const valueWithUnit = computed({
+  get: () => `${value.value} km`,
+  set: (newValue) => {
+    const parsedValue = parseFloat(newValue.replace('km', '').trim())
+    if (!isNaN(parsedValue)) {
+      value.value = parsedValue
+    }
+  }
+})
+
+const especieAnimal = ref()
+const especies = ref([
+  { name: 'Gato', code: 'Cat' },
+  { name: 'Cachorro', code: 'Dog' },
+  { name: 'Aves', code: 'Av' },
+  { name: 'Réptil', code: 'Re' }
+])
+
+const racaAnimal = ref()
+const raca = ref([
+  { name: 'Bodercolie', code: 'NY' },
+  { name: 'Chiuaua', code: 'RM' },
+  { name: 'Pastor Alemão', code: 'LDN' }
+])
+</script>
 
 <style>
 /* SECTION */
@@ -73,12 +109,6 @@
   font-weight: 600;
   font-size: 18px;
 }
-.filtro-feedAnimais {
-  padding: 33px 38px;
-  background-color: white;
-  width: 25%;
-  border-right: 3px solid #e3e3e3;
-}
 
 /* FORM */
 .titulo-filtros-feedAnimais {
@@ -94,7 +124,7 @@
 }
 .paragrafo-filtro-feedAnimais {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 14px;
   color: #373737;
 }
 
@@ -180,43 +210,29 @@
 .p-multiselect-panel .p-multiselect-header .p-checkbox {
   margin-right: 0.5rem !important;
 }
+
+.filtro-feedAnimais {
+  z-index: 1000;
+  left: 5px;
+  top: 6.5em;
+  padding: 33px 20px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+}
+.p-dialog-mask{
+  width: 60% !important;
+  height: 0 !important;
+}
+.p-dialog-header{
+  position: absolute;
+  top: 6.5em;
+  left: 14em;
+  z-index: 1001;
+  background: transparent;
+}
+.p-dialog .p-dialog-content:last-of-type{
+  background: transparent;
+}
 </style>
 
-<script setup>
-import { ref, computed } from 'vue'
-
-const valueInputTextCEP = ref(null)
-const valueInputTextName = ref(null)
-const checked = ref(false)
-const checked2 = ref(false)
-
-const value = ref(0)
-
-// Getter computado para adicionar "km" na frente do valor
-const valueWithUnit = computed({
-  get: () => `${value.value} km`,
-  set: (newValue) => {
-    // Remove "km" e atualiza o valor
-    const parsedValue = parseFloat(newValue.replace('km', '').trim())
-    if (!isNaN(parsedValue)) {
-      value.value = parsedValue
-    }
-  }
-})
-
-const especieAnimal = ref()
-const especies = ref([
-  { name: 'Gato', code: 'Cat' },
-  { name: 'Cachorro', code: 'Dog' },
-  { name: 'Aves', code: 'Av' },
-  { name: 'Réptil', code: 'Re' }
-])
-
-const racaAnimal = ref()
-const raca = ref([
-  { name: 'Bodercolie', code: 'NY' },
-  { name: 'Chiuaua', code: 'RM' },
-  { name: 'Pastor Alemão', code: 'LDN' }
-])
-
-</script>
