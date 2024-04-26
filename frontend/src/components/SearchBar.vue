@@ -5,23 +5,14 @@
     <!-- <InputIcon class="pi pi-search"> </InputIcon> -->
     <InputText class="input-pesquisar" v-model="value1" placeholder="Pesquisar" />
     <div class="buttons">
-      <FiltrosAnimais />
-      <ModalCadPet />
+      <Button class="buttonSearchBar" icon="pi pi-filter-fill" @click="OpenFilterModal()"></Button>
+      <Button class="buttonSearchBar"
+        ><img src="../assets/icons/publicationIcon.svg" alt=""
+      /></Button>
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-
-const value1 = ref('');
-const visible = ref(false);
-
-const showPetModal = () => {
-  visible.value = true;
-};
-</script>
-
+<script></script>
 <style>
 .pi-filter-fill{
   color: #696969;

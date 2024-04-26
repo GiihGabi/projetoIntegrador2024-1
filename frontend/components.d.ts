@@ -7,11 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AutoComplete: typeof import('primevue/autocomplete')['default']
     Badge: typeof import('primevue/badge')['default']
     Button: typeof import('primevue/button')['default']
     CardPerfil: typeof import('./src/components/CardPerfil.vue')['default']
     CardPerfilPetShop: typeof import('./src/components/CardPerfilPetShop.vue')['default']
     CardsAnimais: typeof import('./src/components/CardsAnimais.vue')['default']
+    Carousel: typeof import('primevue/carousel')['default']
     Dialog: typeof import('primevue/dialog')['default']
     Dropdown: typeof import('primevue/dropdown')['default']
     FeedAnimais: typeof import('./src/components/FeedAnimais.vue')['default']

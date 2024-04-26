@@ -12,11 +12,11 @@
             
               <div class="inputLogin">
               <label for="username">Email</label>
-              <InputText id="email" aria-describedby="username-help" />
+              <InputText id="email" v-model="email" aria-describedby="username-help" />
               </div>
               <div class="inputLogin">
               <label for="username">Senha</label>
-              <Password class="password" id="password" :feedback="false" />
+              <Password class="password" v-model="password" id="password" :feedback="false" />
               </div>
             
               <div class="texto-esqueceu-login">
@@ -24,7 +24,7 @@
               </div>
 
               <div class="footer-btn-login">
-                 <Button  class="loginBtn" label="">Entrar</Button>
+                 <Button  class="loginBtn" @click="submitForm" label="">Entrar</Button>
 
               </div>
              
@@ -45,7 +45,7 @@
 
 <script>
 import { ref } from 'vue';
-import { RouterLink, useRouter } from 'vue-router'; // Importe o useRouter corretamente
+import { useRouter } from 'vue-router'; // Importe o useRouter corretamente
 import AuthService from '@/services/AuthService'
 
 export default {
@@ -59,6 +59,7 @@ export default {
       if (loggedIn) {
         // Login bem-sucedido, redirecione o usuário para outra página
         router.push('/');
+        document.dispatchEvent(new CustomEvent('login-success'));
       } else {
         // Login falhou, exiba uma mensagem de erro
         alert('Usuário ou senha incorretos');
