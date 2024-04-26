@@ -1,7 +1,7 @@
 <template>
   <section id="feedAnimais">
     <div id="main-feedAnimais">
-      <SearchBar @OpenFilterModal="funcaoDoOutroComponente" />
+      <SearchBar @OpenFilterModal="OpenFilterModal" />
       <CardsAnimais />
     </div>
   </section>
@@ -9,7 +9,12 @@
   <Dialog v-model:visible="modalFilter" modal header="Filtros" :style="{ width: '25rem' }">
     <div class="input">
       <label for="username">Endereço, cidade ou CEP</label>
-      <InputText id="input" v-model="value" aria-describedby="username-help" />
+      <AutoComplete
+        v-model="endereco"
+        optionLabel="display_name"
+        :suggestions="enderecosEncontrados"
+        @complete="search"
+      />
     </div>
     <div class="input">
       <label for="username">Nome do pet</label>
@@ -53,6 +58,8 @@ import { ref } from 'vue'
 export default {
   setup() {
     const checked = ref(false)
+    const endereco = ref('')
+    const enderecosEncontrados = ref('')
     const modalFilter = ref(false)
     const animalPerdido = ref(false)
     const procurandoTutor = ref(false)
@@ -64,20 +71,36 @@ export default {
       { name: 'Passaros', code: 'LDN' }
     ])
 
+    const search = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/api/search-endereco?endereco=${endereco.value}`
+        )
+        const data = await response.json()
+        console.log(data)
+        enderecosEncontrados.value = data
+      } catch (error) {
+        console.error('Erro ao buscar endereço:', error)
+      }
+    }
+
     // Função que será chamada quando o evento for emitido
-    const funcaoDoOutroComponente = () => {
+    const OpenFilterModal = () => {
       modalFilter.value = true
     }
 
     return {
-      funcaoDoOutroComponente,
+      search,
+      endereco,
+      OpenFilterModal,
       modalFilter,
       checked,
       especieSelecionada,
       especies,
       kilometerFilter,
       animalPerdido,
-      procurandoTutor
+      procurandoTutor,
+      enderecosEncontrados
     }
   }
 }
@@ -103,7 +126,7 @@ export default {
 }
 .p-dialog {
   top: 7.5rem !important;
-  position: inherit;
+  position: fixed;
   width: 90vw !important;
 }
 .p-dialog-header {
@@ -183,5 +206,30 @@ label {
 .kilometerValue {
   color: #ff934b;
   font-weight: 600;
+}
+.p-autocomplete {
+  width: 100%;
+}
+
+.p-autocomplete-input {
+  width: 100%;
+}
+.p-autocomplete-panel {
+  left: 2rem !important;
+  max-width: 77vw !important;
+  position: inherit;
+}
+/* .p-autocomplete-items {
+  width: 90vw;
+  left: 1.5rem;
+  overflow-x: auto;
+} */
+.p-autocomplete-loader{
+  top: 0.5rem !important;
+}
+.p-autocomplete-panel {
+  max-width: 75vw !important;
+  left: 2.5rem !important;
+  overflow-x: auto;
 }
 </style>

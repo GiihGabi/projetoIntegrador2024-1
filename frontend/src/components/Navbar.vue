@@ -22,28 +22,34 @@
   </section>
   <Sidebar v-model:visible="visibleMenu" position="right">
     <div class="menuItens">
+      <RouterLink to="/login" v-if="!isLoggedIn" @click="visibleMenu = false">Entrar</RouterLink>
+      <RouterLink to="/singUp" v-if="!isLoggedIn" @click="visibleMenu = false"
+        >Cadastre-se</RouterLink
+      >
+
       <RouterLink to="/" @click="visibleMenu = false">Encontre seu pet!</RouterLink>
-      <RouterLink to="/products" v-if="!isLoggedIn" @click="visibleMenu = false"
+      <RouterLink to="/products" v-if="isLoggedIn" @click="visibleMenu = false"
         >Produtos</RouterLink
       >
-      <RouterLink to="/adoption" v-if="!isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink>
+      <RouterLink to="/adoption" v-if="isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink>
       <RouterLink to="/about">Sobre nós</RouterLink>
     </div>
     <div class="logoutButton">
-      <div style="float: inline-end"><a href="">Sair</a></div>
+      <div style="float: inline-end"><a href="" @click="logout">Sair</a></div>
     </div>
   </Sidebar>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { onUnmounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import AuthService from '@/services/AuthService'
 import { useRouter } from 'vue-router'
 
 export default {
-  components: {},
   setup() {
     const isLoggedIn = ref(false)
-    const router = useRouter()
+    const router = useRouter(); 
     const visibleMenu = ref(false)
 
     const checkAuthStatus = () => {
@@ -51,19 +57,45 @@ export default {
       isLoggedIn.value = !!token
     }
 
-    const handleLogin = () => {
+    const handleLoginSuccess = () => {
       checkAuthStatus()
-      router.push('/')
+    }
+
+    const handleStorageChange = (event) => {
+      if (event.key === 'token') {
+        checkAuthStatus()
+      }
+    }
+
+    const logout = async () => {
+      const logout = await AuthService.logout();
+      if (logout) {
+        // Login bem-sucedido, redirecione o usuário para outra página
+        router.push('/login');
+      } else {
+        // Login falhou, exiba uma mensagem de erro
+        alert('Usuário ou senha incorretos');
+      }
     }
 
     onMounted(() => {
+      document.addEventListener('login-success', handleLoginSuccess)
       checkAuthStatus()
+    })
+
+    onUnmounted(() => {
+      document.removeEventListener('login-success', handleLoginSuccess)
+    })
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('storage', handleStorageChange)
     })
 
     return {
       visibleMenu,
       isLoggedIn,
-      handleLogin
+      logout,
+      handleLoginSuccess
     }
   }
 }
@@ -86,7 +118,6 @@ export default {
   position: fixed;
   z-index: 10000;
   overflow: hidden;
-
 }
 .menuButton {
   background: none;
