@@ -1,15 +1,15 @@
 <template>
   <div style="display: flex; margin-top: 2rem;">
     <div>
-      <img src="../assets/icons/perfil.svg" style="display: flex; margin-left:1.0rem; margin-top: 1rem;" />
+      <img src="../assets/icons/perfil.svg" style="display: block; margin-left:2.5rem; margin-top: 1rem;" />
     </div>
-    <div style="padding-left: 0.50rem; margin-top: 1.5rem;">
+    <div style="padding-left: 0.20rem; margin-top: 1.5rem;">
       <p style="text-align: center; ">0</p>
       <p style="text-align: center;">publicações</p>
     </div>
-    <div style="padding-left: 1rem; margin-top: 1.5rem;">
+    <div style="margin-top: 1.5rem; padding-left: 0.50rem;">
       <p style="text-align: center; justify-content: right">0</p>
-      <p style="text-align: center;">animais encontrados</p>
+      <p style="text-align: center; ">animais encontrados</p>
     </div>
   </div>
   <div style="display: inline; margin-left: 2rem;">
@@ -59,7 +59,7 @@ h3 {
 }
 
 .border {
-  width: 0.90rem;
+  width: 0.85rem;
   margin-left: 12vh;
 }
 
@@ -80,6 +80,10 @@ h3 {
 .align-image{
   display: flex;
 }
-
-
+p{
+  font-size: 14px;
+}
+.p-tabview .p-tabview-ink-bar{
+  background-color: orangered;
+}
 </style>
