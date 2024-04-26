@@ -1,9 +1,11 @@
+Modal cad pet:
+
 <template>
   <div class="card flex justify-content-center">
     <Button class="buttonSearchBar" @click="showModal">
       <img src="../assets/icons/publicationIcon.svg" alt="" />
     </Button>
-    <Dialog v-model:visible="visible" header="Cadastro de Animal" :style="{ width: '25rem' }">
+    <Dialog v-model:visible="visible" header="Cadastro de Animal" :style="{ width: '20rem' }">
       <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span>
       <div class="image-animals" @click="openFileSelector">
         <input type="file" name="file" id="file" class="inputfile" />
@@ -121,38 +123,6 @@ const racas = [
   outline: 1px solid #ff934b;
 }
 
-.pata_cad {
-  width: 30px;
-}
-
-.div-text-pata-cad {
-  display: block;
-}
-
-.div-infos {
-  display: flex;
-  align-items: center;
-}
-
-.text-image-pata-cad {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0.5rem;
-}
-
-.h3_cad_pet {
-  color: #646464;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.cadastro-pet {
-  font-size: 12px;
-  color: #646464;
-  font-weight: 400;
-  margin-top: -0.6em;
-}
-
 .inputfile {
   display: none;
 }
@@ -164,23 +134,13 @@ const racas = [
   background-size: 30%;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 50%;
+  border-radius: 10%;
   border: 2px solid #ccc;
   cursor: pointer;
 }
 
 .image-animals:hover {
   border-color: #ff5c00;
-}
-
-.images-pets {
-  display: flex;
-  padding: 0.5em;
-}
-
-.form-cad-pet {
-  justify-content: center;
-  display: contents;
 }
 
 .input-cad-pet {
@@ -201,28 +161,6 @@ const racas = [
   padding-top: 0.5rem;
 }
 
-.input-cad-pet-name {
-  display: flex;
-  flex-direction: column;
-  color: gray;
-  width: 100%;
-  margin-right: 20px;
-  padding-top: 0.5rem;
-}
-
-.tipo-raca {
-  display: flex;
-  margin-right: 20px;
-}
-
-.input-raca {
-  width: 100%;
-}
-
-.form-div {
-  padding: 0 0 1em 2em;
-}
-
 .form-div-2 {
   padding-top: 1em;
 }
@@ -231,14 +169,10 @@ const racas = [
   color: #ff5c00;
 }
 
-.button-cancel:hover {
-  color: #ff5c00;
-}
-
 .button-publicar {
   display: flex;
-  justify-content: end;
-  margin-top: 1em;
+  justify-content: center;
+  margin-top: 1.5em;
 }
 
 .button-publicar1 {

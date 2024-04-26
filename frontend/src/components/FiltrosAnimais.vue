@@ -1,3 +1,5 @@
+filtros animais:
+
 <template>
   <Button class="buttonSearchBar" icon="pi pi-filter-fill" @click="showModal = true"></Button>
   <Dialog v-model:visible="showModal"  :style="{ width: '50vw' }">
