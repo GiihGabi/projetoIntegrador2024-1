@@ -202,6 +202,7 @@ const raca = ref([
 
 .p-inputtext:enabled:focus {
   outline: 1px solid #ff934b;
+  border-radius: 1rem;
 }
 
 .p-multiselect-filter-icon {

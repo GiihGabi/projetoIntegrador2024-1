@@ -1,12 +1,11 @@
 // AuthService.js
 
-var URL = "http://localhost:8000"
+var URL = "http://localhost:8000/api/auth"
 
 export default {
     async login(email, password) {
-        console.log(email,password)
         try {
-            const response = await fetch(URL + "/api/login", {
+            const response = await fetch(URL + "/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -18,7 +17,7 @@ export default {
             }
 
             const data = await response.json();
-            const token = data.token;
+            const token = data.authorisation.token;
 
             // Verifique se o token foi retornado
             if (!token) {
@@ -31,6 +30,30 @@ export default {
             return true;
         } catch (error) {
             console.error('Error logging in:', error);
+            return false;
+        }
+    },
+
+    async logout() {
+        try {
+            // const token = localStorage.getItem('token');
+            // const response = await fetch(URL + "/logout", {
+            //     method: 'POST',
+            //     headers: {
+            //         'Authorization': `Bearer ${token}`
+            //     }
+            // });
+
+            // if (!response.ok) {
+            //     throw new Error('Logout failed');
+            // }
+
+            // Remova o token do armazenamento local
+            localStorage.removeItem('token');
+
+            return true;
+        } catch (error) {
+            console.error('Error logging out:', error);
             return false;
         }
     }
