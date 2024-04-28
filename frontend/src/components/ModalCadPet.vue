@@ -2,9 +2,9 @@ Modal cad pet:
 
 <template>
   <div class="card flex justify-content-center">
-    <Button class="buttonSearchBar" @click="showModal">
+    <!-- <Button class="buttonSearchBar" @click="showModal">
       <img src="../assets/icons/publicationIcon.svg" alt="" />
-    </Button>
+    </Button> -->
     <Dialog v-model:visible="visible" header="Cadastro de Animal" :style="{ width: '20rem' }">
       <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span>
       <div class="image-animals" @click="openFileSelector">
@@ -74,9 +74,9 @@ import { ref } from "vue";
 
 const visible = ref(false);
 
-const showModal = () => {
-  visible.value = true;
-};
+// const showModal = () => {
+//   visible.value = true;
+// };
 
 const hideModal = () => {
   visible.value = false;
@@ -89,7 +89,7 @@ const openFileSelector = () => {
 
 const nome = ref("");
 const selectedSituacao = ref(null);
-const raca = ref("");
+// const raca = ref("");
 const selectedRaca = ref(null);
 const selectedTipo = ref(null);
 const local = ref("");
