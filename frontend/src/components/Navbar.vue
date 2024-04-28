@@ -111,8 +111,8 @@ export default {
 .body {
   display: flex;
   justify-content: space-between;
-  padding-inline: 1rem;
-  width: 100%;
+  /* padding-inline: 1rem; */
+  width: 100vw;
   height: 3rem;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -148,7 +148,9 @@ export default {
   z-index: 1 !important;
 }
 .p-sidebar {
+  /* margin: auto; */
   top: 3rem;
+  right: auto;
   width: 15rem !important;
 }
 .p-sidebar-header {

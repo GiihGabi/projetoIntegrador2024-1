@@ -59,6 +59,7 @@ export default {
       if (loggedIn) {
         // Login bem-sucedido, redirecione o usuário para outra página
         router.push('/');
+        alert("logado")
         document.dispatchEvent(new CustomEvent('login-success'));
       } else {
         // Login falhou, exiba uma mensagem de erro
@@ -175,8 +176,9 @@ export default {
 
 .main-card-rgst{
   display: flex;
+  margin: auto;
   flex-direction: column;
-  padding-inline: 3rem;
+  /* padding-inline: 3rem; */
 }
 
 .cachorros{

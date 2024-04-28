@@ -4,54 +4,79 @@
       <div id="bloco-info">
         <div class="bloco-topo">
           <div class="info-CardAnimais">
-            <img src="../assets/icons/lost.svg" alt="" srcset="" class="icone-info">
+            <img src="../assets/icons/lost.svg" alt="" srcset="" class="icone-info" />
             <h2 class="lost-text">Perdido</h2>
             <p class="status">Há 2 dias</p>
           </div>
           <div>
             <div class="info-baixo">
               <p class="text-nome">Nome:<strong class="strong-nome">Desconhecido</strong></p>
-              <p class="text-nome">Encontrado próximo à:<strong class="strong-nome">Rua Padre roma,205 - Marília -
-                  SP</strong></p>
+              <p class="text-nome">
+                Encontrado próximo à:<strong class="strong-nome"
+                  >Rua Padre roma,205 - Marília - SP</strong
+                >
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <Carousel :value="products" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions">
+        <Carousel
+          :value="products"
+          :numVisible="3"
+          :numScroll="3"
+          :responsiveOptions="responsiveOptions"
+        >
           <template #item="slotProps">
             <div class="border-1 surface-border border-round m-2 p-3">
               <div class="mb-3">
                 <div class="relative mx-auto">
-                  <img :src="slotProps.data.image" :alt="slotProps.data.alt" class="carousel__images" />
+                  <img
+                    :src="slotProps.data.image"
+                    :alt="slotProps.data.alt"
+                    class="carousel__images"
+                  />
                 </div>
               </div>
             </div>
           </template>
-        </Carousel>    
+        </Carousel>
       </div>
-      
+
       <div class="talk">
-        <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info">
-        <div>
-          Entrar em contato
-        </div>
+        <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info" />
+        <div>Entrar em contato</div>
       </div>
     </div>
   </section>
-
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const products = ref([
-  { image: 'https://img.freepik.com/fotos-gratis/isolado-feliz-sorridente-cao-fundo-branco-retrato-4_1562-693.jpg', alt: 'background-image' },
-  { image: 'https://img.freepik.com/fotos-premium/cachorro-fofo-enquanto-levanta-o-pe_1000717-382.jpg', alt: 'background-image' },
-  { image: 'https://img.freepik.com/fotos-gratis/isolado-feliz-sorridente-cao-fundo-branco-retrato-4_1562-693.jpg', alt: 'background-image' },
-  { image: 'https://img.freepik.com/fotos-premium/cachorro-fofo-enquanto-levanta-o-pe_1000717-382.jpg', alt: 'background-image' }
-]);
+  {
+    image:
+      'https://img.freepik.com/fotos-gratis/isolado-feliz-sorridente-cao-fundo-branco-retrato-4_1562-693.jpg',
+    alt: 'background-image'
+  },
+  {
+    image:
+      'https://img.freepik.com/fotos-premium/cachorro-fofo-enquanto-levanta-o-pe_1000717-382.jpg',
+    alt: 'background-image'
+  },
+  {
+    image:
+      'https://img.freepik.com/fotos-gratis/isolado-feliz-sorridente-cao-fundo-branco-retrato-4_1562-693.jpg',
+    alt: 'background-image'
+  },
+  {
+    image:
+      'https://img.freepik.com/fotos-premium/cachorro-fofo-enquanto-levanta-o-pe_1000717-382.jpg',
+    alt: 'background-image'
+  }
+])
 
 const responsiveOptions = ref([
   {
@@ -74,14 +99,14 @@ const responsiveOptions = ref([
     numVisible: 1,
     numScroll: 1
   }
-]);
+])
 </script>
 
 <style>
-#bloco-info{
+#bloco-info {
   padding: 20px 10px 0;
 }
-.cards-geral{
+.cards-geral {
   background-color: white;
   margin-bottom: 15px;
 }
@@ -94,12 +119,12 @@ const responsiveOptions = ref([
 
 .lost-text {
   color: black;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
   font-size: 20px;
 }
 
-.p-carousel-next {
+/* .p-carousel-next {
   position: absolute !important;
   left: 20em !important;
   top: 20em !important;
@@ -109,16 +134,16 @@ const responsiveOptions = ref([
   top: 20em !important;
   left: 1em !important;
   z-index: 999 !important;
-}
-.p-carousel .p-carousel-indicators .p-carousel-indicator button{
+} */
+.p-carousel .p-carousel-indicators .p-carousel-indicator button {
   width: 10px;
   height: 10px;
 }
-.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button{
-  background-color: #FF5C00;
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #ff5c00;
 }
 
-.p-carousel-indicators  {
+.p-carousel-indicators {
   display: flex !important;
   justify-content: center !important;
   width: 29% !important;
@@ -127,13 +152,12 @@ const responsiveOptions = ref([
   top: 27em;
   left: 8em;
 }
-.p-highlight{
+.p-highlight {
   margin-right: 2px !important;
   margin-left: 2px !important;
-
 }
 .text-nome {
-  color: #9E9E9E;
+  color: #9e9e9e;
   font-size: 10px;
 }
 
@@ -177,9 +201,9 @@ const responsiveOptions = ref([
 }
 
 .buttonCardsAnimais {
-  background: linear-gradient(90deg, #FF934B, #F27322, #D94509);
-  border-radius:10px;
-  border:0;
+  background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
+  border-radius: 10px;
+  border: 0;
 }
 
 .botaoPublicar {
@@ -190,8 +214,8 @@ const responsiveOptions = ref([
   /* padding: 0.5rem 0; 
   width: 284px;
   /* font-size: 20px; */
-  /* font-weight: bold; */
-}
+/* font-weight: bold; */
+
 #icone-lupaDog {
   margin: 0 0 0 10px;
 }
@@ -200,8 +224,6 @@ const responsiveOptions = ref([
   width: 20px;
   height: 20px;
 }
-
-
 
 .carousel {
   position: relative;
@@ -249,7 +271,7 @@ const responsiveOptions = ref([
 
 .carousel__button--left {
   left: 10px;
-  transform: translateY(-50%) rotate(180deg)
+  transform: translateY(-50%) rotate(180deg);
 }
 .carousel__button--right {
   right: 10px;
@@ -276,7 +298,7 @@ const responsiveOptions = ref([
 }
 
 .carousel__indicator.current-slide {
-  background: #FF5C00;
+  background: #ff5c00;
 }
 .is-hidden {
   display: none;
