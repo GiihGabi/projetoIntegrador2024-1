@@ -14,8 +14,8 @@
   </div>
   <div style="display: inline; margin-left: 2rem;margin: auto; padding-top: 1rem;">
     <h2>Fulano da Silva
-      <Button @click="modalEdicao = true" style="width: 1rem; height: auto;" >
-      <img src="../assets/icons/new_pencil.svg" class="border" />
+      <Button icon="pi pi-pencil" class="editar" @click="modalEdicao = true" >
+      <!-- <img src="../assets/icons/new_pencil.svg" class="border" /> -->
       </Button> 
     </h2>
     <h3>Telefone: (14) 99999-9999</h3>
@@ -183,5 +183,17 @@ p {
 
 .p-tabview-panels {
   min-height: 50vh;
+}
+.editar{
+  border: 1px solid transparent;
+  margin-left: 1rem;
+  width: 2rem;
+  background-color: transparent;
+}
+.editar{
+  color: black;
+}
+.p-button:not(:disabled):hover{
+  background-color: transparent;
 }
 </style>
