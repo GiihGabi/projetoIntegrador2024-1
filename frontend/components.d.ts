@@ -21,6 +21,7 @@ declare module 'vue' {
     InputSwitch: typeof import('primevue/inputswitch')['default']
     InputText: typeof import('primevue/inputtext')['default']
     ModalCadPet: typeof import('./src/components/ModalCadPet.vue')['default']
+    ModalCadProdutos: typeof import('./src/components/ModalCadProdutos.vue')['default']
     MultiSelect: typeof import('primevue/multiselect')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
@@ -30,6 +31,8 @@ declare module 'vue' {
     SearchBar: typeof import('./src/components/SearchBar.vue')['default']
     Sidebar: typeof import('primevue/sidebar')['default']
     Slider: typeof import('primevue/slider')['default']
+    TabPanel: typeof import('primevue/tabpanel')['default']
+    TabView: typeof import('primevue/tabview')['default']
     Textarea: typeof import('primevue/textarea')['default']
   }
 }

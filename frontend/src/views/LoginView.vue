@@ -59,6 +59,7 @@ export default {
       if (loggedIn) {
         // Login bem-sucedido, redirecione o usuário para outra página
         router.push('/');
+        alert("logado")
         document.dispatchEvent(new CustomEvent('login-success'));
       } else {
         // Login falhou, exiba uma mensagem de erro
@@ -177,6 +178,7 @@ export default {
   display: flex;
   margin: auto;
   flex-direction: column;
+  padding-inline: 3rem;
 }
 
 .cachorros{

@@ -1,19 +1,19 @@
 <template>
   <div style="display: flex; margin-top: 2rem;">
     <div>
-      <img src="../assets/icons/perfil.svg" style="display: block; margin-left:2.5rem; margin-top: 1rem;" />
+      <img src="../assets/icons/perfil.svg" style="display: block; margin-left:2rem; margin-top: 1rem;" />
     </div>
-    <div style="padding-left: 0.20rem; margin-top: 1.5rem;">
+    <div style="padding-left: 0.40rem; margin-top: 1.5rem;">
       <p style="text-align: center; ">0</p>
       <p style="text-align: center;">publicações</p>
     </div>
     <div style="margin-top: 1.5rem; padding-left: 0.50rem;">
-      <p style="text-align: center; justify-content: right">0</p>
-      <p style="text-align: center; ">animais encontrados</p>
+      <p style="text-align: center; justify-content: right;">0</p>
+      <p style="text-align: center;">animais encontrados</p>
     </div>
   </div>
   <div style="display: inline; margin-left: 2rem;">
-    <h2 style="font-weight: bolder; text-align: left;">Fulano da Silva
+    <h2>Fulano da Silva
       <img src="../assets/icons/new_pencil.svg" class="border" />
     </h2>
     <h3>Telefone: (14) 99999-9999</h3>
@@ -50,6 +50,11 @@
 
 </template>
 <style>
+h2{
+  font-weight: bolder;
+  text-align: left;
+  color: black;
+}
 h3 {
   font-weight: bolder;
   text-align: left;
@@ -70,11 +75,11 @@ h3 {
 .icon-ajuste {
   display: block;
   justify-content: center;
-  margin-left: 6rem;
+  margin-left: 4rem;
 }
 
 .card {
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 .align-image{
