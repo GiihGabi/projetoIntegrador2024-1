@@ -1,17 +1,11 @@
 <template>
-    <div class="screenLogin">
+    <div class="screenRgst">
       <section class="mainLogin" v-if="registerStage">
-            <div class="imgfundo">
-                <img class="cachorros" src="../assets/images/fundocachorros.svg" alt="" />
-            </div>
-
             <div class="main-card-rgst" >
                 <div class="header-card-rgst">
-
-                <img class="logologin" src="../assets/images/logoLogin.svg" alt="" />
+                        <img class="logologin" src="../assets/images/logo.svg" alt="" />
                         <div class="textos-rgst">
-                            <RouterLink to="/" class="textoEntrar">Encontre seu pet!</RouterLink>
-                            <p class="cadastretxt">Cadastre-se agora</p>
+                            <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
                         </div>
                 </div>
 
@@ -35,7 +29,9 @@
 
 
                 <div class="footer-card-rgst">
-                    <label class="conta">Ja tem uma conta? <RouterLink to="/login" class="link-login">Entre!</RouterLink></label>
+                  <div class="texto-footer-card-rgst">
+                    <label class="conta">Ja tem conta? <RouterLink to="/login" class="link-login">Entre!</RouterLink></label>
+                  </div>
                     <Button @click="registerStage = false" class="rgstBtn" label=""></Button>
                 </div>
                
@@ -50,9 +46,10 @@
             <div class="form">
               <div class="header-card-rgst">
                 
-                <img class="logologin" src="../assets/icons/pin.svg" style="width: 1.5rem;" alt="" />
-                <div class="textos-rgst">
-                  <RouterLink to="/" class="textoEntrar">Informe sua localização:</RouterLink>
+                <img class="logorgst" src="../assets/images/logo.svg" alt="" />
+                <div class="textos-pin-rgst">
+                  <img class="pinrgst" src="../assets/icons/pin.svg" alt="" />
+                  <RouterLink to="/" class="textoloc">Informe sua localização:</RouterLink>
                 </div>
               </div>
 
@@ -72,66 +69,20 @@
                   <label for="username">Rua</label>
                   <InputText id="rua" aria-describedby="username-help" />
                 </div>
-              </div>
-              
-            <div class="divider"></div>
 
-            <div class="formAnimals">
-              <div class="header-card-rgst">
                 
-                <img class="logologin" src="../assets/icons/paw.svg" alt="" />
-                <div class="textos-rgst">
-                  <RouterLink to="/" class="textoEntrar">Tem um animal perdido?</RouterLink>
+             
+
+
+              </div>
+           
+              <div class = "botao-loc-rgstr">
+                  <Button  class="locrgst" @click="submitForm" label="">Entrar</Button>
+                </div>
+
                 </div>
               </div>
-
-                <div class="inputRegst">
-                  <label for="username">Insira imagens do seu animalzinho:</label>
-                  
-                  <div class="images">
-                    <div class="image"></div>
-                    <div class="image"></div>
-                    <div class="image"></div>
-
-                  </div>
-                </div>
-                <div class="inputRegst">
-                  <label for="username">Nome do Animalzinho:</label>
-                  <InputText id="cidade" aria-describedby="username-help" />
-                </div>
-                <div class="inputRegstDropDowns">
-                  <div style="width: 10rem">
-                    <label for="username">Tipo:</label>
-                    <InputText style="width: 100%" id="cep" aria-describedby="username-help" />
-                  </div>
-                  <div style="width: 16rem">
-                      
-                      <label for="username">Raça</label>
-                        
-                        <InputText style="width: 17rem" id="cep" aria-describedby="username-help" />
-                        
-                  </div>
-                </div>
-                <div class="inputRegst">
-                  <label for="username">Ultimo Local visto</label>
-                  <div style="width: 100%;gap: 1rem;display: flex;">
-                    
-                    <InputText style="width: 100%;" id="rua" aria-describedby="username-help" />
-                    <Button @click="registerStage = false" class="mapBtn" label=""></Button>
-
-                  </div>
-                </div>
-              </div>
-          </div>
-            
-            <div class="imgfundo">
-                </div>
-                <div class="footer-card-rgst" style="margin: 0;display: flex;justify-content: end;padding: 1rem 0;width: 100%;">
-                  <RouterLink to="/" style="margin:0" >       <Button class="rgstBtn" label=""></Button></RouterLink>
-                </div>
-               
-
-            </div>
+         
       </section>
     </div>
   </template>
@@ -181,7 +132,8 @@
   .teste{
     display: flex;
     margin-top:2rem;
-    gap:2rem
+    gap:2rem;
+    flex-direction: column;
   }
   .form{
     display: flex;
@@ -192,41 +144,46 @@
     flex-direction: column;
     width: 30rem;
   }
+
+
   .mainLogin {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    border: 8px red;
-    background-color: white;
-    width: fit-content;
-    height: 27rem;
-    display: flex;
-    justify-content: center;
-    border-radius: 1.5rem;
-  }
+  margin: auto;
+  border: 8px red;
+  width: fit-content;
+  height: 27rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 1.5rem;
+}
+
+
   .divider{
     height: 20rem;
     border: 1px solid #d0d0d0;
     width: 1px;
     margin: auto;
   }
-  .screenlogin {
-    width: 100%;
-    height: 100%;
+
+  .screenRgst {
+      background-color: #f0f0f0e7;
+      padding-top: 3rem;
+      margin: auto;
+      width: 100vw;
+      height: 100vh;
   }
-  
-  .logologin {
-    width: 2rem;
-    height: 2rem;
+
+  .logorgst{
+    width: 9rem;
+    height: 5rem;
   }
   
   .textoEntrar {
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 2rem;
     margin: 0;
   }
   
   .inputRegst {
-    padding-left: 2rem;
     display: flex;
     flex-direction: column;
     color: gray;
@@ -312,9 +269,8 @@
 
 
   .header-card-rgst{
-    /* margin-top: 1rem; */
     display: flex;
-    /* height: fit-content; */
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
     padding-top:1.0rem;
@@ -335,9 +291,10 @@
 
   .footer-card-rgst{
     display: flex;
-   margin: 1rem 3rem;
-   gap: 4rem;
-    justify-content: space-between
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    padding-top: 1rem;
 
   }
 
@@ -350,6 +307,41 @@
   text-decoration: underline;
   color: #FF5C00;
 }
+
+.logologin{
+  padding-left: 3px;
+  width: 6rem;
+  height: 4rem; 
+}
+
+.texto-footer-card-rgst{
+  padding-left: 2rem;
+}
+
+.textos-pin-rgst{
+  display: flex;
+  gap: 10px;
+}
+
+.locrgst {
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
+  background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
+  border: none;
+  border-radius: 1rem;
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: bolder;
+  width: 9rem;
+  margin: auto;
+  
+}
+
+
+.botao-loc-rgst{
+  padding-top: 4rem;
+}
+
 
   </style>
   

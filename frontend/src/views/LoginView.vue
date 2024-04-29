@@ -178,7 +178,7 @@ export default {
   display: flex;
   margin: auto;
   flex-direction: column;
-  /* padding-inline: 3rem; */
+  padding-inline: 3rem;
 }
 
 .cachorros{
