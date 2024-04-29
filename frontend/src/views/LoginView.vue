@@ -175,8 +175,8 @@ export default {
 
 .main-card-rgst{
   display: flex;
+  margin: auto;
   flex-direction: column;
-  padding-inline: 3rem;
 }
 
 .cachorros{

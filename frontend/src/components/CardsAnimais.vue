@@ -191,7 +191,7 @@ const responsiveOptions = ref([
   width: 284px;
   /* font-size: 20px; */
   /* font-weight: bold; */
-}
+
 #icone-lupaDog {
   margin: 0 0 0 10px;
 }
