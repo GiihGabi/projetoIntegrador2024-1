@@ -1,5 +1,7 @@
+
 <template>
    <CardPerfil />
+   <GridPerfil/>
 </template>
 
 
