@@ -13,7 +13,7 @@
           </div>
           <div class="card flex justify-content-center desc-prod">
             <label for="nome">Descrição:</label>
-            <Textarea class="input-pesquisar2" v-model="value" rows="4" cols="25" />
+            <Textarea class="input-pesquisar2" v-model="value" rows="4" />
         </div>
         <div class="formDiv">
             <div class="input-cad-prod">
@@ -97,6 +97,9 @@
 
   .desc-prod{
     margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
   }
   
   .input-cad-prod {
@@ -128,7 +131,9 @@
   }
 
   .input-name-produto{
-    width: 100%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
   }
   
   </style>
