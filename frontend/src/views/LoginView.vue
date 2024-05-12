@@ -5,7 +5,7 @@
           <div class="main-card-rgst">
                <div class="header-card-rgst">
                         <div class="content-header-login">
-                              <img class="logologin" src="../assets/images/logo.svg" alt="" />
+                              <img class="logologin" src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/Logo.svg" alt="" />
                               <h2 class="entrarLogin">Entrar</h2>
                         </div>
                 </div>
@@ -29,8 +29,8 @@
               </div>
              
               <div class="footer-texts-login">       
-                 <label>Ainda não tem conta?</label>
-                 <label><RouterLink to="/singUp" class="link-registro">Cadastre-se</RouterLink> e encontre seu pet!</label>
+                 <label class="txt">Ainda não tem conta?</label>
+                 <label class="txt"><RouterLink to="/singUp" class="link-registro">Cadastre-se</RouterLink> e encontre seu pet!</label>
               </div>
 
           </div>
@@ -82,9 +82,8 @@ export default {
 
 .mainLogin {
   margin: auto;
-  border: 8px red;
   width: fit-content;
-  height: 27rem;
+  height: 100vh;
   display: flex;
   justify-content: center;
   border-radius: 1.5rem;
@@ -142,7 +141,6 @@ export default {
 
 .screenLogin {
   background-color: #f0f0f0e7;
-  padding-top: 3rem;
   margin: auto;
   width: 100vw;
   height: 100vh;
@@ -192,7 +190,6 @@ export default {
   display: flex;
   height: fit-content;
   gap: 1rem;
-  padding-top:1.0rem;
 }
 
 
@@ -212,6 +209,10 @@ export default {
   display: flex;
   justify-content: center;
   padding-top:1.5rem;
+  label{
+    color: #646464;
+
+  }
 }
 
 .conta{
@@ -251,4 +252,7 @@ export default {
   height: 4rem; 
 }
 
+.txt{
+  color: #646464;
+}
 </style>
