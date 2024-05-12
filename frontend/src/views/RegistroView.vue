@@ -1,152 +1,158 @@
 <template>
-    <div class="screenRgst">
-      <section class="mainLogin" v-if="registerStage">
-            <div class="main-card-rgst" >
-                <div class="header-card-rgst">
-                        <img class="logologin" src="../assets/images/logo.svg" alt="" />
-                        <div class="textos-rgst">
-                            <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
-                        </div>
-                </div>
+  <div class="screenRgst">
+    <section class="mainLogin" v-if="registerStage">
+      <div class="main-card-rgst">
+        <div class="header-card-rgst">
+          <img class="logologin"
+            src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/Logo.svg"
+            alt="" />
+          <div class="textos-rgst">
+            <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
+          </div>
+        </div>
 
-                <div class="inputRegst">
-                <label for="username">Nome</label>
-                <InputText id="email" aria-describedby="username-help" />
-                </div>
-                <div class="inputRegst">
-                <label for="username">Email</label>
-                <InputText id="email" aria-describedby="username-help" />
-                </div>
-                <div class="inputRegst">
-                <label for="username">Senha</label>
-                <Password class="password" id="password" :feedback="false" />
-                </div>
-                <div class="inputRegst">
-                <label for="username">Repetir a Senha</label>
-                <Password class="password" id="password" :feedback="false" />
-                </div>
+        <div class="inputRegst">
+          <label for="username">Nome</label>
+          <InputText id="email" aria-describedby="username-help" />
+        </div>
+        <div class="inputRegst">
+          <label for="username">Email</label>
+          <InputText id="email" aria-describedby="username-help" />
+        </div>
+        <div class="inputRegst">
+          <label for="username">Senha</label>
+          <Password class="password" id="password" :feedback="false" />
+        </div>
+        <div class="inputRegst">
+          <label for="username">Repetir a Senha</label>
+          <Password class="password" id="password" :feedback="false" />
+        </div>
 
 
 
-                <div class="footer-card-rgst">
-                  <div class="texto-footer-card-rgst">
-                    <label class="conta">Ja tem conta? <RouterLink to="/login" class="link-login">Entre!</RouterLink></label>
-                  </div>
-                    <Button @click="registerStage = false" class="rgstBtn" label=""></Button>
-                </div>
-               
+        <div class="footer-card-rgst">
+          <div class="texto-footer-card-rgst">
+            <label class="conta">Ja tem conta? <RouterLink to="/login" class="link-login">Entre!</RouterLink></label>
+          </div>
+          <Button @click="registerStage = false" class="rgstBtn" label=""></Button>
+        </div>
 
+
+      </div>
+    </section>
+    <section class="mainLogin" style="height: fit-content;" v-if="!registerStage">
+
+      <div class="main-card-rgst">
+        <div class="teste">
+
+          <div class="form">
+            <div class="header-card-rgst">
+
+              <img class="logorgst" src="../assets/images/logo.svg" alt="" />
+              <div class="textos-pin-rgst">
+                <img class="pinrgst" src="../assets/icons/pin.svg" alt="" />
+                <RouterLink to="/" class="textoloc">Informe sua localização:</RouterLink>
+              </div>
             </div>
-      </section>
-      <section class="mainLogin" style="height: fit-content;" v-if="!registerStage">
-        
-        <div class="main-card-rgst" >
-          <div class="teste">
 
-            <div class="form">
-              <div class="header-card-rgst">
-                
-                <img class="logorgst" src="../assets/images/logo.svg" alt="" />
-                <div class="textos-pin-rgst">
-                  <img class="pinrgst" src="../assets/icons/pin.svg" alt="" />
-                  <RouterLink to="/" class="textoloc">Informe sua localização:</RouterLink>
-                </div>
-              </div>
-
-                <div class="inputRegst">
-                  <label for="username">Estado</label>
-                  <InputText id="estado" aria-describedby="username-help" />
-                </div>
-                <div class="inputRegst">
-                  <label for="username">Cidade</label>
-                  <InputText id="cidade" aria-describedby="username-help" />
-                </div>
-                <div class="inputRegst">
-                  <label for="username">Cep</label>
-                  <InputText id="cep" aria-describedby="username-help" />
-                </div>
-                <div class="inputRegst">
-                  <label for="username">Rua</label>
-                  <InputText id="rua" aria-describedby="username-help" />
-                </div>
-
-                
-             
+            <div class="inputRegst">
+              <label for="username">Estado</label>
+              <InputText id="estado" aria-describedby="username-help" />
+            </div>
+            <div class="inputRegst">
+              <label for="username">Cidade</label>
+              <InputText id="cidade" aria-describedby="username-help" />
+            </div>
+            <div class="inputRegst">
+              <label for="username">Cep</label>
+              <InputText id="cep" aria-describedby="username-help" />
+            </div>
+            <div class="inputRegst">
+              <label for="username">Rua</label>
+              <InputText id="rua" aria-describedby="username-help" />
+            </div>
 
 
-              </div>
-           
-              <div class = "botao-loc-rgstr">
-                  <Button  class="locrgst" @click="submitForm" label="">Entrar</Button>
-                </div>
 
-                </div>
-              </div>
-         
-      </section>
-    </div>
-  </template>
-  
+
+
+          </div>
+
+          <div class="botao-loc-rgstr">
+            <Button class="locrgst" @click="submitForm" label="">Entrar</Button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+  </div>
+</template>
+
 <script>
-  import { ref } from 'vue';
-  import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
-  export default {
-    setup(){
+export default {
+  setup() {
 
-      const registerStage = ref(true)
+    const registerStage = ref(true)
 
-      return{
-        registerStage,
-        RouterLink
-      }
+    return {
+      registerStage,
+      RouterLink
     }
   }
+}
 
 </script>
 
 
 
-  <style>
- .inputRegstDropDowns {
-    padding-left: 2rem;
-    display: flex;
-    color: gray;
-    gap: 1rem;
-    width: 100%;
-  }
-  .images{
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    gap: 1rem;
-    .image{
-      border: 1px solid #a5a5a5;
-      background-color: #f8f8f8;
-      border-radius: 1rem;
-      width: 5rem;
-      height: 100%
+<style>
+.inputRegstDropDowns {
+  padding-left: 2rem;
+  display: flex;
+  color: gray;
+  gap: 1rem;
+  width: 100%;
+}
 
-    }
+.images {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  gap: 1rem;
+
+  .image {
+    border: 1px solid #a5a5a5;
+    background-color: #f8f8f8;
+    border-radius: 1rem;
+    width: 5rem;
+    height: 100%
   }
-  .teste{
-    display: flex;
-    margin-top:2rem;
-    gap:2rem;
-    flex-direction: column;
-  }
-  .form{
-    display: flex;
-    flex-direction: column;
-  }
-  .formAnimals{ 
-     display: flex;
-    flex-direction: column;
-    width: 30rem;
-  }
+}
+
+.teste {
+  display: flex;
+  margin-top: 2rem;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formAnimals {
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+}
 
 
-  .mainLogin {
+.mainLogin {
   margin: auto;
   border: 8px red;
   width: fit-content;
@@ -157,168 +163,170 @@
 }
 
 
-  .divider{
-    height: 20rem;
-    border: 1px solid #d0d0d0;
-    width: 1px;
-    margin: auto;
-  }
+.divider {
+  height: 20rem;
+  border: 1px solid #d0d0d0;
+  width: 1px;
+  margin: auto;
+}
 
-  .screenRgst {
-      background-color: #f0f0f0e7;
-      padding-top: 3rem;
-      margin: auto;
-      width: 100vw;
-      height: 100vh;
-  }
+.screenRgst {
+  background-color: #f0f0f0e7;
+  padding-top: 3rem;
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
+}
 
-  .logorgst{
-    width: 9rem;
-    height: 5rem;
-  }
-  
-  .textoEntrar {
-    font-weight: bolder;
-    font-size: 2rem;
-    margin: 0;
-  }
-  
-  .inputRegst {
-    display: flex;
-    flex-direction: column;
-    color: gray;
-  }
-  .p-password-input{
-      width: 100%;
-  }
-  
-  .rgstBtn {
-    height: 2.5rem;
-    background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
-    border: none;
-    border-radius: 1rem;
-    font-family: 'Roboto Flex', sans-serif;
-    font-weight: bolder;
-    width: fit-content;
-    background-image: url('../assets/images/seta.svg');
-    background-size: cover;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-  
-  }
-  .mapBtn {
-    height: 2.5rem;
-    background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
-    border: none;
-    border-radius: 1rem;
-    font-family: 'Roboto Flex', sans-serif;
-    font-weight: bolder;
-    width: fit-content;
-    background-image: url('../assets/images/mapa.svg');
-    background-size: cover;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-  
-  }
-  
-  .screenLogin {
-    padding-top: 6rem;
-    margin: auto;
-    width: 100vw;
-    height: 10%;
-  }
-  
-  .esqueceu {
-    padding-top: 0.5rem;
-    color: gray;
-    float: right;
-    padding-bottom: 1rem;
-  }
-  
-  .conta {
-    padding-top: 0.5rem;
-    color: gray;
-  }
-  
-  .cadastrese {
-    color: gray;
-  }
-  
-  .textoslogin {
-    color: gray;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    text-align: center;
-  }
+.logorgst {
+  width: 9rem;
+  height: 5rem;
+}
 
+.textoEntrar {
+  font-weight: bolder;
+  font-size: 2rem;
+  margin: 0;
+}
 
+.inputRegst {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+}
 
-  .main-card-rgst{
-    display: flex;
-    flex-direction: column;
-    padding-inline: 3rem;
-  }
+.p-password-input {
+  width: 100%;
+}
 
-  .cachorros{
-    height: 100%;
-    width: 100%;
-  }
+.rgstBtn {
+  height: 2.5rem;
+  background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
+  border: none;
+  border-radius: 1rem;
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: bolder;
+  width: fit-content;
+  background-image: url('../assets/images/seta.svg');
+  background-size: cover;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+}
+
+.mapBtn {
+  height: 2.5rem;
+  background: linear-gradient(90deg, #ff934b, #f27322, #d94509);
+  border: none;
+  border-radius: 1rem;
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: bolder;
+  width: fit-content;
+  background-image: url('../assets/images/mapa.svg');
+  background-size: cover;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+}
+
+.screenLogin {
+  padding-top: 6rem;
+  margin: auto;
+  width: 100vw;
+  height: 10%;
+}
+
+.esqueceu {
+  padding-top: 0.5rem;
+  color: gray;
+  float: right;
+  padding-bottom: 1rem;
+}
+
+.conta {
+  padding-top: 0.5rem;
+  color: gray;
+}
+
+.cadastrese {
+  color: gray;
+}
+
+.textoslogin {
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+}
 
 
-  .header-card-rgst{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding-top:1.0rem;
-    padding-bottom: 1rem;
-  }
+
+.main-card-rgst {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 3rem;
+}
+
+.cachorros {
+  height: 100%;
+  width: 100%;
+}
 
 
-  .cadastretxt{
-    color: #646464;
-    font-size: 14px;
-  }
+.header-card-rgst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.0rem;
+  padding-bottom: 1rem;
+}
 
 
-  .textos-rgst{
-    line-height: 1rem;
-  }
+.cadastretxt {
+  color: #646464;
+  font-size: 14px;
+}
 
 
-  .footer-card-rgst{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    justify-content: space-between;
-    padding-top: 1rem;
+.textos-rgst {
+  line-height: 1rem;
+}
 
-  }
 
-  .conta{
-    color:#646464;
-  }
+.footer-card-rgst {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  padding-top: 1rem;
 
-  .link-login {
+}
+
+.conta {
+  color: #646464;
+}
+
+.link-login {
   font-size: 15px;
   text-decoration: underline;
   color: #FF5C00;
 }
 
-.logologin{
+.logologin {
   padding-left: 3px;
   width: 6rem;
-  height: 4rem; 
+  height: 4rem;
 }
 
-.texto-footer-card-rgst{
+.texto-footer-card-rgst {
   padding-left: 2rem;
 }
 
-.textos-pin-rgst{
+.textos-pin-rgst {
   display: flex;
   gap: 10px;
 }
@@ -334,14 +342,11 @@
   font-weight: bolder;
   width: 9rem;
   margin: auto;
-  
+
 }
 
 
-.botao-loc-rgst{
+.botao-loc-rgst {
   padding-top: 4rem;
 }
-
-
-  </style>
-  
+</style>
