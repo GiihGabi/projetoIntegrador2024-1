@@ -6,33 +6,29 @@
     </RouterLink>
     <div style="display: flex">
       <div class="notLogged">
-        <RouterLink to="/chat" @click="visibleMenu = false"
-          ><i v-badge class="pi pi-comments" style="font-size: 1rem" />
+        <RouterLink to="/chat" @click="visibleMenu = false"><i v-badge class="pi pi-comments" style="font-size: 1rem" />
         </RouterLink>
 
-        <RouterLink to="/cart" @click="visibleMenu = false"
-          ><img src="../assets/icons/cartIcon.svg" alt=""
-        /></RouterLink>
+        <RouterLink to="/cart" @click="visibleMenu = false"><img src="../assets/icons/cartIcon.svg" alt="" />
+        </RouterLink>
       </div>
 
       <Button class="menuButton" @click="visibleMenu = !visibleMenu">
         <img src="../assets/icons/menuIcon.svg" />
       </Button>
     </div>
-  </section>
+  </section>      
   <Sidebar v-model:visible="visibleMenu" position="right">
     <div class="menuItens">
       <RouterLink to="/login" v-if="!isLoggedIn" @click="visibleMenu = false">Entrar</RouterLink>
-      <RouterLink to="/singUp" v-if="!isLoggedIn" @click="visibleMenu = false"
-        >Cadastre-se</RouterLink
-      >
+      <RouterLink to="/singUp" v-if="!isLoggedIn" @click="visibleMenu = false">Cadastre-se</RouterLink>
 
       <RouterLink to="/" @click="visibleMenu = false">Encontre seu pet!</RouterLink>
-      <RouterLink to="/products" v-if="isLoggedIn" @click="visibleMenu = false"
-        >Produtos</RouterLink
-      >
+      <RouterLink to="/products" v-if="isLoggedIn" @click="visibleMenu = false">Produtos</RouterLink>
       <RouterLink to="/adoption" v-if="isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink>
-      <RouterLink to="/about">Sobre nós</RouterLink>
+      <RouterLink to="/about" @click="visibleMenu = false">Sobre nós</RouterLink>
+      <RouterLink to="/ranking" @click="visibleMenu = false">Ranking</RouterLink>
+
       <ModalCadProdutos />
     </div>
     <div class="logoutButton">
@@ -50,7 +46,7 @@ import { useRouter } from 'vue-router'
 export default {
   setup() {
     const isLoggedIn = ref(false)
-    const router = useRouter(); 
+    const router = useRouter();
     const visibleMenu = ref(false)
 
     const checkAuthStatus = () => {
@@ -120,10 +116,12 @@ export default {
   z-index: 10000;
   overflow: hidden;
 }
+
 .menuButton {
   background: none;
   border: none;
 }
+
 .menuItens {
   display: flex;
   text-align: end;
@@ -144,18 +142,22 @@ export default {
 .p-sidebar-close {
   display: none;
 }
+
 .p-sidebar-mask {
   z-index: 1 !important;
 }
+
 .p-sidebar {
   /* margin: auto; */
   top: 3rem;
   right: auto;
   width: 15rem !important;
 }
+
 .p-sidebar-header {
   display: none;
 }
+
 .p-sidebar-content {
   display: flex;
   flex-direction: column;
