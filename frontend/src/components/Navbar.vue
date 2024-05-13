@@ -28,8 +28,7 @@
       <RouterLink to="/adoption" v-if="isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink>
       <RouterLink to="/about" @click="visibleMenu = false">Sobre nós</RouterLink>
       <RouterLink to="/ranking" @click="visibleMenu = false">Ranking</RouterLink>
-
-      <ModalCadProdutos />
+      <RouterLink to="/cadastroProduto" @click="visibleMenu = false">Produtos</RouterLink>
     </div>
     <div class="logoutButton">
       <div style="float: inline-end"><a href="" @click="logout">Sair</a></div>
@@ -218,115 +217,5 @@ a {
   line-height: 2rem;
 }
 
-/* *****  MODAL STYLES *****
 
-.pata_cad {
-  width: 30px;
-}
-
-.div-text-pata-cad {
-  display: block;
-}
-
-.div-infos {
-  display: flex;
-  align-items: center;
-}
-
-.text-image-pata-cad {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0.5rem;
-}
-
-.h3_cad_pet {
-  color: #646464;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.cadastro-pet {
-  font-size: 12px;
-  color: #646464;
-  font-weight: 400;
-  margin-top: -0.6em;
-}
-
-.inputfile {
-  display: none;
-}
-
-.image-animals {
-  width: 100px;
-  height: 100px;
-  background-image: url('../assets/icons/image-camera.png');
-  background-size: 30%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  cursor: pointer;
-}
-
-.image-animals:hover {
-  border-color: #ff5c00;
-}
-
-.images-pets {
-  display: flex;
-  padding: 0.5em;
-}
-
-.form-cad-pet {
-  justify-content: center;
-  display: contents;
-}
-
-.input-cad-pet {
-  display: flex;
-  flex-direction: column;
-  color: gray;
-  width: 11em;
-  margin-right: 20px;
-  padding-top: 0.5rem;
-}
-
-.input-cad-pet-local {
-  display: flex;
-  flex-direction: column;
-  color: gray;
-  width: 23.2rem;
-  margin-right: 20px;
-  padding-top: 0.5rem;
-}
-
-.input-cad-pet-name {
-  display: flex;
-  flex-direction: column;
-  color: gray;
-  width: 23.2rem;
-  margin-right: 20px;
-  padding-top: 0.5rem;
-}
-
-.tipo-raca {
-  display: flex;
-  margin-right: 20px;
-}
-
-.form-div {
-  padding: 0 0 1em 2em;
-}
-
-.form-div-2 {
-  padding-top: 1em;
-}
-
-.button-save:hover {
-  color: #ff5c00;
-}
-
-.button-cancel:hover {
-  color: #ff5c00;
-} */
 </style>

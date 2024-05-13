@@ -103,6 +103,14 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       // component: () => import('../views/RegistroView.vue')
     },
+    {
+      path: '/cadastroProduto',
+      name: 'cadastroProduto',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/CadastroProdutosView.vue')
+    }
   ]
 })
 router.beforeEach((to, from, next) => {

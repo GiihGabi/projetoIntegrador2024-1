@@ -1,6 +1,6 @@
 <template>
     <div class="card flex justify-content-center">
-        <label for="produtos" class="cadProd" @click="showModal">Cadastrar Produtos</label>
+        <label for="produtos" class="cadProd" @click="showModal">Novo Produto</label>
       <Dialog v-model:visible="visible" header="Cadastrar novo produto" :style="{ width: '21rem' }">
         <span class="p-text-secondary block mb-5">Adicione imagens do seu produto:</span>
         <div class="image-animals" @click="openFileSelector">
@@ -60,8 +60,8 @@
 
   .cadProd{
     text-decoration: none;
-    color: #696969;
-    font-size: 1.2rem;
+    color: #ff5c00;
+    font-size: 14px;
     font-weight: 600;
     line-height: 2rem;
     cursor: pointer;
