@@ -4,7 +4,7 @@
       <div class="main-card-rgst">
         <div class="header-card-rgst">
           <img class="logologin"
-            src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/Logo.svg"
+            src="../assets/images/Logo.svg"
             alt="" />
           <div class="textos-rgst">
             <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
