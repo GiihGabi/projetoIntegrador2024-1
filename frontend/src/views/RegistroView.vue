@@ -3,9 +3,7 @@
     <section class="mainLogin" v-if="registerStage">
       <div class="main-card-rgst">
         <div class="header-card-rgst">
-          <img class="logologin"
-            src="../assets/images/Logo.svg"
-            alt="" />
+      
           <div class="textos-rgst">
             <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
           </div>
@@ -48,7 +46,6 @@
           <div class="form">
             <div class="header-card-rgst">
 
-              <img class="logorgst" src="../assets/images/logo.svg" alt="" />
               <div class="textos-pin-rgst">
                 <img class="pinrgst" src="../assets/icons/pin.svg" alt="" />
                 <RouterLink to="/" class="textoloc">Informe sua localização:</RouterLink>
