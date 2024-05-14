@@ -48,10 +48,10 @@
           <div class="form">
             <div class="header-card-rgst">
 
-              <img class="logorgst" src="../assets/images/logo.svg" alt="" />
+              <img class="logorgst" src="../assets/images/Logo.svg" alt="" />
               <div class="textos-pin-rgst">
                 <img class="pinrgst" src="../assets/icons/pin.svg" alt="" />
-                <RouterLink to="/" class="textoloc">Informe sua localização:</RouterLink>
+                <label to="/" class="textoloc">Informe sua localização:</label>
               </div>
             </div>
 
@@ -154,9 +154,8 @@ export default {
 
 .mainLogin {
   margin: auto;
-  border: 8px red;
   width: fit-content;
-  height: 27rem;
+  height: 100vh;
   display: flex;
   justify-content: center;
   border-radius: 1.5rem;
@@ -172,7 +171,7 @@ export default {
 
 .screenRgst {
   background-color: #f0f0f0e7;
-  padding-top: 3rem;
+  /* padding-top: 3rem; */
   margin: auto;
   width: 100vw;
   height: 100vh;
@@ -231,12 +230,12 @@ export default {
 
 }
 
-.screenLogin {
-  padding-top: 6rem;
+/* .screenLogin {
+  padding-top: 4rem !important;
   margin: auto;
   width: 100vw;
   height: 10%;
-}
+} */
 
 .esqueceu {
   padding-top: 0.5rem;
@@ -267,7 +266,8 @@ export default {
 .main-card-rgst {
   display: flex;
   flex-direction: column;
-  padding-inline: 3rem;
+  width: 80vw;
+  /* padding-inline: 3rem; */
 }
 
 .cachorros {
@@ -344,7 +344,10 @@ export default {
   margin: auto;
 
 }
-
+.textoloc{
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 
 .botao-loc-rgst {
   padding-top: 4rem;
