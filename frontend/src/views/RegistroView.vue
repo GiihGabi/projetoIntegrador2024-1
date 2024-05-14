@@ -171,8 +171,7 @@ export default {
 
 .screenRgst {
   background-color: #f0f0f0e7;
-  /* padding-top: 3rem; */
-  margin: auto;
+  /* margin: auto; */
   width: 100vw;
   height: 100vh;
 }
@@ -263,8 +262,9 @@ export default {
 
 
 
-.main-card-rgst {
+.main-card-rgst{
   display: flex;
+  margin: auto;
   flex-direction: column;
   width: 80vw;
   /* padding-inline: 3rem; */
