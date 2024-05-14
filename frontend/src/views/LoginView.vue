@@ -5,7 +5,7 @@
           <div class="main-card-rgst">
                <div class="header-card-rgst">
                         <div class="content-header-login">
-                              <img class="logologin" src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/Logo.svg" alt="" />
+                              <img class="logologin" src="../assets/images/Logo.svg" alt="" />
                               <h2 class="entrarLogin">Entrar</h2>
                         </div>
                 </div>

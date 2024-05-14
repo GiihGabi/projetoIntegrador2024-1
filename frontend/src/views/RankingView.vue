@@ -6,7 +6,7 @@
     <div class="podium">
         <div class="low">
             <img class="profilePodium"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
                 fulano
             <div class="lowBlock">
@@ -15,7 +15,7 @@
         </div>
         <div class="high">
             <img class="profilePodium"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
                 beltrano
             <div class="highBlock">
@@ -24,7 +24,7 @@
         </div>
         <div class="medium">
             <img class="profilePodium"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
                 ciclano
             <div class="mediumBlock">
@@ -36,31 +36,31 @@
     <div class="profiles">
         <div class="profileLine">
             <img class=" profileImg"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
             <h4 class="name">Nome - 0 animais encontrados</h4>
         </div>
         <div class="profileLine">
             <img class=" profileImg"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
             <h4 class="name">Nome - 0 animais encontrados</h4>
         </div>
         <div class="profileLine">
             <img class=" profileImg"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
             <h4 class="name">Nome - 0 animais encontrados</h4>
         </div>
         <div class="profileLine">
             <img class=" profileImg"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
             <h4 class="name">Nome - 0 animais encontrados</h4>
         </div>
         <div class="profileLine">
             <img class=" profileImg"
-                src="/home/henry/Pessoal/ProjetoIntegrador/projetoIntegrador2024-1/frontend/src/assets/images/circle.png"
+                src="../assets/images/circle.png"
                 alt="">
             <h4 class="name">Nome - 0 animais encontrados</h4>
         </div>
