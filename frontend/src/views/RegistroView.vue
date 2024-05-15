@@ -3,9 +3,7 @@
     <section class="mainLogin" v-if="registerStage">
       <div class="main-card-rgst">
         <div class="header-card-rgst">
-          <img class="logologin"
-            src="../assets/images/Logo.svg"
-            alt="" />
+          <img class="logologin" src="../assets/images/Logo.svg" alt="" />
           <div class="textos-rgst">
             <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
           </div>
@@ -13,15 +11,15 @@
 
         <div class="inputRegst">
           <label for="username">Nome</label>
-          <InputText id="email" aria-describedby="username-help" />
+          <InputText id="email" v-model="username" aria-describedby="username-help" />
         </div>
         <div class="inputRegst">
           <label for="username">Email</label>
-          <InputText id="email" aria-describedby="username-help" />
+          <InputText id="email" v-model="email" aria-describedby="username-help" />
         </div>
         <div class="inputRegst">
           <label for="username">Senha</label>
-          <Password class="password" id="password" :feedback="false" />
+          <Password class="password" v-model="password" id="password" :feedback="false" />
         </div>
         <div class="inputRegst">
           <label for="username">Repetir a Senha</label>
@@ -65,11 +63,11 @@
             </div>
             <div class="inputRegst">
               <label for="username">Cep</label>
-              <InputText id="cep" aria-describedby="username-help" />
+              <InputText id="cep" v-model="zip_code" aria-describedby="username-help" />
             </div>
             <div class="inputRegst">
-              <label for="username">Rua</label>
-              <InputText id="rua" aria-describedby="username-help" />
+              <label for="username">Documento</label>
+              <InputText id="rua" v-model="document" aria-describedby="username-help" />
             </div>
 
 
@@ -92,21 +90,61 @@
 <script>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router'; // Importe o useRouter corretamente
+
+import RegisterService from "../services/RegisterService.js";
 
 export default {
   setup() {
+    const router = useRouter(); 
+    const username = ref('');
+    const email = ref('');
+    const password = ref('');
+    const zip_code = ref('');
+    const user_level = ref('C');
+    const document = ref('');
+    const profile_image = ref('');
+    const registerStage = ref(true);
 
-    const registerStage = ref(true)
+    async function submitForm() {
+      try {
+        const isSuccess = await RegisterService.registerUser(
+          username.value,
+          email.value,
+          password.value,
+          zip_code.value,
+          user_level.value,
+          document.value,
+          profile_image.value
+        );
+
+        if (isSuccess) {
+          router.push('/');
+
+          console.log("Registro bem-sucedido");
+        } else {
+          console.log("Falha no registro");
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+    }
 
     return {
+      username,
+      email,
+      password,
+      zip_code,
+      user_level,
+      document,
+      profile_image,
       registerStage,
+      submitForm,
       RouterLink
-    }
+    };
   }
 }
-
 </script>
-
 
 
 <style>
@@ -262,7 +300,7 @@ export default {
 
 
 
-.main-card-rgst{
+.main-card-rgst {
   display: flex;
   margin: auto;
   flex-direction: column;
@@ -344,7 +382,8 @@ export default {
   margin: auto;
 
 }
-.textoloc{
+
+.textoloc {
   font-size: 0.9rem;
   font-weight: 600;
 }
