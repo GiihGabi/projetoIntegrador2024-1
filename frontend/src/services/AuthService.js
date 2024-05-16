@@ -1,6 +1,4 @@
-// AuthService.js
-
-var URL = "http://localhost:8000/api/auth"
+var URL = "http://localhost:8000/api/auth";
 
 export default {
     async login(email, password) {
@@ -34,20 +32,33 @@ export default {
         }
     },
 
+    async getUserDetails() {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Token not found');
+            }
+
+            const response = await fetch(URL + "/user-details", {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to get user details');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error getting user details:', error);
+            throw error;
+        }
+    },
+
     async logout() {
         try {
-            // const token = localStorage.getItem('token');
-            // const response = await fetch(URL + "/logout", {
-            //     method: 'POST',
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // });
-
-            // if (!response.ok) {
-            //     throw new Error('Logout failed');
-            // }
-
             // Remova o token do armazenamento local
             localStorage.removeItem('token');
 

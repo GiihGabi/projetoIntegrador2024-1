@@ -57,6 +57,7 @@
   <!-- Modal Cadastro Pet -->
   <div class="card flex justify-content-center">
     <Dialog
+    class="cadAnimal"
       v-model:visible="modalCadPet"
       modal
       header="Cadastro de Animal"
@@ -250,7 +251,7 @@ export default {
   /* justify-content: space-between; */
   height: 100vh;
 }
-.p-dialog {
+.cadAnimal {
   /* top: 7.5rem !important; */
   position: fixed;
   width: 90vw !important;

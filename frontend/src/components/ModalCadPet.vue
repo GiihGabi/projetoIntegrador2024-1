@@ -1,7 +1,7 @@
 Modal cad pet:
 
 <template>
-  <div class="card flex justify-content-center">
+  <!-- <div class="card flex justify-content-center"> -->
     <!-- <Button class="buttonSearchBar" @click="showModal">
       <img src="../assets/icons/publicationIcon.svg" alt="" />
     </Button> -->
@@ -66,7 +66,7 @@ Modal cad pet:
         <Button class="button-publicar1" type="button" label="Publicar" @click="hideModal"></Button>
       </div>
     </Dialog>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script setup>

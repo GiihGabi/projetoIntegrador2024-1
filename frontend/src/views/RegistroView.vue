@@ -3,9 +3,7 @@
     <section class="mainLogin" v-if="registerStage">
       <div class="main-card-rgst">
         <div class="header-card-rgst">
-          <img class="logologin"
-            src="../assets/images/Logo.svg"
-            alt="" />
+          <img class="logologin" src="../assets/images/Logo.svg" alt="" />
           <div class="textos-rgst">
             <RouterLink to="/" class="textoEntrar">Cadastre-se!</RouterLink>
           </div>
@@ -13,15 +11,15 @@
 
         <div class="inputRegst">
           <label for="username">Nome</label>
-          <InputText id="email" aria-describedby="username-help" />
+          <InputText id="email" v-model="username" aria-describedby="username-help" />
         </div>
         <div class="inputRegst">
           <label for="username">Email</label>
-          <InputText id="email" aria-describedby="username-help" />
+          <InputText id="email" v-model="email" aria-describedby="username-help" />
         </div>
         <div class="inputRegst">
           <label for="username">Senha</label>
-          <Password class="password" id="password" :feedback="false" />
+          <Password class="password" v-model="password" id="password" :feedback="false" />
         </div>
         <div class="inputRegst">
           <label for="username">Repetir a Senha</label>
@@ -48,33 +46,26 @@
           <div class="form">
             <div class="header-card-rgst">
 
-              <img class="logorgst" src="../assets/images/logo.svg" alt="" />
+              <img class="logorgst" src="../assets/images/Logo.svg" alt="" />
               <div class="textos-pin-rgst">
                 <img class="pinrgst" src="../assets/icons/pin.svg" alt="" />
-                <RouterLink to="/" class="textoloc">Informe sua localização:</RouterLink>
+                <label to="/" class="textoloc">Informe sua localização:</label>
               </div>
             </div>
 
             <div class="inputRegst">
-              <label for="username">Estado</label>
-              <InputText id="estado" aria-describedby="username-help" />
-            </div>
-            <div class="inputRegst">
-              <label for="username">Cidade</label>
-              <InputText id="cidade" aria-describedby="username-help" />
-            </div>
-            <div class="inputRegst">
               <label for="username">Cep</label>
-              <InputText id="cep" aria-describedby="username-help" />
+              <InputText id="cep" v-model="zip_code" aria-describedby="username-help" />
+            </div>
+           
+            <div class="inputRegst">
+              <label for="username">Telefone</label>
+              <InputText id="cidade" v-model="phone" aria-describedby="username-help" />
             </div>
             <div class="inputRegst">
-              <label for="username">Rua</label>
-              <InputText id="rua" aria-describedby="username-help" />
+              <label for="username">Documento</label>
+              <InputText id="rua" v-model="document" aria-describedby="username-help" />
             </div>
-
-
-
-
 
           </div>
 
@@ -92,21 +83,64 @@
 <script>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router'; // Importe o useRouter corretamente
+
+import RegisterService from "../services/RegisterService.js";
 
 export default {
   setup() {
+    const router = useRouter();
+    const username = ref('');
+    const email = ref('');
+    const password = ref('');
+    const zip_code = ref('');
+    const user_level = ref('C');
+    const document = ref('');
+    const phone = ref('')
+    const profile_image = ref('');
+    const registerStage = ref(true);
 
-    const registerStage = ref(true)
+    async function submitForm() {
+      try {
+        const isSuccess = await RegisterService.registerUser(
+          username.value,
+          email.value,
+          password.value,
+          zip_code.value,
+          user_level.value,
+          document.value,
+          profile_image.value,
+          phone.value,
+        );
+
+        if (isSuccess) {
+          router.push('/');
+
+          console.log("Registro bem-sucedido");
+        } else {
+          console.log("Falha no registro");
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+    }
 
     return {
+      username,
+      phone,
+      email,
+      password,
+      zip_code,
+      user_level,
+      document,
+      profile_image,
       registerStage,
+      submitForm,
       RouterLink
-    }
+    };
   }
 }
-
 </script>
-
 
 
 <style>
@@ -154,9 +188,8 @@ export default {
 
 .mainLogin {
   margin: auto;
-  border: 8px red;
   width: fit-content;
-  height: 27rem;
+  height: 100vh;
   display: flex;
   justify-content: center;
   border-radius: 1.5rem;
@@ -172,8 +205,7 @@ export default {
 
 .screenRgst {
   background-color: #f0f0f0e7;
-  padding-top: 3rem;
-  margin: auto;
+  /* margin: auto; */
   width: 100vw;
   height: 100vh;
 }
@@ -231,12 +263,12 @@ export default {
 
 }
 
-.screenLogin {
-  padding-top: 6rem;
+/* .screenLogin {
+  padding-top: 4rem !important;
   margin: auto;
   width: 100vw;
   height: 10%;
-}
+} */
 
 .esqueceu {
   padding-top: 0.5rem;
@@ -266,8 +298,10 @@ export default {
 
 .main-card-rgst {
   display: flex;
+  margin: auto;
   flex-direction: column;
-  padding-inline: 3rem;
+  width: 80vw;
+  /* padding-inline: 3rem; */
 }
 
 .cachorros {
@@ -345,6 +379,10 @@ export default {
 
 }
 
+.textoloc {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 
 .botao-loc-rgst {
   padding-top: 4rem;

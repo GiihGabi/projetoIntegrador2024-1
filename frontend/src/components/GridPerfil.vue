@@ -37,17 +37,16 @@
   
           </div>
         </TabPanel>
-        <TabPanel>
+        <!-- <TabPanel>
           <template #header>
             <div class="flex align-items-center gap-2">
               <img src="../assets/icons/icon_pata_black.svg" class="icon-ajuste">
-              <!-- <span class="font-bold white-space-nowrap"></span> -->
             </div>
           </template>
           <div class="align-image">
             <img class="cachorro" src="../assets/images/image_dog.svg">
           </div>
-        </TabPanel>
+        </TabPanel> -->
       </TabView>
     </div>
     

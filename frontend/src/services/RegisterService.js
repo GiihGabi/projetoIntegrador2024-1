@@ -1,50 +1,60 @@
-// AuthService.js
-
-var URL = "http://localhost:8000"
+var URL = "http://127.0.0.1:8000/api";
 
 export default {
     async registerUser(
-        username,
+        name,
         email,
         password,
         zip_code,
         user_level,
         document,
         profile_image,
+        phone,
     ) {
-        console.log(email, password)
+        console.log(email, password,phone);
         try {
-            const response = await fetch(URL + "/api/register", {
+            const response = await fetch(URL + "/auth/register", {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    username,
+                    name,
                     email,
                     password,
                     zip_code,
                     user_level,
                     document,
                     profile_image,
+                    phone,
                 })
             });
+
+            console.log('Response:', response);
+
             if (!response.ok) {
+                const text = await response.text();
+                console.error('Response text:', text);
                 throw new Error('register failed');
             }
 
-            const data = await response.json();
-            const token = data.token;
+            if (response.headers.get('content-type')?.includes('application/json')) {
+                const data = await response.json();
+                console.log('Response data:', data);
+                const token = data.authorization.token;
 
-            // Verifique se o token foi retornado
-            if (!token) {
-                throw new Error('Token not found');
+                if (!token) {
+                    throw new Error('Token not found');
+                }
+
+                localStorage.setItem('token', token);
+                return true;
+            } else {
+                const text = await response.text();
+                console.error('Expected JSON, got:', text);
+                throw new Error('Unexpected response format');
             }
-
-            // Armazene o token JWT no armazenamento local
-            localStorage.setItem('token', token);
-
-            return true;
         } catch (error) {
             console.error('Error logging in:', error);
             return false;

@@ -1,66 +1,117 @@
 <template>
-  <div style="display: flex; margin-top: 2rem; margin: auto; padding-top: 2rem;">
-<div>
-  <img src="../assets/icons/perfil.svg" style="display: block;margin-top: 1rem;" />
-</div>
-<div style="padding-left: 0.40rem; margin-top: 1.5rem;">
-  <p style="text-align: center; ">0</p>
-  <p style="text-align: center;">publicações</p>
-</div>
-<div style="margin-top: 1.5rem; padding-left: 0.50rem;">
-  <p style="text-align: center; justify-content: right;">0</p>
-  <p style="text-align: center;">animais encontrados</p>
-</div>
-</div>
-<div style="display: inline; margin-left: 2rem;margin: auto; padding-top: 1rem;">
-<h2>Fulano da Silva
-  <Button icon="pi pi-pencil" class="editar" @click="modalEdicao = true" >
-  <!-- <img src="../assets/icons/new_pencil.svg" class="border" /> -->
-  </Button> 
-</h2>
-<h3>Telefone: (14) 99999-9999</h3>
-<h3>E-mail: fulano@gmail.com.br</h3>
-</div>
-<div class="card flex justify-content-center">
-      <Dialog v-model:visible="modalEdicao" modal header="Atualize seus dados:" :style="{ width: '25rem' }">
-        <div class="flex align-items-center gap-3 mb-3">
-          <label for="username" class="font-semibold w-6rem">Nome de Usuario:</label>
-          <InputText id="username" class="flex-auto" autocomplete="off" />
-        </div>
-        <div class="flex align-items-center gap-3 mb-5">
-          <label for="email" class="font-semibold w-6rem">Telefone:</label>
-          <InputText id="email" class="flex-auto" autocomplete="off" />
-        </div>
-        <div class="flex align-items-center gap-3 mb-5">
-          <label for="email" class="font-semibold w-6rem">E-mail:</label>
-          <InputText id="email" class="flex-auto" autocomplete="off" />
-        </div>
-        <div class="flex justify-content-end gap-2">
-          <Button type="button" label="Cancel" severity="secondary" @click="modalEdicao = false"></Button>
-          <Button type="button" label="Save" @click="modalEdicao = false"></Button>
-        </div>
-      </Dialog>
+ 
+  <div style="display: inline; width: 80vw;margin: auto; padding-top: 1rem;">
+
+    <div style="display: flex;justify-content: space-between;align-items: center;">
+      <div style="display: flex;align-items: center;gap: 1rem;">
+        <img src="../assets/icons/perfil.svg" style="" />
+        <h2 style="height: fit-content;">{{ userData.name }}</h2>
+      </div>
+      <Button icon="pi pi-pencil" class="editar" @click="modalEdicao = true"></Button>
     </div>
+    <div style="display: flex;justify-content: space-between;margin-top: 1rem">
+
+      <h3>Tel: {{userData.phone}}</h3>
+    </div>
+    <h3>Email: {{ userData.email }}</h3>
+  </div>
+
+  <!-- Modal Edição de dados -->
+  <Dialog v-model:visible="modalEdicao" modal header="Atualize seus dados:" :style="{ width: '80vw' }">
+    <div class="flex align-items-center gap-3 mb-3" style="width: 100%;">
+      <label for="username" class="font-semibold w-6rem">Nome de Usuario:</label>
+      <InputText id="username" class="" style="width: 100%;" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-3" style="width: 100%;">
+      <label for="email" class="font-semibold w-6rem">Telefone:</label>
+      <InputText id="email" class="flex-auto" style="width: 100%;" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-3" style="width: 100%;">
+      <label for="email" class="font-semibold w-6rem">E-mail:</label>
+      <InputText id="email" class="flex-auto" style="width: 100%;" autocomplete="off" />
+    </div>
+    <div class="flex justify-content-end gap-2" style="gap: 1rem;padding: 1rem;display: flex;">
+      <Button type="button" style="width: 5rem; height: 1.5rem;padding: 0.5rem;" label="Cancel" severity="secondary"
+        @click="modalEdicao = false"></Button>
+      <Button type="button" style="width: 5rem; height: 1.5rem;padding: 0.5rem;" label="Salvar"
+        @click="modalEdicao = false"></Button>
+    </div>
+  </Dialog>
+
 </template>
 
+
+
 <script>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
+import UserService from "@/services/UserService";
 
 export default {
-
   setup() {
+    const router = useRouter();
     const modalEdicao = ref(false);
+    const userId = 1; // Defina o ID do usuário que você deseja buscar e atualizar
+
+    // Variáveis reativas para armazenar os dados do usuário
+    const userData = ref({
+      username: "",
+      telefone: "",
+      email: ""
+    });
+
+    // Função para buscar os dados do usuário por ID
+    const getUserData = async () => {
+      try {
+        const user = await UserService.getUserById(userId);
+        userData.value = user;
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    // Função para atualizar os dados do usuário
+    const saveUserData = async () => {
+      try {
+        await UserService.updateUser(userId, userData.value);
+        modalEdicao.value = false; // Fechar o modal após a atualização
+      } catch (error) {
+        console.error("Error updating user data:", error);
+      }
+    };
+
+    // Detecta quando o usuário faz logout e redireciona para a rota "/"
+    watch(UserService.isLoggedIn, (loggedIn) => {
+      if (!loggedIn) {
+        router.push("/");
+      }
+    });
+
+    // Chamada inicial para buscar os dados do usuário ao montar o componente
+    onMounted(() => {
+      getUserData();
+      console.log("Entrou");
+    });
 
     return {
-      modalEdicao
-    }
+      modalEdicao,
+      userData,
+      saveUserData
+    };
   }
-}
+};
 </script>
 
 <style>
-.p-button {
-  background: orangered;
-  background-color: transparent;
+.editar {
+  border: none;
+  background-color: rgb(241, 241, 241);
+  color: gray;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.pi {
+  font-size: 0.8rem !important;
 }
 </style>

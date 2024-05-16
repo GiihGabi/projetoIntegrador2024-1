@@ -59,7 +59,7 @@ export default {
       if (loggedIn) {
         // Login bem-sucedido, redirecione o usuário para outra página
         router.push('/');
-        alert("logado")
+        
         document.dispatchEvent(new CustomEvent('login-success'));
       } else {
         // Login falhou, exiba uma mensagem de erro
@@ -120,6 +120,7 @@ export default {
   display: flex;
   flex-direction: column;
   color: gray;
+  width: 80vw;
 }
 .p-password-input{
     width: 100%;
@@ -141,7 +142,7 @@ export default {
 
 .screenLogin {
   background-color: #f0f0f0e7;
-  margin: auto;
+  /* margin: auto; */
   width: 100vw;
   height: 100vh;
 }
@@ -176,7 +177,7 @@ export default {
   display: flex;
   margin: auto;
   flex-direction: column;
-  padding-inline: 3rem;
+  /* padding-inline: 3rem; */
 }
 
 .cachorros{

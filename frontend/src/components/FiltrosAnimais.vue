@@ -2,7 +2,7 @@ filtros animais:
 
 <template>
   <Button class="buttonSearchBar" icon="pi pi-filter-fill" @click="showModal = true"></Button>
-  <Dialog v-model:visible="showModal"  :style="{ width: '50vw' }">
+  <Dialog v-model:visible="showModal"  :style="{ width: '80vw' }">
     <section class="filtro-feedAnimais">
       <form class="form-feedAnimais">
         <p class="titulo-filtros-feedAnimais">Filtros</p>
