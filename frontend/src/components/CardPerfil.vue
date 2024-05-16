@@ -65,7 +65,6 @@ export default {
       try {
         const user = await UserService.getUserById(userId);
         userData.value = user;
-        console.log(userData.value);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }

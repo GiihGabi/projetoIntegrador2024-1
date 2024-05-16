@@ -9,8 +9,9 @@ export default {
         user_level,
         document,
         profile_image,
+        phone,
     ) {
-        console.log(email, password);
+        console.log(email, password,phone);
         try {
             const response = await fetch(URL + "/auth/register", {
                 method: 'POST',
@@ -26,6 +27,7 @@ export default {
                     user_level,
                     document,
                     profile_image,
+                    phone,
                 })
             });
 

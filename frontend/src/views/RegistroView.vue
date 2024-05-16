@@ -54,25 +54,18 @@
             </div>
 
             <div class="inputRegst">
-              <label for="username">Estado</label>
-              <InputText id="estado" aria-describedby="username-help" />
-            </div>
-            <div class="inputRegst">
-              <label for="username">Cidade</label>
-              <InputText id="cidade" aria-describedby="username-help" />
-            </div>
-            <div class="inputRegst">
               <label for="username">Cep</label>
               <InputText id="cep" v-model="zip_code" aria-describedby="username-help" />
+            </div>
+           
+            <div class="inputRegst">
+              <label for="username">Telefone</label>
+              <InputText id="cidade" v-model="phone" aria-describedby="username-help" />
             </div>
             <div class="inputRegst">
               <label for="username">Documento</label>
               <InputText id="rua" v-model="document" aria-describedby="username-help" />
             </div>
-
-
-
-
 
           </div>
 
@@ -96,13 +89,14 @@ import RegisterService from "../services/RegisterService.js";
 
 export default {
   setup() {
-    const router = useRouter(); 
+    const router = useRouter();
     const username = ref('');
     const email = ref('');
     const password = ref('');
     const zip_code = ref('');
     const user_level = ref('C');
     const document = ref('');
+    const phone = ref('')
     const profile_image = ref('');
     const registerStage = ref(true);
 
@@ -115,7 +109,8 @@ export default {
           zip_code.value,
           user_level.value,
           document.value,
-          profile_image.value
+          profile_image.value,
+          phone.value,
         );
 
         if (isSuccess) {
@@ -132,6 +127,7 @@ export default {
 
     return {
       username,
+      phone,
       email,
       password,
       zip_code,
