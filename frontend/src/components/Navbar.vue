@@ -6,10 +6,10 @@
     </RouterLink>
     <div style="display: flex">
       <div class="notLogged">
-        <RouterLink to="/chat" @click="visibleMenu = false"><i v-badge class="pi pi-comments" style="font-size: 1rem" />
+        <RouterLink to="/chat" v-if="isLoggedIn" @click="visibleMenu = false"><i v-badge class="pi pi-comments" style="font-size: 1rem" />
         </RouterLink>
 
-        <RouterLink to="/cart" @click="visibleMenu = false"><img src="../assets/icons/cartIcon.svg" alt="" />
+        <RouterLink to="/cart" v-if="isLoggedIn" @click="visibleMenu = false"><img src="../assets/icons/cartIcon.svg" alt="" />
         </RouterLink>
       </div>
 
@@ -29,6 +29,8 @@
       <RouterLink to="/about" @click="visibleMenu = false">Sobre nós</RouterLink>
       <RouterLink to="/ranking" @click="visibleMenu = false">Ranking</RouterLink>
       <RouterLink to="/cadastroProduto" @click="visibleMenu = false">Produtos</RouterLink>
+      <RouterLink to="/profile" v-if="isLoggedIn" @click="visibleMenu = false">Perfil</RouterLink>
+
     </div>
     <div class="logoutButton">
       <div style="float: inline-end"><a href="" @click="logout">Sair</a></div>
@@ -38,7 +40,7 @@
 
 <script>
 import { onUnmounted } from 'vue'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import AuthService from '@/services/AuthService'
 import { useRouter } from 'vue-router'
 
@@ -87,6 +89,11 @@ export default {
       window.removeEventListener('storage', handleStorageChange)
     })
 
+    // Use um watcher para observar a mudança no valor do token
+    watch(() => localStorage.getItem('token'), (newValue) => {
+      isLoggedIn.value = !!newValue;
+    });
+
     return {
       visibleMenu,
       isLoggedIn,
@@ -95,6 +102,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style>
