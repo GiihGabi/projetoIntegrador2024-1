@@ -1,56 +1,44 @@
-<!-- Login.vue -->
 <template>
   <div class="screenLogin">
     <section class="mainLogin">
-          <div class="main-card-rgst">
-               <div class="header-card-rgst">
-                        <div class="content-header-login">
-                              <img class="logologin" src="../assets/images/Logo.svg" alt="" />
-                              <h2 class="entrarLogin">Entrar</h2>
-                        </div>
-                </div>
-            
-              <div class="inputLogin">
-              <label for="username">Email</label>
-              <InputText id="email" v-model="email" aria-describedby="username-help" />
-              </div>
-              <div class="inputLogin">
-              <label for="username">Senha</label>
-              <Password class="password" v-model="password" id="password" :feedback="false" />
-              </div>
-            
-              <div class="texto-esqueceu-login">
-                <label class="esqueceu">Esqueceu sua <RouterLink to="/singUp" class="link-registro">senha?</RouterLink> </label>
-              </div>
-
-              <div class="footer-btn-login">
-                 <Button  class="loginBtn" @click="submitForm" label="">Entrar</Button>
-
-              </div>
-             
-              <div class="footer-texts-login">       
-                 <label class="txt">Ainda não tem conta?</label>
-                 <label class="txt"><RouterLink to="/singUp" class="link-registro">Cadastre-se</RouterLink> e encontre seu pet!</label>
-              </div>
-
+      <div class="main-card-rgst">
+        <div class="header-card-rgst">
+          <div class="content-header-login">
+            <img class="logologin" src="../assets/images/Logo.svg" alt="" />
+            <h2 class="entrarLogin">Entrar</h2>
           </div>
+        </div>
+        <div class="inputLogin">
+          <label for="email">Email</label>
+          <InputText id="email" v-model="email" aria-describedby="username-help" />
+        </div>
+        <div class="inputLogin">
+          <label for="password">Senha</label>
+          <Password class="password" v-model="password" id="password" :feedback="false" />
+        </div>
+        <div class="texto-esqueceu-login">
+          <label class="esqueceu">Esqueceu sua <RouterLink to="/singUp" class="link-registro">senha?</RouterLink> </label>
+        </div>
+        <div class="footer-btn-login">
+          <Button class="loginBtn" @click="submitForm" label="">Entrar</Button>
+        </div>
+        <div class="footer-texts-login">
+          <label class="txt">Ainda não tem conta?</label>
+          <label class="txt"><RouterLink to="/singUp" class="link-registro">Cadastre-se</RouterLink> e encontre seu pet!</label>
+        </div>
+      </div>
     </section>
   </div>
 </template>
 
-
-
-
-
-
 <script>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'; // Importe o useRouter corretamente
-import AuthService from '@/services/AuthService'
+import { useRouter } from 'vue-router';
+import AuthService from '@/services/AuthService';
 
 export default {
   setup() {
-    const router = useRouter(); 
+    const router = useRouter();
     const email = ref('');
     const password = ref('');
 
@@ -59,7 +47,6 @@ export default {
       if (loggedIn) {
         // Login bem-sucedido, redirecione o usuário para outra página
         router.push('/');
-        
         document.dispatchEvent(new CustomEvent('login-success'));
       } else {
         // Login falhou, exiba uma mensagem de erro

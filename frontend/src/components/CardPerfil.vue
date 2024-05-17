@@ -1,5 +1,5 @@
 <template>
- 
+
   <div style="display: inline; width: 80vw;margin: auto; padding-top: 1rem;">
 
     <div style="display: flex;justify-content: space-between;align-items: center;">
@@ -11,7 +11,7 @@
     </div>
     <div style="display: flex;justify-content: space-between;margin-top: 1rem">
 
-      <h3>Tel: {{userData.phone}}</h3>
+      <h3>Tel: {{ userData.phone }}</h3>
     </div>
     <h3>Email: {{ userData.email }}</h3>
   </div>
@@ -46,12 +46,13 @@
 import { ref, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import UserService from "@/services/UserService";
+import AuthService from "@/services/AuthService"; // Certifique-se de importar AuthService
 
 export default {
   setup() {
     const router = useRouter();
     const modalEdicao = ref(false);
-    const userId = 1; // Defina o ID do usuário que você deseja buscar e atualizar
+    const userId = localStorage.getItem('userId'); // Obtém o ID do usuário do armazenamento local
 
     // Variáveis reativas para armazenar os dados do usuário
     const userData = ref({
@@ -65,6 +66,7 @@ export default {
       try {
         const user = await UserService.getUserById(userId);
         userData.value = user;
+        console.log(userData.value)
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -81,7 +83,7 @@ export default {
     };
 
     // Detecta quando o usuário faz logout e redireciona para a rota "/"
-    watch(UserService.isLoggedIn, (loggedIn) => {
+    watch(AuthService.isLoggedIn, (loggedIn) => {
       if (!loggedIn) {
         router.push("/");
       }
@@ -101,6 +103,7 @@ export default {
   }
 };
 </script>
+
 
 <style>
 .editar {
