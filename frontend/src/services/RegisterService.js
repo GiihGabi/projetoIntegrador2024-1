@@ -11,13 +11,12 @@ export default {
         profile_image,
         phone,
     ) {
-        console.log(email, password,phone);
+        console.log(email, password, phone);
         try {
             const response = await fetch(URL + "/auth/register", {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     name,
