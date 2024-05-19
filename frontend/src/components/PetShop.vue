@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="item">
-        <p>PetShops</p>
+        <h2 style="margin-left: 1rem;">PetShops</h2>
       </div>
       <div class="item">
         <Dropdown 
@@ -15,42 +15,53 @@
         />
       </div>
    </div>
-   <div style="display: flex;">
-    <img src="../assets/icons/icon_loja.png"/>
-    <h2 style="margin-left: 1 rem">LovePet</h2>
-    <p>Rua exemplo N 10 - centro <br> PetShop</p>
-    
+   <div style="display: flex; justify-content: center; align-items: center; padding: 1rem; background-color: #f0f0f0;">
+    <div style="width: 20rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <img src="../assets/icons/icon_loja.png" style="margin-right: 1rem;"/>
+            <div>
+                <h2 style="margin: 0;">LovePet</h2>
+                <p style="margin: 0;">Rua exemplo N 10 - centro <br> PetShop</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <img src="../assets/icons/icon_loja.png" style="margin-right: 1rem;"/>
+            <div>
+                <h2 style="margin: 0;">LovePet</h2>
+                <p style="margin: 0;">Rua exemplo N 10 - centro <br> PetShop</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <img src="../assets/icons/icon_loja.png" style="margin-right: 1rem;"/>
+            <div>
+                <h2 style="margin: 0;">MedPet</h2>
+                <p style="margin: 0;">Rua exemplo N 10 - centro <br> PetShop</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <img src="../assets/icons/icon_loja.png" style="margin-right: 1rem;"/>
+            <div>
+                <h2 style="margin: 0;">MedPet</h2>
+                <p style="margin: 0;">Rua exemplo N 10 - centro <br> PetShop</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <img src="../assets/icons/icon_loja.png" style="margin-right: 1rem;"/>
+            <div>
+                <h2 style="margin: 0;">Cobasi</h2>
+                <p style="margin: 0;">Rua exemplo N 10 - centro <br> PetShop</p>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <img src="../assets/icons/icon_loja.png" style="margin-right: 1rem;"/>
+            <div>
+                <h2 style="margin: 0;">Cobasi</h2>
+                <p style="margin: 0;">Rua exemplo N 10 - centro <br> PetShop</p>
+            </div>
+        </div>
     </div>
-   <div style="display: flex;">
-    <img src="../assets/icons/icon_loja.png"/>
-    <h2 style="margin-left: 1 rem">LovePet</h2>
-    <p>Rua exemplo N 10 - centro <br> PetShop</p>
-    
-    </div>
-   <div style="display: flex;">
-    <img src="../assets/icons/icon_loja.png"/>
-    <h2 style="margin-left: 1 rem">MedPet</h2>
-    <p>Rua exemplo N 10 - centro <br> PetShop</p>
-    
-    </div>
-   <div style="display: flex;">
-    <img src="../assets/icons/icon_loja.png"/>
-    <h2 style="margin-left: 1 rem">MedPet</h2>
-    <p>Rua exemplo N 10 - centro <br> PetShop</p>
-    
-    </div>
-   <div style="display: flex;">
-    <img src="../assets/icons/icon_loja.png"/>
-    <h2 style="margin-left: 1 rem">Cobasi</h2>
-    <p>Rua exemplo N 10 - centro <br> PetShop</p>
-    
-    </div>
-   <div style="display: flex;">
-    <img src="../assets/icons/icon_loja.png"/>
-    <h2 style="margin-left: 1 rem">Cobasi</h2>
-    <p>Rua exemplo N 10 - centro <br> PetShop</p>
-    
-    </div>
+</div>
+
 </template>
   
   
