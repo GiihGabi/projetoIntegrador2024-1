@@ -8,8 +8,8 @@
           </div>
         </template>
         <div class="align-image">
-          <div v-for="dog in dogs" :key="dog.animal.id">
-            <img v-for="url in dog.image_urls" :src="url" :key="url" class="cachorro" style="height: auto;">
+          <div v-for="dog in dogs"  :key="dog.animal.id">
+            <img v-for="url in dog.image_urls" :src="url" :key="url" class="cachorro">
           </div>
         </div>
       </TabPanel>
@@ -49,8 +49,8 @@ export default {
 };
 </script>
 
-  
- 
+
+
 
 <style>
 h2 {
@@ -61,6 +61,7 @@ h2 {
 
 .cachorro {
   width: 100%;
+  height: 100%;
 }
 
 h3 {
@@ -95,6 +96,8 @@ h3 {
 }
 
 .align-image {
+  width: 100%;
+  /* height: 50vh; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* Cria três colunas de largura igual */
@@ -128,6 +131,7 @@ p {
 
 .p-tabview-panels {
   min-height: 50vh;
+  padding: 0;
 }
 
 .editar {

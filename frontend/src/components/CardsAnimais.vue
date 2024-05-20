@@ -1,20 +1,18 @@
 <template>
   <section class="cardAnimaisGeral">
-    <div class="cards-geral">
+    <div class="cards-geral" v-for="animalData in animals" :key="animalData.animal.id">
       <div id="bloco-info">
         <div class="bloco-topo">
           <div class="info-CardAnimais">
             <img src="../assets/icons/lost.svg" alt="" srcset="" class="icone-info" />
             <h2 class="lost-text">Perdido</h2>
-            <p class="status">Há 2 dias</p>
+            <p class="status">{{ timeFromNow(animalData.animal.created_at) }}</p>
           </div>
           <div>
             <div class="info-baixo">
-              <p class="text-nome">Nome:<strong class="strong-nome">Desconhecido</strong></p>
+              <p class="text-nome">Nome:<strong class="strong-nome">{{ animalData.animal.animal_name }}</strong></p>
               <p class="text-nome">
-                Encontrado próximo à:<strong class="strong-nome"
-                  >Rua Padre roma,205 - Marília - SP</strong
-                >
+                Encontrado próximo à:<strong class="strong-nome">Rua Padre roma,205 - Marília - SP</strong>
               </p>
             </div>
           </div>
@@ -22,26 +20,9 @@
       </div>
 
       <div class="card">
-        <Carousel
-          :value="products"
-          :numVisible="3"
-          :numScroll="3"
-          :responsiveOptions="responsiveOptions"
-        >
-          <template #item="slotProps">
-            <div class="border-1 surface-border border-round m-2 p-3">
-              <div class="mb-3">
-                <div class="relative mx-auto">
-                  <img
-                    :src="slotProps.data.image"
-                    :alt="slotProps.data.alt"
-                    class="carousel__images"
-                  />
-                </div>
-              </div>
-            </div>
-          </template>
-        </Carousel>
+        <div class="image-container" v-for="url in animalData.image_urls" :key="url">
+          <img :src="url" alt="Animal Image" class="animal-image" />
+        </div>
       </div>
 
       <div class="talk">
@@ -52,7 +33,7 @@
   </section>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue'
 
 const products = ref([
@@ -100,16 +81,52 @@ const responsiveOptions = ref([
     numScroll: 1
   }
 ])
+</script> -->
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
+
+const animals = ref([]);
+const loading = ref(true);
+const error = ref('');
+
+const fetchAllAnimalsWithImages = async () => {
+  try {
+    const response = await fetch('http://localhost:8000/api/all-animals');
+    if (!response.ok) {
+      throw new Error('Failed to fetch animal data.');
+    }
+    const data = await response.json();
+    console.log(data)
+    animals.value = data;
+  } catch (err) {
+    error.value = 'Error fetching animal data: ' + err.message;
+  } finally {
+    loading.value = false;
+  }
+};
+
+const timeFromNow = (date) => {
+  return dayjs(date).fromNow();
+}
+
+onMounted(fetchAllAnimalsWithImages);
 </script>
 
 <style>
 #bloco-info {
   padding: 20px 10px 0;
 }
+
 .cards-geral {
   background-color: white;
   margin-bottom: 15px;
 }
+
 #filtro-cardAnimais {
   display: flex;
   display: flex;
@@ -139,6 +156,7 @@ const responsiveOptions = ref([
   width: 10px;
   height: 10px;
 }
+
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
   background-color: #ff5c00;
 }
@@ -152,10 +170,12 @@ const responsiveOptions = ref([
   top: 27em;
   left: 8em;
 }
+
 .p-highlight {
   margin-right: 2px !important;
   margin-left: 2px !important;
 }
+
 .text-nome {
   color: #9e9e9e;
   font-size: 10px;
@@ -214,7 +234,7 @@ const responsiveOptions = ref([
   /* padding: 0.5rem 0; 
   width: 284px;
   /* font-size: 20px; */
-  /* font-weight: bold; */
+/* font-weight: bold; */
 
 #icone-lupaDog {
   margin: 0 0 0 10px;
@@ -232,18 +252,21 @@ const responsiveOptions = ref([
   margin: 0 auto;
   margin-bottom: 5rem;
 }
+
 .carousel__images {
   max-width: 500px;
   width: 100%;
   height: 250px;
   object-fit: cover;
 }
+
 .carousel__track-container {
   height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
+
 .carousel__track {
   display: flex;
   transition: transform 0.5s ease-in-out;
@@ -252,12 +275,14 @@ const responsiveOptions = ref([
   position: relative;
   height: 100%;
 }
+
 .carousel__slide {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
 }
+
 .carousel__button {
   position: absolute;
   top: 50%;
@@ -273,12 +298,15 @@ const responsiveOptions = ref([
   left: 10px;
   transform: translateY(-50%) rotate(180deg);
 }
+
 .carousel__button--right {
   right: 10px;
 }
+
 .carousel__button img {
   width: 35px;
 }
+
 .carousel__nav {
   display: flex;
   justify-content: center;
@@ -288,6 +316,7 @@ const responsiveOptions = ref([
   left: 11em;
   gap: 1rem;
 }
+
 .carousel__indicator {
   border: 0;
   border-radius: 50%;
@@ -300,7 +329,17 @@ const responsiveOptions = ref([
 .carousel__indicator.current-slide {
   background: #ff5c00;
 }
+
 .is-hidden {
   display: none;
+}
+
+.image-container {
+  height: 50vh;
+}
+
+.animal-image {
+  height: 100%;
+  width: 100%;
 }
 </style>

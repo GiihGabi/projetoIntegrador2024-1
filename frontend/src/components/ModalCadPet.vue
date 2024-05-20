@@ -161,9 +161,6 @@ const racas = [
   padding-top: 0.5rem;
 }
 
-.form-div-2 {
-  padding-top: 1em;
-}
 
 .button-save:hover {
   color: #ff5c00;

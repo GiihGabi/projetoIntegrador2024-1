@@ -34,7 +34,7 @@
 
     </div>
     <div class="logoutButton">
-      <div style="float: inline-end"><a href="" @click="logout">Sair</a></div>
+      <div style="float: inline-end"><a v-if="isLoggedIn" href="" @click="logout">Sair</a></div>
     </div>
   </Sidebar>
   <Dialog :closable="false" :closeOnEscape="true" class="cart" v-model:visible="visible" :position="position"

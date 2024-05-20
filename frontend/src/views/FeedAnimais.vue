@@ -63,7 +63,7 @@
       header="Cadastro de Animal"
       :style="{ width: '20rem' }"
     >
-      <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span>
+      <!-- <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span> -->
       <!-- <div class="image-animals" @click="openFileSelector">
         <input type="file" name="file" id="file" class="inputfile" />
       </div> -->
@@ -426,9 +426,7 @@ input-pesquisar2:enabled:focus {
   padding-top: 0.5rem;
 }
 
-.form-div-2 {
-  padding-top: 1em;
-}
+
 
 .button-save:hover {
   color: #ff5c00;
