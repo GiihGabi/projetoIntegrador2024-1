@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div style="display: block;">
     <p style="text-align: center; margin-top: 2.80rem">Rua Padre roma,205 - Marília - SP</p>
     </div>
-  <div style="display: flex; margin-top: 2rem; justify-content: left; padding-top: 2rem; margin-left: 2rem;">
+  <div style="display: flex; margin-top: 2.5rem; justify-content: left;margin-left: 1.5rem;">
     <div>
-      <img src="../assets/icons/icon-produto.svg" style="margin-top: 1rem;justify-content: left;" />
+      <img src="../assets/icons/icon-produto.svg" style="margin: auto; margin-top: 1rem;" />
     </div>
-    <div style="padding-left: 0.40rem; margin-top: 1.0rem;">
-      <h2 style="text-align: center; margin-left: 0.40rem;">Produtos</h2>
+    <div style="margin-top: 0.50rem;">
+      <h1>Produtos</h1>
     </div>
   </div>
   <div class="card flex flex-wrap justify-content-center gap-3" style="margin-top: 0.60rem;">
-    <IconField iconPosition="left" style="margin-left: 2rem;">
+    <IconField iconPosition="left" style="margin-left: 1.5rem;">
       <InputText v-model="value1" placeholder="Buscar em PetShops"></InputText>
     </IconField>
   </div>
@@ -59,6 +59,12 @@
 
   .p-carousel-indicator{
     display: none;
+  }
+  h1{
+    text-align: center;
+    font-weight: bolder;
+    margin: auto;
+    margin-left: 1rem;
   }
   </style>
   
