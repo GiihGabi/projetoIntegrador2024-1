@@ -30,7 +30,7 @@
             src="../assets/icons/talk.svg" alt=""></Button>
         <!-- <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info" /> -->
         <div>Entrar em contato</div>
-      </div>
+      
     </div>
   </section>
 </template>

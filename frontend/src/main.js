@@ -1,6 +1,6 @@
 import './assets/main.css'
 import 'primevue/resources/themes/aura-light-green/theme.css'
-import 'leaflet/dist/leaflet.css';
+// import 'leaflet/dist/leaflet.css';
 
 
 import { createApp } from 'vue'
