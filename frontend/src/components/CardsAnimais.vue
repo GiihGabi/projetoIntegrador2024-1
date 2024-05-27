@@ -21,7 +21,7 @@
 
       <div class="card">
         <div class="image-container" v-for="url in animalData.image_urls" :key="url">
-          <img :src="'http://localhost:8000'+url" alt="Animal Image" class="animal-image" />
+          <img :src="'http://localhost:8000' + url" alt="Animal Image" class="animal-image" />
         </div>
       </div>
 
@@ -30,7 +30,9 @@
             src="../assets/icons/talk.svg" alt=""></Button>
         <!-- <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info" /> -->
         <div>Entrar em contato</div>
-      
+
+      </div>
+
     </div>
   </section>
 </template>
