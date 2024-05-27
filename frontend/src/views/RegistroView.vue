@@ -11,7 +11,7 @@
 
         <div class="inputRegst">
           <label for="username">Nome</label>
-          <InputText id="email" v-model="username" aria-describedby="username-help" />
+          <InputText id="email" v-model="name" aria-describedby="username-help" />
         </div>
         <div class="inputRegst">
           <label for="username">Email</label>
@@ -63,8 +63,8 @@
               <InputText id="cidade" v-model="phone" aria-describedby="username-help" />
             </div>
             <div class="inputRegst">
-              <label for="username">Documento</label>
-              <InputText id="rua" v-model="document" aria-describedby="username-help" />
+              <label for="username">Enrdereco</label>
+              <InputText id="rua" v-model="address" aria-describedby="username-help" />
             </div>
 
           </div>
@@ -90,27 +90,26 @@ import RegisterService from "../services/RegisterService.js";
 export default {
   setup() {
     const router = useRouter();
-    const username = ref('');
+    const name = ref('');
     const email = ref('');
     const password = ref('');
-    const zip_code = ref('');
-    const user_level = ref('C');
-    const document = ref('');
     const phone = ref('')
-    const profile_image = ref('');
+    const zip_code = ref('');
+    const address = ref('');
+    const user_level = ref('C');
     const registerStage = ref(true);
 
     async function submitForm() {
       try {
         const isSuccess = await RegisterService.registerUser(
-          username.value,
+          name.value,
           email.value,
           password.value,
-          zip_code.value,
-          user_level.value,
-          document.value,
-          profile_image.value,
           phone.value,
+          zip_code.value,
+          address.value,
+          user_level.value,
+          // profile_image.value,
         );
 
         if (isSuccess) {
@@ -126,14 +125,13 @@ export default {
     }
 
     return {
-      username,
+      name,
       phone,
       email,
       password,
       zip_code,
       user_level,
-      document,
-      profile_image,
+      address,
       registerStage,
       submitForm,
       RouterLink
@@ -189,7 +187,7 @@ export default {
 .mainLogin {
   margin: auto;
   width: fit-content;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   border-radius: 1.5rem;
@@ -207,7 +205,7 @@ export default {
   background-color: #f0f0f0e7;
   /* margin: auto; */
   width: 100vw;
-  height: 100vh;
+  height: 93vh;
 }
 
 .logorgst {
@@ -315,7 +313,6 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding-top: 1.0rem;
   padding-bottom: 1rem;
 }
 

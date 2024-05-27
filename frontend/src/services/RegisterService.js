@@ -5,11 +5,11 @@ export default {
         name,
         email,
         password,
-        zip_code,
-        user_level,
-        document,
-        profile_image,
         phone,
+        zip_code,
+        address,
+        user_level,
+       
     ) {
         console.log(email, password, phone);
         try {
@@ -22,11 +22,11 @@ export default {
                     name,
                     email,
                     password,
-                    zip_code,
-                    user_level,
-                    document,
-                    profile_image,
                     phone,
+                    zip_code,
+                    phone,
+                    address,
+                    user_level,
                 })
             });
 

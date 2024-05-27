@@ -25,11 +25,11 @@
       <RouterLink to="/singUp" v-if="!isLoggedIn" @click="visibleMenu = false">Cadastre-se</RouterLink>
 
       <RouterLink to="/" @click="visibleMenu = false">Encontre seu pet!</RouterLink>
-      <RouterLink to="/products" v-if="isLoggedIn" @click="visibleMenu = false">Produtos</RouterLink>
-      <RouterLink to="/adoption" v-if="isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink>
+      <RouterLink to="/produto" v-if="isLoggedIn" @click="visibleMenu = false">Produtos</RouterLink>
+      <!-- <RouterLink to="/adoption" v-if="isLoggedIn" @click="visibleMenu = false">Adoção</RouterLink> -->
       <RouterLink to="/about" @click="visibleMenu = false">Sobre nós</RouterLink>
       <RouterLink to="/ranking" @click="visibleMenu = false">Ranking</RouterLink>
-      <RouterLink to="/cadastroProduto" @click="visibleMenu = false">Produtos</RouterLink>
+      <!-- <RouterLink to="/cadastroProduto" @click="visibleMenu = false">Produtos</RouterLink> -->
       <RouterLink to="/profile" v-if="isLoggedIn" @click="visibleMenu = false">Perfil</RouterLink>
 
     </div>

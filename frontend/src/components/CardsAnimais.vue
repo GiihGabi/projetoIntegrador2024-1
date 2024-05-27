@@ -21,67 +21,20 @@
 
       <div class="card">
         <div class="image-container" v-for="url in animalData.image_urls" :key="url">
-          <img :src="url" alt="Animal Image" class="animal-image" />
+          <img :src="'http://localhost:8000'+url" alt="Animal Image" class="animal-image" />
         </div>
       </div>
 
       <div class="talk">
-        <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info" />
+        <Button style="padding: 0;background: none;border: none" @click="console.log(animalData)"><img
+            src="../assets/icons/talk.svg" alt=""></Button>
+        <!-- <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info" /> -->
         <div>Entrar em contato</div>
       </div>
     </div>
   </section>
 </template>
 
-<!-- <script setup>
-import { ref } from 'vue'
-
-const products = ref([
-  {
-    image:
-      'https://img.freepik.com/fotos-gratis/isolado-feliz-sorridente-cao-fundo-branco-retrato-4_1562-693.jpg',
-    alt: 'background-image'
-  },
-  {
-    image:
-      'https://img.freepik.com/fotos-premium/cachorro-fofo-enquanto-levanta-o-pe_1000717-382.jpg',
-    alt: 'background-image'
-  },
-  {
-    image:
-      'https://img.freepik.com/fotos-gratis/isolado-feliz-sorridente-cao-fundo-branco-retrato-4_1562-693.jpg',
-    alt: 'background-image'
-  },
-  {
-    image:
-      'https://img.freepik.com/fotos-premium/cachorro-fofo-enquanto-levanta-o-pe_1000717-382.jpg',
-    alt: 'background-image'
-  }
-])
-
-const responsiveOptions = ref([
-  {
-    breakpoint: '1400px',
-    numVisible: 2,
-    numScroll: 1
-  },
-  {
-    breakpoint: '1199px',
-    numVisible: 3,
-    numScroll: 1
-  },
-  {
-    breakpoint: '767px',
-    numVisible: 2,
-    numScroll: 1
-  },
-  {
-    breakpoint: '575px',
-    numVisible: 1,
-    numScroll: 1
-  }
-])
-</script> -->
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -119,7 +72,7 @@ onMounted(fetchAllAnimalsWithImages);
 
 <style>
 #bloco-info {
-  padding: 20px 10px 0;
+  padding: 1rem 1rem 0;
 }
 
 .cards-geral {
@@ -185,7 +138,8 @@ onMounted(fetchAllAnimalsWithImages);
   color: #696969;
   display: flex;
   align-items: center;
-  padding: 0px 10px 22px;
+  padding: 0.5rem;
+  gap: 0.5rem;
 }
 
 .strong-nome {
@@ -339,7 +293,11 @@ onMounted(fetchAllAnimalsWithImages);
 }
 
 .animal-image {
-  height: 100%;
-  width: 100%;
+  height: 50vh;
+  width: 100vw;
+}
+
+.card {
+  padding: 0 !important;
 }
 </style>

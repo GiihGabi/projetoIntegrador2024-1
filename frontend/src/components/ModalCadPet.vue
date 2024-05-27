@@ -2,70 +2,59 @@ Modal cad pet:
 
 <template>
   <!-- <div class="card flex justify-content-center"> -->
-    <!-- <Button class="buttonSearchBar" @click="showModal">
+  <!-- <Button class="buttonSearchBar" @click="showModal">
       <img src="../assets/icons/publicationIcon.svg" alt="" />
     </Button> -->
-    <Dialog v-model:visible="visible" header="Cadastro de Animal" :style="{ width: '20rem' }">
-      <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span>
-      <div class="image-animals" @click="openFileSelector">
-        <input type="file" name="file" id="file" class="inputfile" />
+  <Dialog v-model:visible="visible" header="Cadastro de Animal" :style="{ width: '20rem' }">
+    <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span>
+    <div class="image-animals" @click="openFileSelector">
+      <input type="file" name="file" id="file" class="inputfile" />
+    </div>
+    <div class="form-div-2">
+      <div class="input-cad-pet-local">
+        <label for="nome">Nome do animal:</label>
+        <InputText class="input-pesquisar2" id="nome" v-model="animal_name" aria-describedby="username-help" />
       </div>
-      <div class="form-div-2">
-        <div class="input-cad-pet-local">
-          <label for="nome">Nome do animal:</label>
-          <InputText class="input-pesquisar2" id="nome" v-model="nome" aria-describedby="username-help" />
-        </div>
-        <div class="input-cad-pet">
-          <label for="situacao">Situação do animal:</label>
-          <Dropdown
-            v-model="selectedSituacao"
-            :options="situacoes"
-            optionLabel="name"
-            placeholder="Selecione a situação"
-            class="w-full dropdown-situacao input-pesquisar2"
-          >
-            <template #selectedItem>
-              <div v-if="selectedSituacao">{{ selectedSituacao.name }}</div>
-            </template>
-          </Dropdown>
-        </div>
-        <div class="input-cad-pet">
-          <label for="tipo">Tipo:</label>
-          <Dropdown
-            v-model="selectedTipo"
-            :options="tipos"
-            optionLabel="name"
-            placeholder="Selecione o tipo"
-            class="w-full dropdown-tipo input-pesquisar2"
-          >
-            <template #selectedItem>
-              <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
-            </template>
-          </Dropdown>
-        </div>
-        <div class="input-cad-pet">
-          <label for="raca">Raça:</label>
-          <Dropdown
-            v-model="selectedRaca"
-            :options="racas"
-            optionLabel="name"
-            placeholder="Selecione a raça"
-            class="w-full dropdown-raca input-pesquisar2"
-          >
-            <template #selectedItem>
-              <div v-if="selectedRaca">{{ selectedRaca.name }}</div>
-            </template>
-          </Dropdown>
-        </div>
-        <div class="input-cad-pet-local">
-          <label for="local">Último local visto:</label>
-          <InputText class="input-pesquisar2" id="local" v-model="local" aria-describedby="username-help" />
-        </div>
+      <div class="input-cad-pet-local">
+        <label for="nome">Idade do animal:</label>
+        <InputText class="input-pesquisar2" id="nome" v-model="age" aria-describedby="username-help" />
       </div>
-      <div class="flex justify-content-end button-publicar">
-        <Button class="button-publicar1" type="button" label="Publicar" @click="hideModal"></Button>
+      <div class="input-cad-pet">
+        <label for="situacao">Situação do animal:</label>
+        <Dropdown v-model="selectedSituacao" :options="situacoes" optionLabel="name" placeholder="Selecione a situação"
+          class="w-full dropdown-situacao input-pesquisar2">
+          <template #selectedItem>
+            <div v-if="selectedSituacao">{{ selectedSituacao.name }}</div>
+          </template>
+        </Dropdown>
       </div>
-    </Dialog>
+      <div class="input-cad-pet">
+        <label for="tipo">Tipo:</label>
+        <Dropdown v-model="selectedTipo" :options="tipos" optionLabel="name" placeholder="Selecione o tipo"
+          class="w-full dropdown-tipo input-pesquisar2">
+          <template #selectedItem>
+            <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
+          </template>
+        </Dropdown>
+      </div>
+      <div class="input-cad-pet">
+        <label for="raca">Raça:</label>
+        <Dropdown v-model="selectedRaca" :options="racas" optionLabel="name" placeholder="Selecione a raça"
+          class="w-full dropdown-raca input-pesquisar2">
+          <template #selectedItem>
+            <div v-if="selectedRaca">{{ selectedRaca.name }}</div>
+          </template>
+        </Dropdown>
+      </div>
+      <div class="input-cad-pet-local">
+        <label for="local">Último local visto:</label>
+        <InputText class="input-pesquisar2" id="local" v-model="local" aria-describedby="username-help" />
+      </div>
+    </div>
+    <div class="flex justify-content-end button-publicar">
+      <Button class="button-publicar1" type="button" label="Publicar" @click="hideModal"></Button>
+    </div>
+  </Dialog>
   <!-- </div> -->
 </template>
 
@@ -73,11 +62,6 @@ Modal cad pet:
 import { ref } from "vue";
 
 const visible = ref(false);
-
-// const showModal = () => {
-//   visible.value = true;
-// };
-
 const hideModal = () => {
   visible.value = false;
 };
@@ -87,10 +71,18 @@ const openFileSelector = () => {
   fileInput.click();
 };
 
-const nome = ref("");
+const animal_name = ref("");
+const age = ref('')
+const gender = ref('')
+const description = ref('')
+const size = ref("")
+const weight = ref("")
+const temperament = ref('')
+const status_id = ref("")
+const species_id = ref('')
+
+
 const selectedSituacao = ref(null);
-// const raca = ref("");
-const selectedRaca = ref(null);
 const selectedTipo = ref(null);
 const local = ref("");
 
@@ -118,6 +110,9 @@ const racas = [
 
 <style scoped>
 /* Estilos do modal */
+.p-dialog-content {
+  padding: 0.5rem !important;
+}
 
 .input-pesquisar2:enabled:focus {
   outline: 1px solid #ff934b;
@@ -176,5 +171,4 @@ const racas = [
   background-color: #ff5c00;
   border: none;
 }
-
 </style>

@@ -12,12 +12,8 @@
   <Dialog v-model:visible="modalFilter" modal header="Filtros" :style="{ width: '25rem' }">
     <div class="input">
       <label for="username">Endereço, cidade ou CEP</label>
-      <AutoComplete
-        v-model="endereco"
-        optionLabel="display_name"
-        :suggestions="enderecosEncontrados"
-        @complete="search"
-      />
+      <AutoComplete v-model="endereco" optionLabel="display_name" :suggestions="enderecosEncontrados"
+        @complete="search" />
     </div>
     <div class="input">
       <label for="username">Nome do pet</label>
@@ -34,16 +30,9 @@
     <div class="select">
       <label for="username">Espécie</label>
 
-      <MultiSelect
-        v-model="especieSelecionada"
-        display="chip"
-        :options="especies"
-        optionLabel="name"
-        placeholder="Selecione espécies"
-        :maxSelectedLabels="3"
-        class="w-full md:w-20rem"
-        :virtualScrollerOptions="{ itemSize: 50 }"
-      />
+      <MultiSelect v-model="especieSelecionada" display="chip" :options="especies" optionLabel="name"
+        placeholder="Selecione espécies" :maxSelectedLabels="3" class="w-full md:w-20rem"
+        :virtualScrollerOptions="{ itemSize: 50 }" />
     </div>
     <div class="">
       <label for="username">Distância máxima</label>
@@ -54,134 +43,127 @@
     </div>
   </Dialog>
 
-  <!-- Modal Cadastro Pet -->
   <div class="card flex justify-content-center">
-    <Dialog
-    class="cadAnimal"
-      v-model:visible="modalCadPet"
-      modal
-      header="Cadastro de Animal"
-      :style="{ width: '20rem' }"
-    >
-      <!-- <span class="p-text-secondary block mb-5">Adicione imagens do seu animalzinho:</span> -->
-      <!-- <div class="image-animals" @click="openFileSelector">
-        <input type="file" name="file" id="file" class="inputfile" />
-      </div> -->
+    <Dialog class="cadAnimal" v-model:visible="modalCadPet" modal header="Cadastro de Animal"
+      :style="{ width: '85vw' }">
+
       <div class="dropZoneContainer">
         <div class="image-animals">
-          <input
-          type="file"
-          id="drop_zone"
-          class="FileUpload"
-          accept=".jpg,.png,.gif"
-          :value="Image"
-          onchange="handleFileSelect(this) "
-          />
-          <!-- <img :src="" alt="" srcset=""> -->
+          <input type="file" id="drop_zone" class="FileUpload" accept=".jpg,.png,.gif" multiple @change="handleFiles" />
+          <img :src="Image" alt="" srcset="">
         </div>
-        <!-- <div class="dropZoneOverlay">Drag and drop your image <br />or<br />Click to add</div> -->
       </div>
       <div class="form-div-2">
         <div class="input-cad-pet-local">
           <label for="nome">Nome do animal:</label>
-          <InputText
-            class="input-pesquisar2"
-            id="nome"
-            v-model="nome"
-            aria-describedby="username-help"
-          />
+          <InputText class="input-pesquisar2" id="nome" v-model="animal_name" aria-describedby="username-help" />
         </div>
+
+        <div class="input-cad-pet-local">
+          <label for="nome">Descrição:</label>
+          <InputText class="input-pesquisar2" id="nome" v-model="description" aria-describedby="username-help" />
+        </div>
+
         <div class="input-cad-pet">
-          <label for="situacao">Situação do animal:</label>
-          <Dropdown
-            v-model="selectedSituacao"
-            :options="situacoes"
-            optionLabel="name"
-            placeholder="Selecione a situação"
-            class="w-full dropdown-situacao input-pesquisar2"
-          >
+          <label for="situacao">Tamanho do animal:</label>
+          <Dropdown v-model="size" :options="tamanhos" optionLabel="name" placeholder="Selecione a situação"
+            class="w-full dropdown-situacao input-pesquisar2">
+            <template #selectedItem>
+              <div v-if="size">{{ size.name }}</div>
+            </template>
+          </Dropdown>
+        </div>
+
+        <div class="input-cad-pet">
+          <label for="tipo">Situação:</label>
+          <Dropdown v-model="selectedSituacao" :options="situacoes" optionLabel="name" placeholder="Selecione o tipo"
+            class="w-full dropdown-tipo input-pesquisar2">
             <template #selectedItem>
               <div v-if="selectedSituacao">{{ selectedSituacao.name }}</div>
             </template>
           </Dropdown>
         </div>
+
         <div class="input-cad-pet">
-          <label for="tipo">Tipo:</label>
-          <Dropdown
-            v-model="selectedTipo"
-            :options="tipos"
-            optionLabel="name"
-            placeholder="Selecione o tipo"
-            class="w-full dropdown-tipo input-pesquisar2"
-          >
+          <label for="raca">Espécie:</label>
+          <Dropdown v-model="selectedTipo" :options="tipos" optionLabel="name" placeholder="Selecione a raça"
+            class="w-full dropdown-raca input-pesquisar2">
             <template #selectedItem>
               <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
             </template>
           </Dropdown>
         </div>
+
         <div class="input-cad-pet">
-          <label for="raca">Raça:</label>
-          <Dropdown
-            v-model="selectedRaca"
-            :options="racas"
-            optionLabel="name"
-            placeholder="Selecione a raça"
-            class="w-full dropdown-raca input-pesquisar2"
-          >
+          <label for="raca">Genero:</label>
+          <Dropdown v-model="selectedGenero" :options="genero" optionLabel="name" placeholder="Selecione a raça"
+            class="w-full dropdown-raca input-pesquisar2">
             <template #selectedItem>
-              <div v-if="selectedRaca">{{ selectedRaca.name }}</div>
+              <div v-if="selectedTipo">{{ selectedTipo.name }}</div>
             </template>
           </Dropdown>
         </div>
+
         <div class="input-cad-pet-local">
           <label for="local">Último local visto:</label>
-          <InputText
-            class="input-pesquisar2"
-            id="local"
-            v-model="local"
-            aria-describedby="username-help"
-          />
+          <InputText class="input-pesquisar2" id="local" v-model="localAnimal" aria-describedby="username-help" />
         </div>
       </div>
-      <div class="flex justify-content-end button-publicar">
-        <Button class="button-publicar1" type="button" label="Publicar" @click="hideModal"></Button>
+      <div style="padding: 1rem;display: flex;justify-content: center;" class="flex justify-content-end button-publicar">
+        <Button class="button-publicar1" type="button" label="Publicar" @click="publishAnimal"></Button>
       </div>
     </Dialog>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import AnimalService from '@/services/animalService';
+import { ref } from 'vue';
 
 export default {
   setup() {
-    const checked = ref(false)
-    const endereco = ref('')
-    const enderecosEncontrados = ref('')
-    const modalFilter = ref(false)
-    const modalCadPet = ref(false)
-    const animalPerdido = ref(false)
-    const procurandoTutor = ref(false)
-    const especieSelecionada = ref()
-    const kilometerFilter = ref(0)
-    const nomeAnimal = ref('')
-    const selectedSituacao = ref(null)
-    const selectedRaca = ref(null)
-    const selectedTipo = ref(null)
-    const localAnimal = ref('')
-    const especies = ref([
-      { name: 'Cachorros', code: 'NY' },
-      { name: 'Gatos', code: 'RM' },
-      { name: 'Passaros', code: 'LDN' }
-    ])
+    const Image = ref([]);
+    const checked = ref(false);
+    const endereco = ref('');
+    const enderecosEncontrados = ref('');
+    const modalFilter = ref(false);
+    const modalCadPet = ref(false);
+    const animalPerdido = ref(false);
+    const procurandoTutor = ref(false);
+    const especieSelecionada = ref();
+    const kilometerFilter = ref(0);
+
+    const animal_name = ref('');
+    const age = ref('');
+    const description = ref('');
+    const size = ref('');
+    const weight = ref('');
+    const temperament = ref('');
+    const selectedSituacao = ref(null);
+    const selectedGenero = ref(null);
+    const selectedTipo = ref(null);
+    const selectedRaca = ref(null);
+    const localAnimal = ref('');
+    const tipos = ref([
+      { name: 'Cachorros', value: 1 },
+      { name: 'Gatos', value: 2 },
+      { name: 'Pássaros', value: 3 }
+    ]);
+    const genero = ref([
+      { name: 'Macho', value: "M" },
+      { name: 'Femea', value: "F" },
+    ]);
     const situacoes = [
-      { name: 'Perdido' },
-      { name: 'Abandonado' },
-      { name: 'Resgatado' },
-      { name: 'Adotado' }
-    ]
-    const tipos = [{ name: 'Cachorro' }, { name: 'Gato' }, { name: 'Pássaro' }, { name: 'Outros' }]
-    const racas = [{ name: 'Labrador' }, { name: 'Poodle' }, { name: 'Siamês' }, { name: 'Persa' }]
+      { name: 'Perdido', value: "PERDIDO" },
+      { name: 'Abandonado', value: "ABANDONADO" },
+      { name: 'Resgatado', value: "RESGATADO" },
+      { name: 'Adotado', value: "ADOCAO" }
+    ];
+    const tamanhos = [
+      { name: 'Pequeno', value: 'P' },
+      { name: 'Médio', value: 'M' },
+      { name: 'Grande', value: 'G' }
+    ];
 
     const search = async () => {
       try {
@@ -189,7 +171,6 @@ export default {
           `http://localhost:8000/api/search-endereco?endereco=${endereco.value}`
         )
         const data = await response.json()
-        console.log(data)
         enderecosEncontrados.value = data
       } catch (error) {
         console.error('Erro ao buscar endereço:', error)
@@ -206,14 +187,47 @@ export default {
       modalCadPet.value = true
     }
 
+    const publishAnimal = async () => {
+      console.log(Image)
+
+      try {
+
+        const animalData = {
+          animal_name: animal_name.value,
+          gender: selectedGenero.value.value,
+          description: description.value,
+          size: size.value.value,
+          situation: selectedSituacao.value.value,
+          species_id: selectedTipo.value.value
+        };
+        const response = await AnimalService.createAnimal(animalData, Image.value);
+        console.log('Animal criado com sucesso:', response);
+        modalCadPet.value = false; // Feche o modal após o animal ser criado com sucesso
+      } catch (error) {
+        console.error('Erro ao criar o animal:', error);
+      }
+    }
+
+    const handleFiles = (event) => {
+      Image.value = Array.from(event.target.files);
+    };
+
     return {
-      nomeAnimal,
+      genero,
+      selectedGenero,
+      animal_name,
+      age,
+      description,
+      size,
+      weight,
+      temperament,
+      tamanhos,
+      Image,
       selectedSituacao,
       selectedRaca,
       selectedTipo,
       localAnimal,
       tipos,
-      racas,
       situacoes,
       search,
       endereco,
@@ -221,18 +235,41 @@ export default {
       modalFilter,
       checked,
       especieSelecionada,
-      especies,
       kilometerFilter,
       animalPerdido,
       procurandoTutor,
       enderecosEncontrados,
       OpenCadPetModal,
-      modalCadPet
+      modalCadPet,
+      publishAnimal,
+      handleFiles
     }
   }
 }
 </script>
+<!-- 
+<style >
+.p-inputtext {
+  width: 100%;
+  height: 2rem !important;
+  padding: 0.5rem !important;
+}
+.p-dropdown{
+  width: 100%;
+  height: 2rem;
+  padding: 0 !important;
 
+}
+.p-dropdown-label{
+  padding: 0.2rem 0.4rem !important;
+}
+.image-animals {
+  width: 100% !important;
+}
+.FileUpload{
+  width: 100%;
+}
+</style> -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 #feedAnimais {
@@ -426,7 +463,9 @@ input-pesquisar2:enabled:focus {
   padding-top: 0.5rem;
 }
 
-
+.form-div-2 {
+  padding-top: 1em;
+}
 
 .button-save:hover {
   color: #ff5c00;
@@ -435,7 +474,6 @@ input-pesquisar2:enabled:focus {
 .button-publicar {
   display: flex;
   justify-content: center;
-  margin-top: 1.5em;
 }
 
 .button-publicar1 {

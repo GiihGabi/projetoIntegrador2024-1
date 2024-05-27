@@ -8,12 +8,21 @@
           </div>
         </template>
         <div class="align-image">
-          <div v-for="dog in dogs"  :key="dog.animal.id">
-            <img v-for="url in dog.image_urls" :src="url" :key="url" class="cachorro">
+          <div class="image-place" v-for="dog in dogs" :key="dog.animal.id">
+            <img v-for="url in dog.image_urls" :src="'http://localhost:8000'+url" :key="url" class="cachorro" @click="openModal(dog)">
           </div>
         </div>
       </TabPanel>
     </TabView>
+    <Dialog v-model:visible="showModal" modal :closable="false" dismissableMask>
+      <img :src="'http://localhost:8000'+selectedImage.image_urls[0]" class="modal-image">
+      <div class="modalAnimal">
+
+        <h4 class="modalAnimalName">{{ selectedImage.animal.animal_name }}</h4>
+        <h4 class="modalAnimalDescription">{{ selectedImage.animal.description }}</h4>
+      </div>
+
+    </Dialog>
   </div>
 </template>
 
@@ -23,27 +32,37 @@ import { ref, onMounted } from 'vue';
 export default {
   setup() {
     const dogs = ref([]);
-    const userId = localStorage.getItem('userId'); // Obtém o ID do usuário do armazenamento local
+    const userId = localStorage.getItem('userId');
+    const selectedImage = ref(null);
+    const showModal = ref(false);
 
     const fetchDogs = async () => {
       try {
-        const ownerId = userId; // Use o ID do usuário do localStorage, se disponível
+        const ownerId = userId;
         const response = await fetch(`http://localhost:8000/api/owners/${ownerId}/animals`);
         if (!response.ok) {
           throw new Error('Falha ao obter os dados dos cachorros.');
         }
         const data = await response.json();
-        dogs.value = data; // Supondo que a resposta da API seja um objeto com uma propriedade "dogs" contendo a lista de cachorros
-        console.log(dogs.value);
+        dogs.value = data;
       } catch (error) {
         console.error('Erro ao buscar dados dos cachorros:', error);
       }
     };
 
+    const openModal = (dog) => {
+      console.log(dog)
+      selectedImage.value = dog;
+      showModal.value = true;
+    };
+
     onMounted(fetchDogs);
 
     return {
-      dogs
+      dogs,
+      selectedImage,
+      showModal,
+      openModal
     };
   }
 };
@@ -51,17 +70,54 @@ export default {
 
 
 
+<style scoped>
+.p-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-shrink: 0;
+  padding: 0;
+}
 
+.p-dialog-content {
+  padding: 0 !important;
+  background: transparent !important;
+}
+</style>
 <style>
+.modalAnimal {
+  padding: 0.5rem;
+}
+
+.modalAnimalDescription {
+  font-size: 0.8rem;
+}
+
+.modal-image {
+  border-radius: 0.5rem;
+  width: 80vw;
+  height: auto;
+  border: none;
+}
+
 h2 {
   font-weight: bolder;
   text-align: left;
   color: black;
 }
 
+.image-place {
+  width: 33vw;
+  height: 33vw;
+
+}
+
 .cachorro {
   width: 100%;
   height: 100%;
+  cursor: pointer;
+  /* Adicione um cursor pointer para indicar que a imagem é clicável */
+
 }
 
 h3 {
@@ -92,6 +148,7 @@ h3 {
   margin-top: 3rem;
   margin: auto;
   width: 100vw;
+  height: 100%;
   padding-top: 2rem
 }
 
@@ -129,9 +186,9 @@ p {
   justify-content: center;
 }
 
-.p-tabview-panels {
-  min-height: 50vh;
-  padding: 0;
+.p-tabview .p-tabview-panels {
+  height: 65vh !important;
+  padding: 0 !important;
 }
 
 .editar {
