@@ -44,10 +44,10 @@
         </Carousel>
       </div>
 
-      <div class="talk">
+      <a href="/chat" class="talk">
         <img src="../assets/icons/talk.svg" alt="" srcset="" class="icone-info" />
         <div>Entrar em contato</div>
-      </div>
+      </a>
     </div>
   </section>
 </template>

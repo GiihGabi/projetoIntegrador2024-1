@@ -1,196 +1,278 @@
 <template>
-  <div class="chat">
-    <div class="input-search-chat">
-      <InputGroup>
-        <div class="input-container">
-          <InputText placeholder="" class="input-chat" />
-          <div class="lupa-chat">
-            <img src="../assets/icons/lupa.svg" alt="" srcset="" />
+  <div id="chat-engine-wrapper">
+    <div v-if="loading">Carregando...</div>
+    <div v-else id="chat-engine">
+      <div class="componentes-top-chat">
+        <input class="input-pesquisa" v-model="searchText" placeholder="" />
+        <button @click="showModal = true" class="botao-sem-fundo"><img src="../assets/icons/plus.svg" alt="" srcset=""></button>
+      </div>
+      <div v-if="filteredChats.length === 0">Nenhum chat encontrado.</div>
+      <div v-else>
+        <div class="tab-mensagens">
+          <p class="mensagens">Mensagens</p>
+        </div>
+        <div v-for="chat in filteredChats" :key="chat.id" class="chat-item" @click="navigateToChatPage(chat.id)">
+          <h3>{{ chat.title }}</h3>
+          <p>{{ chat.last_message ? chat.last_message.text : 'Sem mensagens' }}</p>
+          <button class="options-btn botao-sem-fundo" @click.stop="showOptionsMenu(chat)"><img src="../assets/icons/dots.svg" width="15px" alt="" srcset=""></button>
+          <div v-if="selectedChat === chat.id" class="options-menu">
+            <ul class="ul-chat">
+              <li><a @click.stop="deleteChat(chat.id)">Excluir Chat</a></li>
+              <li><a @click.stop="reportChat(chat.id)">Denunciar</a></li>
+              <li><a @click.stop="markChatAsResolved(chat.id)">Resolvido</a></li>
+            </ul>
           </div>
         </div>
-      </InputGroup>
+      </div>
     </div>
-    <TabView class="tabview-chat">
-      <TabPanel header="Recebidas" class="tab-header-chat">
-        <div class="container-chats">
-          <div class="image-container">
-            <img src="../assets/images/cao1.png" alt="" srcset="" />
-          </div>        
-          <div>
-            <p class="p-chat"><strong style="font-weight: bold;">Animal perdido</strong> - Julio Figueira</p>
-            <p class="m-0 p-chat">Lorem ipsum dolor sit amet</p>
-          </div>
-          <div class="card flex justify-content-center">
-            <Button
-              type="button"
-              icon="pi pi-ellipsis-v"
-              @click="toggle"
-              aria-haspopup="true"
-              aria-controls="overlay_menu"
-              class="horizontal-ellipsis"
-            />
-            <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
-          </div>
-        </div>
-        <div class="container-chats">
-          <div class="image-container">
-            <img src="../assets/images/cao1.png" alt="" srcset="" />
-          </div>        
-          <div>
-            <p class="p-chat"><strong style="font-weight: bold;">Animal perdido</strong> - Julio Figueira</p>
-            <p class="m-0 p-chat">Lorem ipsum dolor sit amet</p>
-          </div>
-          <div class="card flex justify-content-center">
-            <Button
-              type="button"
-              icon="pi pi-ellipsis-v"
-              @click="toggle"
-              aria-haspopup="true"
-              aria-controls="overlay_menu"
-              class="horizontal-ellipsis"
-            />
-            <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
-          </div>
-        </div>
-      </TabPanel>
-      <TabPanel header="Enviadas" class="tab-header-chat">
-        <div class="container-chats">
-          <div class="image-container">
-            <img src="../assets/images/cao1.png" alt="" srcset="" />
-          </div>        
-          <div>
-            <p class="p-chat"><strong style="font-weight: bold;">Animal perdido</strong> - Julio Figueira</p>
-            <p class="m-0 p-chat">Lorem ipsum dolor sit amet</p>
-          </div>
-          <div class="card flex justify-content-center">
-            <Button
-              type="button"
-              icon="pi pi-ellipsis-v"
-              @click="toggle"
-              aria-haspopup="true"
-              aria-controls="overlay_menu"
-              class="horizontal-ellipsis"
-            />
-            <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
-          </div>
-        </div>
-      </TabPanel>
-    </TabView>
+    <Dialog v-model:visible="showModal" header="Criar Novo Chat">
+      <form @submit.prevent="createChat" style="display: flex;flex-direction: column;justify-content: space-around;">
+        <input class="inputform" v-model="newChatTitle" placeholder="Título do novo chat" required />
+        <input class="inputform" v-model="participantUserName" placeholder="Nome do participante" required />
+        <button class="botao-chat-g" type="submit">Criar Chat</button>
+      </form>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 
-const menu = ref()
-const items = ref([
-  {
-    label: 'Resolvido',
-    items: [
-      {
-        label: 'Excluir conversa'
-      },
-      {
-        label: 'Denunciar'
+const projectID = '52c3db0f-f347-46af-8d0e-1a0ccdd36d6b'; 
+const userName = 'GiihGabi';
+const userSecret = '52c3db0f-f347-46af-8d0e-1a0ccdd36d6b'; 
+
+const loading = ref(true);
+const chats = ref([]);
+const newChatTitle = ref('');
+const participantUserName = ref('');
+const selectedChat = ref(null);
+const showModal = ref(false);
+const searchText = ref(''); // Adição da variável searchText
+
+const router = useRouter();
+
+const getChats = async () => {
+  try {
+    const response = await axios.get('https://api.chatengine.io/chats/', {
+      headers: {
+        'Project-ID': projectID,
+        'User-Name': userName,
+        'User-Secret': userSecret
       }
-    ]
+    });
+    console.log('Chats data:', response.data);
+    chats.value = response.data;
+  } catch (error) {
+    console.error('Erro ao carregar os chats:', error);
+  } finally {
+    loading.value = false;
   }
-])
+};
 
-const toggle = (event) => {
-  menu.value.toggle(event)
-}
+const createChat = async () => {
+  try {
+    const response = await axios.post('https://api.chatengine.io/chats/', 
+    {
+      title: newChatTitle.value,
+      is_direct_chat: true,
+      usernames: [userName, participantUserName.value]
+    }, 
+    {
+      headers: {
+        'Project-ID': projectID,
+        'User-Name': userName,
+        'User-Secret': userSecret
+      }
+    });
+    console.log('New chat created:', response.data);
+    chats.value.push(response.data);
+    newChatTitle.value = '';
+    participantUserName.value = '';
+  } catch (error) {
+    console.error('Erro ao criar o chat:', error);
+  }
+};
+
+const navigateToChatPage = (chatId) => {
+  router.push(`/chat/${chatId}`);
+};
+
+const showOptionsMenu = (chat) => {
+  if (selectedChat.value === chat.id) {
+    selectedChat.value = null;
+  } else {
+    selectedChat.value = chat.id;
+  }
+};
+
+const deleteChat = async (chatId) => {
+  try {
+    await axios.delete(`https://api.chatengine.io/chats/${chatId}/`, {
+      headers: {
+        'Project-ID': projectID,
+        'User-Name': userName,
+        'User-Secret': userSecret
+      }
+    });
+    chats.value = chats.value.filter(chat => chat.id !== chatId);
+    selectedChat.value = null;
+  } catch (error) {
+    console.error('Erro ao excluir o chat:', error);
+  }
+};
+
+const reportChat = (chatId) => {
+  // Lógica para denunciar o chat
+  console.log('Chat denunciado:', chatId);
+  selectedChat.value = null;
+};
+
+const markChatAsResolved = (chatId) => {
+  // Lógica para marcar o chat como resolvido
+  console.log('Chat marcado como resolvido:', chatId);
+  selectedChat.value = null;
+};
+
+// Computed property para filtrar os chats com base no searchText
+const filteredChats = computed(() => {
+  if (!searchText.value) {
+    return chats.value;
+  } else {
+    const lowerCaseSearchText = searchText.value.toLowerCase();
+    return chats.value.filter(chat => {
+      // Verifica se o título do chat inclui o searchText
+      const titleMatch = chat.title.toLowerCase().includes(lowerCaseSearchText);
+      // Verifica se alguma mensagem do chat inclui o searchText
+      const messageMatch = chat.last_message && chat.last_message.text.toLowerCase().includes(lowerCaseSearchText);
+      return titleMatch || messageMatch;
+    });
+  }
+});
+
+onMounted(() => {
+  getChats();
+});
 </script>
 
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
-.chat{
-  font-family: "Roboto Flex", sans-serif !important;
+#chat-engine-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #F8F8F8;
 }
-.tab-header-chat {
-  display: block  ;
+
+#chat-engine {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 100%;
 }
-.input-search-chat {
+.componentes-top-chat{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.input-pesquisa{
+  border-radius: 6px;
+  background-color: #F2F2F2;
+  padding: 10px;
+  border: none;
+  width: 75%;
+  margin-bottom: 0;
+  padding-left: 35px; /* Espaço para o ícone */
+  background-image: url('../assets/icons/lupa.svg'); /* Substitua pelo caminho para o seu ícone de pesquisa */
+  background-size: 20px; /* Tamanho do ícone */
+  background-repeat: no-repeat; /* Evita que o ícone se repita */
+  background-position: 10px center; 
+}
+.botao-sem-fundo{
+  background-color: transparent;
+  border: none;
+}
+.botao-chat-g{
+  background-color: #F27322;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 6px;
+}
+.tab-mensagens {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 12px;
+  padding: 10px;
 }
-.p-inputtext:enabled:focus{
-  outline: 1px solid #f2722286;
+.mensagens {
+  border-bottom: 2px solid #F27322;
+  color: #F27322;
+  margin-bottom: 10px;
+  width: 30%;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
 }
-.input-container {
+.ul-chat{
+  list-style: none;
+  padding: 10px;
+}
+.inputform{
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #696969;
+}
+.chat-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
   position: relative;
 }
 
-.input-chat {
-  padding-right: 40px;
-  background: #f2f2f2;
-  border: none;
+.chat-item h3 {
+  margin: 0;
+  color: #696969;
+  font-weight: 500;
 }
-.p-tabview-title{
-  font-weight: bold;
+
+.chat-item p {
+  margin: 5px 0;
+  color: #696969;
+
 }
-.lupa-chat {
+
+.options-btn {
   position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  display: flex;
-}
-.image-container {
-  width: 80px; /* Ajuste conforme necessário */
-  height: 80px; /* Ajuste conforme necessário */
-  overflow: hidden;
-  border-radius: 50%; /* Isso cria a forma de elipse */
+  top: 0;
+  right: 0;
 }
 
-.image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 50%; /* Isso garante que a imagem seja cortada como uma elipse */
-} 
-.tabview-chat {
-  background-color: transparent;
+.options-menu {
+  position: absolute;
+  top: 22%;
+  right: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 5px 0;
+  z-index: 99;
 }
 
-.tabview-chat .p-tabview-nav {
-  background-color: transparent;
-  display: flex;
-  justify-content: center; /* Para centralizar os cabeçalhos das abas */
+.options-menu li {
+  padding: 5px 10px;
 }
 
-.tabview-chat .p-tabview-panel, a, .p-tabview-panels,.horizontal-ellipsis {
-  background-color: transparent;
-}
-
-.tabview-chat .p-tabview .p-tabview-nav .p-tabview-selected .p-tablink {
-  color: orange !important;
-}
-
-.container-chats {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.horizontal-ellipsis .pi {
-  transform: rotate(-90deg);
-  color: #696969;
-}
-.horizontal-ellipsis{
-  border: none
-}
-#overlay_menu .p-menuitem-text,#overlay_menu .p-submenu-header{
-  font-size: 14px;
-  color: #696969;
-}
-#overlay_menu{
-  border-radius: 15px;
-}
-.p-chat{
-  color: #696969;
+.options-menu li:hover {
+  background-color: #f0f0f0;
 }
 </style>
