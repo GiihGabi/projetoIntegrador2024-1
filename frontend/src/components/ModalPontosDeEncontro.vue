@@ -12,7 +12,7 @@
   <script>
   import { ref, nextTick } from 'vue';
   import L from 'leaflet';
-  import 'leaflet/dist/leaflet.css';
+  // import 'leaflet/dist/leaflet.css';
   import Dialog from 'primevue/dialog';
   import Button from 'primevue/button';
   
