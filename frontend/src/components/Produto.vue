@@ -2,18 +2,20 @@
   <div style="display: block;">
     <p style="text-align: center; margin-top: 2.80rem">Rua Padre roma,205 - Marília - SP</p>
     </div>
-  <div style="display: flex; margin-top: 2.5rem; justify-content: left;margin-left: 1.5rem;">
-    <div>
-      <img src="../assets/icons/icon-produto.svg" style="margin: auto; margin-top: 1rem;" />
+    <div style="display: flex; justify-content: center;">
+    <div class="image" style="">
+      <img src="../assets/icons/icon-produto.svg">
     </div>
-    <div style="margin-top: 0.50rem;">
-      <h1>Produtos</h1>
+    <div style="margin-right: 15rem;">
+      <h1 class="text">Produtos</h1>
     </div>
   </div>
-  <div class="card flex flex-wrap justify-content-center gap-3" style="margin-top: 0.60rem;">
-    <IconField iconPosition="left" style="margin-left: 1.5rem;">
-      <InputText v-model="value1" placeholder="Buscar em PetShops"></InputText>
-    </IconField>
+  <div class="container">
+    <div class="icon-field">
+      <IconField iconPosition="center" style="margin-left: 2rem;">
+        <InputText v-model="value1" placeholder="Buscar em Petshops"></InputText>
+      </IconField>
+    </div>
   </div>
   
     <div class="card">
@@ -65,6 +67,27 @@
     font-weight: bolder;
     margin: auto;
     margin-left: 1rem;
+    margin-top: 2rem;
   }
+
+  .icon-field {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.image {
+  margin-top: 2.5rem;
+  margin-left: 12rem;
+}
+
+img {
+
+  margin: auto;
+
+}
+
+
   </style>
   

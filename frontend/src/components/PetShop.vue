@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div class="item">
-      <h2 class="title">PetShops</h2>
-    </div>
+    
     <div class="item">
       <Dropdown
         v-model="selectedItem"
@@ -15,6 +13,7 @@
       />
     </div>
   </div>
+ 
   <div class="card-container">
     <div class="card">
       <div class="card-item">
@@ -73,25 +72,33 @@ const items = ref(Array.from({ length: 100000 }, (_, i) => ({ label: `Item #${i}
 
 <style scoped>
 .container {
-  display: flex;
+  text-align: center;
   align-items: center; 
+ 
 }
 
 .item {
-  margin-right: 6rem; 
+  margin-left: 10rem;
 }
-
-.title {
-  margin-left: 1rem;
+h2{
+  
+  display: flex;
+  text-align: center;
 }
 
 .p-dropdown {
   border: none;
   background: transparent;
+  text-align: center;
+  margin-top: 1rem;
+  
+
+  
 }
 
 .p-dropdown .p-dropdown-label.p-placeholder {
   color: black;
+ 
 }
 
 .card-container {
